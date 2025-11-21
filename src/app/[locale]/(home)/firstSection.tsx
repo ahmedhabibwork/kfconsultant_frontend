@@ -4,13 +4,14 @@ import Image from "next/image";
 import { Search, Globe } from "lucide-react";
 import { motion } from "motion/react";
 import MenuButton from "@/components/cors/MenuButton";
+import Button from "@/components/button";
 import { Link } from "@/i18n/navigation";
 
 const FirstSection = () => {
   return (
     <section
       id="first-section"
-      className="panel w-screen h-screen snap-start overflow-y-auto relative text-white"
+      className="panel w-full h-screen snap-start overflow-y-auto relative text-white"
     >
       <Image
         alt="Background"

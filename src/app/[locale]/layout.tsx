@@ -38,9 +38,11 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider locale={locale}>
           <ModalProvider>
-            <NextProgress />
-            <Header />
-            {children}
+            <div className="w-full overflow-x-hidden">
+              <NextProgress />
+              <Header />
+              {children}
+            </div>
           </ModalProvider>
         </NextIntlClientProvider>
       </body>
