@@ -29,7 +29,7 @@ export default async function RootLayout({
   const locale = await getLocale()
   console.log("locale", locale)
   return (
-    <html lang={locale === "ar" ? "ar" : "en"}>
+    <html lang={locale === "ar" ? "ar" : "en"} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

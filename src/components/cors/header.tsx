@@ -1,4 +1,5 @@
 import { Globe, Search, TextAlignJustify } from "lucide-react";
+import GlobeButton from "./GlobeButton";
 
 const Header = () => {
     return (
@@ -14,10 +15,7 @@ const Header = () => {
 
             <div className="flex items-center gap-[20px]">
                 <div className="flex items-center gap-[20px] sm:gap-[30px]">
-                    <button type="button" className="flex items-center gap-2">
-                        <Globe />
-                        <p>English</p>
-                    </button>
+                 <GlobeButton />
                 </div>
 
                 <div className="max-sm:hidden">

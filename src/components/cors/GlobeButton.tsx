@@ -1,13 +1,13 @@
-import { useLocaleToggle } from '@/hooks/useLocaleToggle'
+"use client"
+import { useRouter } from '@/hooks/useLocaleRouter';
 import { Globe } from 'lucide-react'
-import React from 'react'
 
 const GlobeButton = () => {
-    const { toggleLocale } = useLocaleToggle()
+  const {locale, changeLocale} = useRouter();
     return (
-        <button onClick={toggleLocale} type="button" className="flex items-center gap-2">
+        <button onClick={() => changeLocale(locale === "ar" ? "en" : "ar")} type="button" className="flex items-center gap-2">
             <Globe />
-            <p>English</p>
+            <p>{locale === "ar" ? "English" : "العربية"}</p>
         </button>)
 }
 
