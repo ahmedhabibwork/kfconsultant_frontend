@@ -2,17 +2,18 @@
 // src/hooks/useRouter.ts
 'use client';
 
-import { useRouter as useNextIntlRouter, usePathname } from '@/i18n/navigation';
+import { usePathname } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
 import { useParams, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
-// Import NextTopLoader router for progress indication
+
+// ✅ Import the router that triggers NextTopLoader
 import { useRouter as useTopLoaderRouter } from 'nextjs-toploader/app';
 
 export interface CustomRouterOptions {
   locale?: string;
   scroll?: boolean;
-  shallow?: boolean;
+  shallow?: boolean; // kept for API parity, not used by app router
 }
 
 export interface CustomRouter {
@@ -22,13 +23,13 @@ export interface CustomRouter {
   back: () => void;
   forward: () => void;
   refresh: () => void;
-  
+
   // Route information
   pathname: string;
   query: Record<string, string | string[]>;
   locale: string;
   locales: string[];
-  
+
   // Utility methods
   isActive: (href: string) => boolean;
   buildUrl: (href: string, locale?: string) => string;
@@ -36,8 +37,10 @@ export interface CustomRouter {
 }
 
 export const useRouter = (): CustomRouter => {
-  const router = useNextIntlRouter();
+  // 🔹 This router triggers the top loader on navigation
   const topLoaderRouter = useTopLoaderRouter();
+
+  // From next-intl, pathname is WITHOUT locale prefix
   const pathname = usePathname();
   const currentLocale = useLocale();
   const searchParams = useSearchParams();
@@ -45,21 +48,42 @@ export const useRouter = (): CustomRouter => {
   // Convert search params to query object
   const query = Object.fromEntries(searchParams.entries());
 
-  const push = useCallback((href: string, options?: CustomRouterOptions) => {
-    const { locale, ...routerOptions } = options || {};
-    // Use toploader router for progress indication
-    topLoaderRouter.push(href, routerOptions);
-    // Also trigger next-intl navigation
-    router.push(href, { locale: locale || currentLocale, ...routerOptions });
-  }, [router, topLoaderRouter, currentLocale]);
+  const normalizeHref = (href: string): string => {
+    if (!href.startsWith('/')) return `/${href}`;
+    return href;
+  };
 
-  const replace = useCallback((href: string, options?: CustomRouterOptions) => {
-    const { locale, ...routerOptions } = options || {};
-    // Use toploader router for progress indication
-    topLoaderRouter.replace(href, routerOptions);
-    // Also trigger next-intl navigation
-    router.replace(href, { locale: locale || currentLocale, ...routerOptions });
-  }, [router, topLoaderRouter, currentLocale]);
+  const buildUrl = useCallback(
+    (href: string, locale?: string) => {
+      const targetLocale = locale ?? currentLocale;
+      const normalized = normalizeHref(href);
+      // /en + /about -> /en/about
+      return `/${targetLocale}${normalized}`;
+    },
+    [currentLocale]
+  );
+
+  const push = useCallback(
+    (href: string, options?: CustomRouterOptions) => {
+      const { locale, scroll } = options || {};
+      const url = buildUrl(href, locale);
+
+      // This triggers navigation + top loader
+      topLoaderRouter.push(url, { scroll });
+    },
+    [topLoaderRouter, buildUrl]
+  );
+
+  const replace = useCallback(
+    (href: string, options?: CustomRouterOptions) => {
+      const { locale, scroll } = options || {};
+      const url = buildUrl(href, locale);
+
+      // This triggers navigation + top loader
+      topLoaderRouter.replace(url, { scroll });
+    },
+    [topLoaderRouter, buildUrl]
+  );
 
   const back = useCallback(() => {
     topLoaderRouter.back();
@@ -73,19 +97,30 @@ export const useRouter = (): CustomRouter => {
     topLoaderRouter.refresh();
   }, [topLoaderRouter]);
 
-  const isActive = useCallback((href: string) => {
-    return pathname === href;
-  }, [pathname]);
+  const isActive = useCallback(
+    (href: string) => {
+      const normalized = normalizeHref(href);
+      // pathname from next-intl is WITHOUT locale, so compare with normalized
+      return pathname === normalized;
+    },
+    [pathname]
+  );
 
-  const buildUrl = useCallback((href: string, locale?: string) => {
-    const targetLocale = locale || currentLocale;
-    return `/${targetLocale}${href}`;
-  }, [currentLocale]);
+  const changeLocale = useCallback(
+    (newLocale: string, href?: string) => {
+      // `pathname` here is something like "/about" (no /en or /ar)
+      const targetPath = href ? normalizeHref(href) : pathname;
 
-  const changeLocale = useCallback((newLocale: string, href?: string) => {
-    const targetHref = href || pathname;
-    router.replace(targetHref, { locale: newLocale });
-  }, [router, pathname]);
+      // Build URL with new locale and navigate
+      const localizedUrl = buildUrl(targetPath, newLocale);
+
+      // This replace will:
+      // - change locale (via URL)
+      // - trigger NextTopLoader
+      topLoaderRouter.replace(localizedUrl, { scroll: false });
+    },
+    [buildUrl, pathname, topLoaderRouter]
+  );
 
   return {
     push,
@@ -96,10 +131,10 @@ export const useRouter = (): CustomRouter => {
     pathname,
     query,
     locale: currentLocale,
-    locales: ['en', 'ar'], // You can make this dynamic by importing from routing
+    locales: ['en', 'ar'], // make dynamic if needed
     isActive,
     buildUrl,
-    changeLocale,
+    changeLocale
   };
 };
 
@@ -108,35 +143,37 @@ export const useAdvancedRouter = () => {
   const router = useRouter();
   const params = useParams();
 
-  const navigateWithQuery = useCallback((
-    href: string, 
-    queryParams?: Record<string, string | number | boolean>,
-    options?: CustomRouterOptions
-  ) => {
-    let url = href;
-    
-    if (queryParams) {
-      const searchParams = new URLSearchParams();
-      Object.entries(queryParams).forEach(([key, value]) => {
-        searchParams.append(key, String(value));
-      });
-      url += `?${searchParams.toString()}`;
-    }
-    
-    router.push(url, options);
-  }, [router]);
+  const navigateWithQuery = useCallback(
+    (
+      href: string,
+      queryParams?: Record<string, string | number | boolean>,
+      options?: CustomRouterOptions
+    ) => {
+      let url = href;
 
-  const navigateWithState = useCallback((
-    href: string,
-    state?: any,
-    options?: CustomRouterOptions
-  ) => {
-    // Store state in sessionStorage for client-side navigation
-    if (state && typeof window !== 'undefined') {
-      sessionStorage.setItem('navigation-state', JSON.stringify(state));
-    }
-    router.push(href, options);
-  }, [router]);
+      if (queryParams) {
+        const searchParams = new URLSearchParams();
+        Object.entries(queryParams).forEach(([key, value]) => {
+          searchParams.append(key, String(value));
+        });
+        url += `?${searchParams.toString()}`;
+      }
+
+      router.push(url, options);
+    },
+    [router]
+  );
+
+  const navigateWithState = useCallback(
+    (href: string, state?: any, options?: CustomRouterOptions) => {
+      // Store state in sessionStorage for client-side navigation
+      if (state && typeof window !== 'undefined') {
+        sessionStorage.setItem('navigation-state', JSON.stringify(state));
+      }
+      router.push(href, options);
+    },
+    [router]
+  );
 
   const getNavigationState = useCallback(() => {
     if (typeof window === 'undefined') return null;
@@ -160,6 +197,6 @@ export const useAdvancedRouter = () => {
     navigateWithState,
     getNavigationState,
     clearNavigationState,
-    params,
+    params
   };
 };
