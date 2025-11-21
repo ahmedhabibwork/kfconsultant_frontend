@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { useModal } from '../../hooks/useModal';
+import Button from '@/components/button';
 
 interface AddQuizzesProps {
   closeModel: () => void;
@@ -46,24 +47,10 @@ const Page = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-8 flex justify-between items-center">
-      <button
+      <Button
         onClick={(e) => handleOpenModal(e)}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg shadow-lg transition-colors font-medium text-lg"
-      >
-        Open Global Modal
-      </button>
-      <button
-        onClick={(e) => handleOpenModal(e)}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg shadow-lg transition-colors font-medium text-lg"
-      >
-        Open Global Modal
-      </button>
-      <button
-        onClick={(e) => handleOpenModal(e)}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg shadow-lg transition-colors font-medium text-lg"
-      >
-        Open Global Modal
-      </button>
+        text="Open Global Modal"
+      />
     </div>
   );
 };
