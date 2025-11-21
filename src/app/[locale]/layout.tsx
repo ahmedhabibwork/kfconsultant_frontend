@@ -31,7 +31,7 @@ export default async function RootLayout({
     return (
         <html lang={locale === "ar" ? "ar" : "en"} dir={locale === "ar" ? "rtl" : "ltr"}>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
             >
                 <NextIntlClientProvider locale={locale}>
                     <ModalProvider>

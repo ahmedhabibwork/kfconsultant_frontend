@@ -4,7 +4,7 @@ import MenuButton from "./MenuButton";
 
 const Header = () => {
     return (
-        <header className="flex items-center justify-between px-[40px] max-md:px-5 py-[38px] text-white relative">
+        <header className="flex items-center justify-between px-[40px] max-md:px-5 py-[38px] text-white absolute top-0 left-0 w-full right-0">
             <div className="flex items-center gap-3 justify-center">
                <MenuButton />
                 <button>
