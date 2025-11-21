@@ -3,7 +3,7 @@ import SeconedSection from "./(home)/seconedSection";
 
 const page = () => {
   return (
-    <div>
+    <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar">
       <FirstSection />
       <SeconedSection />
     </div>
