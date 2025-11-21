@@ -25,9 +25,7 @@ const AddQuizzes = ({ closeModel, scheme_nameProp, schema_idProp, coursesIds }: 
 };
 
 
-const Page = async () => {
-
-  const testPromise = await new Promise(resolve => setTimeout(resolve, 6000));
+const Page = () => {
 
 
   const handleOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {

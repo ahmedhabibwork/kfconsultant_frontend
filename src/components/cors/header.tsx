@@ -1,13 +1,12 @@
-import { Globe, Search, TextAlignJustify } from "lucide-react";
+import { Search } from "lucide-react";
 import GlobeButton from "./GlobeButton";
+import MenuButton from "./MenuButton";
 
 const Header = () => {
     return (
         <header className="flex items-center justify-between px-[40px] max-md:px-5 py-[38px] text-white relative">
             <div className="flex items-center gap-3 justify-center">
-                <button className="flex items-center gap-3">
-                    <TextAlignJustify />
-                </button>
+               <MenuButton />
                 <button>
                     <Search />
                 </button>
