@@ -40,3 +40,7 @@ button {
 .bg-primary\/95 {
   background-color: rgba(11, 23, 60, 0.95);
 }
+
+.snap-start {
+    scroll-snap-align: start;
+}
