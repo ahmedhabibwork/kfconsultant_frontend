@@ -1,22 +1,23 @@
 import {getRequestConfig} from 'next-intl/server';
- 
-export default getRequestConfig(async () => {
-  // Static for now, we'll change this later
-  const locale = 'en';
- 
+import {routing} from './routing';
+
+export default getRequestConfig(async ({locale}) => {
   const namespaces = ["header"];
-  
+  const activeLocale = typeof locale === 'string' && locale
+    ? locale
+    : routing.defaultLocale ?? routing.locales[0];
+
   const messages = Object.fromEntries(
     await Promise.all(
       namespaces.map(async ns => [
         ns,
-        (await import(`../../messages/${locale}/${ns}.json`)).default
+        (await import(`../../messages/${activeLocale}/${ns}.json`)).default
       ])
     )
   );
- 
+
   return {
-    locale,
+    locale: activeLocale,
     messages
   };
 });
