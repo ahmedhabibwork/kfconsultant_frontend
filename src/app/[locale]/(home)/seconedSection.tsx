@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import CountUp from "@/components/CountUp";
 import Button from "@/components/button";
+import InfoCard from "@/components/InfoCard";
 
 const SecondSection = () => {
   return (
@@ -83,41 +84,14 @@ const SecondSection = () => {
 
         {/* About Text Section */}
         <div className="max-md:w-full">
-          <div className="relative w-[525px] h-[420px] bg-primary/30 backdrop-blur-[8px] leading-5 flex flex-col justify-center gap-[18px] px-6 lg:px-[40px] py-[18px] max-md:w-full max-md:h-fit">
-            <div className="flex flex-col gap-[14px] uppercase w-fit">
-              <div className="text-gray-200 w-fit gap-2 flex items-center max-md:w-full">
-                <div className="w-max text-center text-[13px]">
-                  More About Us
-                </div>
-                <div className="w-[60px] max-w-full h-px bg-gray-200/50"></div>
-              </div>
-              <h1 className="text-[23px] max-md:text-2xl w-full leading-[25px] ltr:tracking-[2px] text-white">
-                Who We Are
-              </h1>
-            </div>
-            <p className="text-gray-100 font-medium line-clamp-6 text-justify text-[13px] leading-relaxed max-md:text-sm">
-              Founded in 1989, DMA has established itself as a
-              multi-disciplinary engineering consulting firm, committed to
-              delivering comprehensive solutions that exceed our clients'
-              expectations across various engineering sectors, including:
-              Architectural and Interior Design, Urban Planning and Landscape,
-              Structural Design, Electromechanical Designs and Infrastructure,
-              and Construction Supervision Services. Our expertise covers
-              various aspects of the industry, including design and engineering
-              services in all sectors we operate in, such as: Hospitality,
-              Resorts, Residential, Commercial, Educational, Healthcare, and
-              Administrative, for both local and international entities. At DMA,
-              we approach every project in an innovative and distinctive way,
-              leveraging the collaborative efforts of our diverse and highly
-              skilled team members. This collaborative approach ensures projects
-              transition seamlessly from the design phase to tangible reality.
-            </p>
-            <div className="max-sm:scale-75 max-xs:scale-[.69] max-sm:-translate-x-11 max-xs:-translate-x-6 flex justify-end pe-4">
-              <Link href="/about">
-                <Button text="Know More" rtl={true} />
-              </Link>
-            </div>
-          </div>
+          <InfoCard
+            title="Who We Are"
+            subTitle="More About Us"
+            description="Founded in 1989, DMA has established itself as a multi-disciplinary engineering consulting firm, committed to delivering comprehensive solutions that exceed our clients' expectations across various engineering sectors, including: Architectural and Interior Design, Urban Planning and Landscape, Structural Design, Electromechanical Designs and Infrastructure, and Construction Supervision Services. Our expertise covers various aspects of the industry, including design and engineering services in all sectors we operate in, such as: Hospitality, Resorts, Residential, Commercial, Educational, Healthcare, and Administrative, for both local and international entities. At DMA, we approach every project in an innovative and distinctive way, leveraging the collaborative efforts of our diverse and highly skilled team members. This collaborative approach ensures projects transition seamlessly from the design phase to tangible reality."
+            linkHref="/about"
+            buttonText="Know More"
+            rtl={true}
+          />
         </div>
       </div>
     </section>
