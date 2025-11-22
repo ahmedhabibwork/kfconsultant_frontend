@@ -23,7 +23,7 @@ export const projects: Project[] = [
     subTitle: "iCity New Cairo",
     description:
       "Mountain View iCity New Cairo is a revolutionary concept that offers a unique living experience. It is designed to be a place where you can indulge in everything you wish for, without any compromise. The project offers a diverse range of architectural styles and living options to suit every lifestyle.",
-    image: "/slidetwo.webp",
+    image: "/slidetow.webp",
     link: "/projects/2",
   },
   {

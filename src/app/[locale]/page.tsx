@@ -1,4 +1,5 @@
 import FirstSection from "./(home)/firstSection";
+import FourthSection from "./(home)/fourthSection";
 import SeconedSection from "./(home)/seconedSection";
 import ThirdSection from "./(home)/thiredSection";
 
@@ -8,6 +9,7 @@ const page = () => {
       <FirstSection />
       <SeconedSection />
       <ThirdSection />
+      <FourthSection />
     </div>
   );
 };

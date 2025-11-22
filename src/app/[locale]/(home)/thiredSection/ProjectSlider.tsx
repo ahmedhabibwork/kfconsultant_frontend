@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { motion, useMotionValue, animate } from "motion/react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Project } from "./projectsData";
@@ -17,16 +17,50 @@ const ProjectSlider = ({
   onSelect,
 }: ProjectSliderProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const itemsContainerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
+  const x = useMotionValue(0);
 
   useEffect(() => {
-    if (scrollContainerRef.current) {
-      setWidth(
-        scrollContainerRef.current.scrollWidth -
-          scrollContainerRef.current.offsetWidth
-      );
-    }
+    const updateWidth = () => {
+      if (scrollContainerRef.current && itemsContainerRef.current) {
+        const scrollWidth = itemsContainerRef.current.scrollWidth;
+        const offsetWidth = scrollContainerRef.current.offsetWidth;
+        setWidth(scrollWidth - offsetWidth);
+      }
+    };
+
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
   }, []);
+
+  useEffect(() => {
+    if (itemsContainerRef.current && width > 0) {
+      const activeIndex = projects.findIndex((p) => p.id === activeId);
+      if (activeIndex !== -1) {
+        const itemNode = itemsContainerRef.current.children[
+          activeIndex
+        ] as HTMLElement;
+
+        if (itemNode) {
+          // Calculate target position to center the item or ensure it's visible
+          // For simplicity, let's try to scroll so the item is at the start, but clamped
+          let targetX = -itemNode.offsetLeft;
+
+          // Clamp between 0 and -width
+          if (targetX > 0) targetX = 0;
+          if (targetX < -width) targetX = -width;
+
+          animate(x, targetX, {
+            type: "spring",
+            stiffness: 300,
+            damping: 30,
+          });
+        }
+      }
+    }
+  }, [activeId, width, projects, x]);
 
   const handlePrev = () => {
     const currentIndex = projects.findIndex((p) => p.id === activeId);
@@ -49,8 +83,10 @@ const ProjectSlider = ({
         className="cursor-grab overflow-hidden"
       >
         <motion.div
+          ref={itemsContainerRef}
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
+          style={{ x }}
           className="flex gap-6"
         >
           {projects.map((project) => (

@@ -22,7 +22,7 @@ const MenuButton = () => {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="menu group fixed top-0 left-0 sm:max-h-screen sm:h-screen w-screen z-[100] overflow-y-hidden max-sm:h-svh max-sm:overflow-y-auto bg-white"
+            className="menu group fixed top-0 left-0 sm:max-h-screen sm:h-screen w-screen z-100 overflow-y-hidden max-sm:h-svh max-sm:overflow-y-auto bg-white"
           >
             <div className="sm:h-screen max-sm:px-[30px] px-[60px] md:px-[120px] pt-[113px] max-sm:py-[60px] pb-[30px] md:pb-[80px] flex flex-col md:flex-row md:justify-between gap-8 lg:items-center relative">
               <button

@@ -1,9 +1,6 @@
 "use client";
-import React from "react";
 import Image from "next/image";
-import { Link } from "@/i18n/navigation";
 import CountUp from "@/components/CountUp";
-import Button from "@/components/button";
 import InfoCard from "@/components/InfoCard";
 
 const SecondSection = () => {
