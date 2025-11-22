@@ -85,7 +85,8 @@ const ServiceSlider = ({ services }: ServiceSliderProps) => {
           ref={itemsContainerRef}
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
-          style={{ x }}
+          dragElastic={0.2}
+          style={{ x, touchAction: "pan-y" }}
           className="flex gap-4 px-4"
         >
           {services.map((service) => (
@@ -104,12 +105,13 @@ const ServiceSlider = ({ services }: ServiceSliderProps) => {
               <Link
                 href={service.link}
                 className="block w-full h-full relative"
+                draggable={false}
               >
                 <Image
                   src={service.image}
                   alt={service.title}
                   fill
-                  className="object-cover"
+                  className="object-cover pointer-events-none"
                 />
                 <div className="absolute inset-0 bg-black/20 hover:bg-black/40 transition-colors duration-300" />
                 <div className="absolute bottom-6 left-6 right-6">
@@ -122,33 +124,35 @@ const ServiceSlider = ({ services }: ServiceSliderProps) => {
           ))}
         </motion.div>
       </motion.div>
-      <div className="flex-1 h-[0.5px] bg-[#D6D6D6] relative">
-        <div
-          className="absolute top-0 left-0 h-px bg-primary transition-all duration-300"
-          style={{
-            width: `${
-              ((services.findIndex((s) => s.id === activeId) + 1) /
-                services.length) *
-              100
-            }%`,
-          }}
-        ></div>
-      </div>
-      <div className="flex items-center justify-end rtl:flex-row-reverse gap-[20px]">
-        <button
-          onClick={handlePrev}
-          disabled={services[0].id === activeId}
-          className="bg-white border-primary size-[40px] rounded-full border cursor-pointer flex items-center justify-center disabled:opacity-50"
-        >
-          <ChevronLeft className="text-primary" size={16} />
-        </button>
-        <button
-          onClick={handleNext}
-          disabled={services[services.length - 1].id === activeId}
-          className="bg-primary border-white size-[40px] rounded-full border cursor-pointer flex items-center justify-center disabled:opacity-50"
-        >
-          <ChevronRight className="text-white" size={16} />
-        </button>
+      <div className="flex items-center justify-between">
+        <div className="flex-1 h-[0.5px] bg-[#D6D6D6] relative">
+          <div
+            className="absolute top-0 left-0 h-px bg-primary transition-all duration-300"
+            style={{
+              width: `${
+                ((services.findIndex((s) => s.id === activeId) + 1) /
+                  services.length) *
+                100
+              }%`,
+            }}
+          ></div>
+        </div>
+        <div className="flex items-center justify-end gap-[20px] px-3">
+          <button
+            onClick={handlePrev}
+            disabled={services[0].id === activeId}
+            className="bg-primary border-white size-[40px] rounded-full border cursor-pointer flex items-center justify-center disabled:opacity-50"
+          >
+            <ChevronLeft className="text-white" size={16} />
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={services[services.length - 1].id === activeId}
+            className="bg-primary border-white size-[40px] rounded-full border cursor-pointer flex items-center justify-center disabled:opacity-50"
+          >
+            <ChevronRight className="text-white" size={16} />
+          </button>
+        </div>
       </div>
     </div>
   );

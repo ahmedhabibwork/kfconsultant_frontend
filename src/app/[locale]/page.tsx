@@ -1,7 +1,8 @@
 import FirstSection from "./(home)/firstSection";
-import FourthSection from "./(home)/fourthSection";
+import FourthSection from "./(home)/(fourthSection)";
 import SeconedSection from "./(home)/seconedSection";
-import ThirdSection from "./(home)/thiredSection";
+import ThirdSection from "./(home)/(thiredSection)";
+import PartnersSection from "./(home)/(partners)";
 
 const page = () => {
   return (
@@ -10,6 +11,7 @@ const page = () => {
       <SeconedSection />
       <ThirdSection />
       <FourthSection />
+      <PartnersSection />
     </div>
   );
 };

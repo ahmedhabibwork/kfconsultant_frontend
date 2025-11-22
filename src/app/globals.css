@@ -8,6 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: #0b173c;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -42,7 +43,7 @@ button {
 }
 
 .snap-start {
-    scroll-snap-align: start;
+  scroll-snap-align: start;
 }
 
 .no-scrollbar::-webkit-scrollbar {

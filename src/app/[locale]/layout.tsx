@@ -6,6 +6,7 @@ import { ModalProvider } from "@/components/modal/Modal";
 import Header from "@/components/cors/header";
 import { getLocale } from "next-intl/server";
 import NextProgress from "@/components/next-progress";
+import Footer from "@/components/cors/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default async function RootLayout({
               <NextProgress />
               <Header />
               {children}
+              <Footer />
             </div>
           </ModalProvider>
         </NextIntlClientProvider>
