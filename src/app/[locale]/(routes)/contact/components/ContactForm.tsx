@@ -5,6 +5,7 @@ import Input from "@/components/cors/Input";
 import PhoneInput from "@/components/cors/PhoneInput";
 import SelectInput from "@/components/cors/SelectInput";
 import Button from "@/components/button";
+import { submitContactForm } from "@/actions/contact";
 
 const enquiryOptions = [
   { value: "general", label: "General Inquiry" },
@@ -22,11 +23,41 @@ const ContactForm = () => {
     enquiryType: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    setStatus({ type: null, message: "" });
+
+    try {
+      const result = await submitContactForm(formData);
+      if (result.success) {
+        setStatus({ type: "success", message: result.message });
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "+20",
+          enquiryType: "",
+          message: "",
+        });
+      } else {
+        setStatus({
+          type: "error",
+          message: "Something went wrong. Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setStatus({ type: "error", message: "An unexpected error occurred." });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -118,8 +149,27 @@ const ContactForm = () => {
           />
         </div>
 
+        {/* Status Message */}
+        {status.message && (
+          <div
+            className={`w-full text-center p-2 rounded ${
+              status.type === "success"
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
+            }`}
+          >
+            {status.message}
+          </div>
+        )}
+
         {/* Submit Button */}
-        <Button text="Send Message" className=" text-primary" />
+        <Button
+          text={isSubmitting ? "Sending..." : "Send Message"}
+          className=" !text-primary"
+          svgClassName="!fill-primary"
+          disabled={isSubmitting}
+          onClick={(e) => handleSubmit(e)}
+        />
       </form>
     </div>
   );

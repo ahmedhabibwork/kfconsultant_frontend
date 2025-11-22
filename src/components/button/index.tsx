@@ -13,6 +13,7 @@ interface ButtonProps {
   textSize?: string;
   arrowSize?: string;
   disabled?: boolean;
+  svgClassName?: string;
 }
 
 export default function Button({
@@ -26,6 +27,7 @@ export default function Button({
   textSize = "text-[13px]",
   arrowSize = "w-6 h-6",
   disabled = false,
+  svgClassName = "",
 }: ButtonProps) {
   const [isRTL, setIsRTL] = useState(false);
 
@@ -63,7 +65,10 @@ export default function Button({
             fillRule="evenodd"
             clipRule="evenodd"
             d="M1.45605 1.41626H199.456V14.0148H200.456V1.41626V0.41626H199.456H1.45605H0.456055V1.41626V59.4163V60.4163H1.45605H199.456H200.456V59.4163V46.8176H199.456V59.4163H1.45605V1.41626Z"
-            className="fill-white group-hover/parent:fill-amber-500 transition-colors duration-300"
+            className={
+              "fill-white group-hover/parent:fill-amber-500 transition-colors duration-300" +
+              svgClassName
+            }
           />
         </svg>
       </div>
