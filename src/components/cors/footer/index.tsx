@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 
 const Footer = () => {
   return (
-    <footer className="pt-[20px] px-4 group-[.home]:snap-start group-[.about]:snap-start group-[.home]:panel group-[.about]:panel overflow-y-auto relative">
+    <footer className="pt-[20px] px-4 snap-start panel overflow-y-auto relative">
       <Image
         alt="Footer Background"
         src="https://admin.dma-mea.com/storage/01JBVT9DBJJE7S4APP40W7YR0S.jpg"

@@ -5,7 +5,7 @@ const PartnersSection = () => {
   return (
     <div
       id="partners"
-      className="pt-[30px] justify-evenly lg:pt-[60px] group-[.careers]:lg:pt-[60px] flex flex-col items-center max-md:h-[400px] group-[.about]:snap-start panel relative bg-white"
+      className="pt-[30px] justify-evenly lg:pt-[60px] group-[.careers]:lg:pt-[60px] flex flex-col items-center max-md:h-[400px] snap-start panel relative bg-white"
     >
       <div className="max-lg:scale-[68%]">
         <div className="flex flex-col gap-[14px] uppercase w-fit items-center text-center">

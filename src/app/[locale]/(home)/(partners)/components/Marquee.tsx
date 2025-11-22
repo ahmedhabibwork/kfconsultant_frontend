@@ -13,7 +13,7 @@ const Marquee = () => {
           initial={{ x: 0 }}
           animate={{ x: "-50%" }}
           transition={{
-            duration: 20,
+            duration: 90,
             ease: "linear",
             repeat: Infinity,
           }}
