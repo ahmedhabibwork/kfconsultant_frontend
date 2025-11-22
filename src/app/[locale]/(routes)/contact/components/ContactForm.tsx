@@ -165,7 +165,7 @@ const ContactForm = () => {
         {/* Submit Button */}
         <Button
           text={isSubmitting ? "Sending..." : "Send Message"}
-          className=" !text-primary"
+          className=" text-primary!"
           svgClassName="!fill-primary"
           disabled={isSubmitting}
           onClick={(e) => handleSubmit(e)}
