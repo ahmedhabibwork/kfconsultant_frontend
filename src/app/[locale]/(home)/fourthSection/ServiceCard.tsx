@@ -32,7 +32,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </div>
         {/* Default Overlay (Always visible on desktop until hover?) - The user's HTML had a rotated text. Let's replicate that style. */}
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300">
-          <div className="absolute bottom-20 -left-10 origin-bottom-left -rotate-90 translate-y-full group-hover:translate-y-20 transition-transform duration-500 opacity-100 group-hover:opacity-0">
+          <div className="absolute bottom-20 -left-10 origin-bottom-left -rotate-90 translate-y-20 group-hover:translate-y-full transition-transform duration-500 opacity-100 group-hover:opacity-0">
             <h3 className="text-white text-4xl font-bold uppercase whitespace-nowrap">
               {service.title}
             </h3>
