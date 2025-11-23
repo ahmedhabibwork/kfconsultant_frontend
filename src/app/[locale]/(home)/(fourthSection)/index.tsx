@@ -13,7 +13,7 @@ const FourthSection = () => {
           <div className="text-gray-500 w-fit gap-2 flex items-center max-md:w-full justify-center">
             <div className="w-max text-center text-[13px]">More About Us</div>
           </div>
-          <h1 className="text-[38px] max-md:text-4xl text-primary font-bold tracking-widest">
+          <h1 className="text-[38px] max-md:text-4xl text-white font-bold tracking-widest">
             SERVICES
           </h1>
         </div>

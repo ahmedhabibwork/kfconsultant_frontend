@@ -2,6 +2,7 @@ import React from "react";
 import AboutHeader from "./AboutHeader";
 import SecondSection from "./seconedSection";
 import ThiredSectionBg from "./ThiredSectionBg";
+import Sectors from "./sectors";
 
 const page = () => {
   return (
@@ -9,6 +10,7 @@ const page = () => {
       <AboutHeader />
       <SecondSection />
       <ThiredSectionBg />
+      <Sectors />
     </div>
   );
 };
