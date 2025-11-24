@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Input from "@/components/cors/Input";
 import PhoneInput from "@/components/cors/PhoneInput";
 import Button from "@/components/button";
+import { useTranslations } from "next-intl";
 
 const JobApplicationForm = () => {
+  const t = useTranslations("forms.job");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -33,13 +35,13 @@ const JobApplicationForm = () => {
     >
       <div className="group-[.contact]:backdrop-blur-[10px] group-[.contact]:rounded-lg group-[.contact]:p-4">
         <h1 className="uppercase text-primary font-bold text-[24px] mb-[40px] max-sm:text-[24px] max-xs:text-lg">
-          Apply for this position
+          {t("title")}
         </h1>
         <form className="relative flex flex-col gap-4 max-sm:gap-3">
           <div className="flex w-full items-center gap-6 max-sm:gap-3">
             <div className="flex-1 w-full">
               <Input
-                placeholder="FIRST NAME"
+                placeholder={t("firstName")}
                 type="text"
                 name="firstName"
                 value={formData.firstName}
@@ -49,7 +51,7 @@ const JobApplicationForm = () => {
             </div>
             <div className="flex-1 w-full">
               <Input
-                placeholder="LAST NAME"
+                placeholder={t("lastName")}
                 type="text"
                 name="lastName"
                 value={formData.lastName}
@@ -61,7 +63,7 @@ const JobApplicationForm = () => {
           <div className="flex w-full items-center gap-6 flex-wrap max-md:flex-col max-sm:gap-3 flex-col !gap-4">
             <div className="w-full flex-1">
               <Input
-                placeholder="EMAIL"
+                placeholder={t("email")}
                 type="email"
                 name="email"
                 value={formData.email}
@@ -75,14 +77,15 @@ const JobApplicationForm = () => {
 
           <div>
             <p className="uppercase text-[#898989] text-[18px] max-sm:text-[12px] mb-2">
-              Attachment (if available)
+              {t("attachment")}
             </p>
             <label
               htmlFor="attachment"
               className="border border-dashed border-[#EAEAEA] flex items-start justify-center p-8 uppercase text-[#898989] cursor-pointer max-sm:text-sm hover:border-primary transition-colors"
             >
               <p className="max-md:text-sm">
-                Drag & Drop or<span className="ms-1 text-secondry">browse</span>
+                {t("dragDrop")}
+                <span className="ms-1 text-secondry">{t("browse")}</span>
               </p>
             </label>
             <input id="attachment" hidden type="file" name="attachment" />
@@ -90,7 +93,7 @@ const JobApplicationForm = () => {
 
           <div className="w-full">
             <textarea
-              placeholder="YOUR MESSAGE"
+              placeholder={t("message")}
               rows={3}
               className="ant-input css-tcy7ai ant-input-outlined flex-1 w-full px-4 py-[20px] border border-[#EAEAEA] focus:outline-none resize-none rounded bg-white"
               name="message"
@@ -102,7 +105,7 @@ const JobApplicationForm = () => {
           <div className="h-[60px] mt-4">
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 max-md:scale-[.95] h-fit mx-auto">
               <Button
-                text="Send The Application"
+                text={t("submit")}
                 textColor="text-primary"
                 hoverColor="hover:text-secondry"
                 width="w-[200px]"
