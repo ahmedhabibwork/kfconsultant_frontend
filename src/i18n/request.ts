@@ -13,7 +13,7 @@ export default getRequestConfig(async ({requestLocale}) => {
       : routing.defaultLocale;
 
   /* 3️⃣  List every JSON file (= namespace) you want to ship */
-  const namespaces = ["header"];      // <-- add "header" here
+  const namespaces = ["header", "footer", "forms"];      // <-- add "header", "footer", "forms" here
 
   /* 4️⃣  Load each file and store it under its own key */
   const messages = Object.fromEntries(

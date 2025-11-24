@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import Button from "@/components/button";
+import { useTranslations } from "next-intl";
 
 const MenuButton = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations("header");
 
   return (
     <>
@@ -47,12 +49,12 @@ const MenuButton = () => {
 
               <div className="flex flex-col gap-[16px] md:gap-[24px] relative z-10">
                 {[
-                  { href: "/", label: "Home" },
-                  { href: "/about", label: "About" },
-                  { href: "/projects", label: "Projects" },
-                  { href: "/careers", label: "Career" },
-                  { href: "/news", label: "News" },
-                  { href: "/team", label: "People" },
+                  { href: "/", label: t("menu.home") },
+                  { href: "/about", label: t("menu.about") },
+                  { href: "/projects", label: t("menu.projects") },
+                  { href: "/careers", label: t("menu.career") },
+                  { href: "/news", label: t("menu.news") },
+                  { href: "/team", label: t("menu.people") },
                 ].map((link) => (
                   <div
                     key={link.href}
@@ -101,9 +103,7 @@ const MenuButton = () => {
 
               <div className="w-fit lg:w-[500px] h-full flex flex-col justify-center relative z-10 text-white">
                 <h1 className="font-bold text-[28px] md:text-[34px] mb-[20px]">
-                  Let's Keep In
-                  <br />
-                  Touch!
+                  {t("contact.title")}
                 </h1>
                 <div className="flex flex-col gap-4 text-white mb-[40px]">
                   <div className="flex flex-col gap-[10px]">
@@ -111,7 +111,9 @@ const MenuButton = () => {
                       className="flex items-center gap-2"
                       href="https://www.google.com/maps/place/%D8%AF%D9%89+%D8%A7%D9%85+%D8%A7%D9%8A%D9%87+-+%D8%AF%D8%A7%D8%B1+%D8%A7%D9%84%D9%85%D8%B9%D9%85%D8%A7%D8%B1+%D9%84%D9%84%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A7%D8%AA+%D8%A7%D9%84%D9%87%D9%86%D8%AF%D8%B3%D9%8A%D8%A9%E2%80%AD/@30.0923338,31.3731537,19.43z/data=!4m6!3m5!1s0x1458158dbf37b047:0xee228a3e21f0fe5!8m2!3d30.0921302!4d31.3725772!16s%2Fg%2F11cn6f7wp3?entry=ttu&amp;g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D"
                     >
-                      <h5 className="text-[16px] font-bold">Egypt Office</h5>
+                      <h5 className="text-[16px] font-bold">
+                        {t("contact.office")}
+                      </h5>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -129,17 +131,13 @@ const MenuButton = () => {
                         ></path>
                       </svg>
                     </a>
-                    <p className="text-[12px]">
-                      87, El-Mosheer Ahmed Ismail st.,
-                      <br /> Sheraton, Heliopolis, Cairo, Egypt.
-                    </p>
+                    <p className="text-[12px]">{t("contact.address")}</p>
                   </div>
                 </div>
                 <div className="mb-[20px] md:mb-[40px] flex">
                   <Link href="/contact">
                     <Button
-                      text="Contact Us"
-                      rtl={true}
+                      text={t("contact.button")}
                       onClick={() => setIsOpen(false)}
                     />
                   </Link>

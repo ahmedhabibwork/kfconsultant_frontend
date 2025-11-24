@@ -6,15 +6,10 @@ import PhoneInput from "@/components/cors/PhoneInput";
 import SelectInput from "@/components/cors/SelectInput";
 import Button from "@/components/button";
 import { submitContactForm } from "@/actions/contact";
-
-const enquiryOptions = [
-  { value: "general", label: "General Inquiry" },
-  { value: "project", label: "Project Inquiry" },
-  { value: "career", label: "Career Inquiry" },
-  { value: "partnership", label: "Partnership Inquiry" },
-];
+import { useTranslations } from "next-intl";
 
 const ContactForm = () => {
+  const t = useTranslations("forms.contact");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -29,6 +24,13 @@ const ContactForm = () => {
     message: string;
   }>({ type: null, message: "" });
 
+  const enquiryOptions = [
+    { value: "general", label: t("options.general") },
+    { value: "project", label: t("options.project") },
+    { value: "career", label: t("options.career") },
+    { value: "partnership", label: t("options.partnership") },
+  ];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -37,7 +39,7 @@ const ContactForm = () => {
     try {
       const result = await submitContactForm(formData);
       if (result.success) {
-        setStatus({ type: "success", message: result.message });
+        setStatus({ type: "success", message: t("success") });
         setFormData({
           firstName: "",
           lastName: "",
@@ -49,12 +51,12 @@ const ContactForm = () => {
       } else {
         setStatus({
           type: "error",
-          message: "Something went wrong. Please try again.",
+          message: t("error"),
         });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setStatus({ type: "error", message: "An unexpected error occurred." });
+      setStatus({ type: "error", message: t("error") });
     } finally {
       setIsSubmitting(false);
     }
@@ -81,7 +83,7 @@ const ContactForm = () => {
     <div className="p-[30px] flex-1 max-sm:py-[10px] w-full max-w-3xl mx-auto bg-[#EAEAEA]">
       <div className="flex flex-col gap-3 mt-2 mb-[40px] mx-auto">
         <h2 className="text-2xl text-primary max-sm:text-lg font-bold uppercase">
-          Get in Touch
+          {t("title")}
         </h2>
       </div>
 
@@ -93,7 +95,7 @@ const ContactForm = () => {
         <div className="flex w-full items-center gap-6 flex-wrap max-md:flex-col max-sm:gap-3">
           <div className="flex-1 w-full">
             <Input
-              placeholder="FIRST NAME"
+              placeholder={t("firstName")}
               type="text"
               name="firstName"
               value={formData.firstName}
@@ -102,7 +104,7 @@ const ContactForm = () => {
           </div>
           <div className="flex-1 w-full">
             <Input
-              placeholder="LAST NAME"
+              placeholder={t("lastName")}
               type="text"
               name="lastName"
               value={formData.lastName}
@@ -115,7 +117,7 @@ const ContactForm = () => {
         <div className="flex w-full items-center gap-6 flex-wrap max-md:flex-col max-sm:gap-3">
           <div className="w-full flex-1">
             <Input
-              placeholder="EMAIL"
+              placeholder={t("email")}
               type="email"
               name="email"
               value={formData.email}
@@ -133,14 +135,14 @@ const ContactForm = () => {
             options={enquiryOptions}
             value={formData.enquiryType}
             onChange={handleSelectChange}
-            placeholder="ENQUIRY TYPE"
+            placeholder={t("enquiryType")}
           />
         </div>
 
         {/* Message */}
         <div className="w-full">
           <textarea
-            placeholder="YOUR MESSAGE"
+            placeholder={t("message")}
             rows={3}
             className="flex-1 w-full px-4 py-[20px] border border-[#EAEAEA] focus:outline-none resize-none rounded bg-white"
             name="message"
@@ -164,7 +166,7 @@ const ContactForm = () => {
 
         {/* Submit Button */}
         <Button
-          text={isSubmitting ? "Sending..." : "Send Message"}
+          text={isSubmitting ? t("submitting") : t("submit")}
           className=" text-primary!"
           svgClassName="!fill-primary"
           disabled={isSubmitting}

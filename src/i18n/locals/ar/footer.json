@@ -1,0 +1,18 @@
+{
+  "quickLinks": {
+    "title": "روابط سريعة",
+    "privacyPolicy": "سياسة الخصوصية",
+    "aboutUs": "عن الشركة",
+    "contactUs": "تواصل معنا",
+    "blogNews": "الأخبار والمدونة"
+  },
+  "locations": {
+    "title": "المواقع",
+    "egyptOffice": "مكتب مصر",
+    "address": "87 شارع المشير أحمد إسماعيل، شيراتون، هليوبوليس، القاهرة، مصر."
+  },
+  "followUs": {
+    "title": "تابعنا"
+  },
+  "copyright": "© 2024 DMA"
+}

@@ -1,0 +1,31 @@
+{
+  "contact": {
+    "title": "Get in Touch",
+    "firstName": "FIRST NAME",
+    "lastName": "LAST NAME",
+    "email": "EMAIL",
+    "enquiryType": "ENQUIRY TYPE",
+    "message": "YOUR MESSAGE",
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Something went wrong. Please try again.",
+    "options": {
+      "general": "General Inquiry",
+      "project": "Project Inquiry",
+      "career": "Career Inquiry",
+      "partnership": "Partnership Inquiry"
+    }
+  },
+  "job": {
+    "title": "Apply for this position",
+    "firstName": "FIRST NAME",
+    "lastName": "LAST NAME",
+    "email": "EMAIL",
+    "message": "YOUR MESSAGE",
+    "attachment": "Attachment (if available)",
+    "dragDrop": "Drag & Drop or",
+    "browse": "browse",
+    "submit": "Send The Application"
+  }
+}

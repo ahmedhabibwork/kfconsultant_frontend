@@ -1,3 +1,16 @@
 {
-    "title": "Hello world!"
+  "menu": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "career": "Career",
+    "news": "News",
+    "people": "People"
+  },
+  "contact": {
+    "title": "Let's Keep In Touch!",
+    "office": "Egypt Office",
+    "address": "87, El-Mosheer Ahmed Ismail st., Sheraton, Heliopolis, Cairo, Egypt.",
+    "button": "Contact Us"
+  }
 }

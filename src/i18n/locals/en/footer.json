@@ -1,0 +1,18 @@
+{
+  "quickLinks": {
+    "title": "Quick Links",
+    "privacyPolicy": "Privacy Policy",
+    "aboutUs": "About Us",
+    "contactUs": "Contact Us",
+    "blogNews": "Blog News"
+  },
+  "locations": {
+    "title": "Locations",
+    "egyptOffice": "Egypt Office",
+    "address": "87, El-Mosheer Ahmed Ismail st., Sheraton, Heliopolis, Cairo, Egypt."
+  },
+  "followUs": {
+    "title": "FOLLOW US"
+  },
+  "copyright": "© 2024 DMA"
+}

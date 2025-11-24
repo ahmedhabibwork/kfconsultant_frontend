@@ -1,8 +1,12 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
+  const t = useTranslations("footer");
+
   return (
     <footer className="pt-[20px] px-4 snap-start panel overflow-y-auto relative">
       <Image
@@ -15,24 +19,28 @@ const Footer = () => {
       <div className="bg-overlay bg-primary/95 absolute inset-0 -z-10"></div>
       <div className="flex justify-between gap-4 max-sm:flex-col pb-[10px] max-w-[60%] mx-auto max-md:max-w-full relative z-10">
         <div>
-          <p className="text-white text-sm mb-[12px] uppercase">Quick Links</p>
+          <p className="text-white text-sm mb-[12px] uppercase">
+            {t("quickLinks.title")}
+          </p>
           <div className="flex flex-col gap-2">
             <a className="text-white text-xs" href="/DMA Privacy Policy.docx">
-              Privacy Policy
+              {t("quickLinks.privacyPolicy")}
             </a>
             <Link className="text-white text-xs" href="/about">
-              About Us
+              {t("quickLinks.aboutUs")}
             </Link>
             <Link className="text-white text-xs" href="/contact">
-              Contact Us
+              {t("quickLinks.contactUs")}
             </Link>
             <Link className="text-white text-xs" href="/news">
-              Blog News
+              {t("quickLinks.blogNews")}
             </Link>
           </div>
         </div>
         <div className="flex flex-col">
-          <p className="text-white text-sm mb-[12px] uppercase">Locations</p>
+          <p className="text-white text-sm mb-[12px] uppercase">
+            {t("locations.title")}
+          </p>
           <div className="flex flex-col gap-2 text-xs text-white">
             <div className="flex flex-col gap-1">
               <a
@@ -41,7 +49,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <p className="text-xs">Egypt Office</p>
+                <p className="text-xs">{t("locations.egyptOffice")}</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -59,16 +67,14 @@ const Footer = () => {
                   ></path>
                 </svg>
               </a>
-              <p className="text-[12px]">
-                87, El-Mosheer Ahmed Ismail st.,
-                <br />
-                Sheraton, Heliopolis, Cairo, Egypt.
-              </p>
+              <p className="text-[12px]">{t("locations.address")}</p>
             </div>
           </div>
         </div>
         <div className="">
-          <p className="text-white text-sm mb-[12px] uppercase">FOLLOW US</p>
+          <p className="text-white text-sm mb-[12px] uppercase">
+            {t("followUs.title")}
+          </p>
           <div className="flex gap-[28px]">
             <a
               target="_blank"
@@ -128,7 +134,7 @@ const Footer = () => {
               </svg>
             </a>
           </div>
-          <p className="mt-3 text-white">© 2024 DMA</p>
+          <p className="mt-3 text-white">{t("copyright")}</p>
         </div>
       </div>
     </footer>
