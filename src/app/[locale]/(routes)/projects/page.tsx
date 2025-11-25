@@ -1,6 +1,6 @@
 import React from "react";
 import ProjectsHeader from "./projectsHeader";
-import SeconedSection from "./SeconedSection";
+import SeconedSection from "./(SeconedSection)";
 
 const page = () => {
   return (
