@@ -36,7 +36,7 @@ const InfoCard = ({
       </p>
       <div className="max-sm:scale-75 max-xs:scale-[.69] max-sm:-translate-x-11 max-xs:-translate-x-6 flex justify-end pe-4">
         <Link href={linkHref}>
-          <Button text={buttonText} rtl={rtl} />
+          <Button text={buttonText} />
         </Link>
       </div>
     </div>

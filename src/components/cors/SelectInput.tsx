@@ -74,10 +74,12 @@ const SelectInput = ({
   className = "",
 }: SelectInputProps) => {
   const selectedOption = options.find((opt) => opt.value === value) || null;
+  const instanceId = React.useId();
 
   return (
     <div className={`w-full ${className}`}>
       <Select
+        instanceId={instanceId}
         options={options}
         value={selectedOption}
         onChange={(option) => onChange(option ? option.value : "")}
