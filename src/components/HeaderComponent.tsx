@@ -21,10 +21,10 @@ const HeaderComponent = ({
         className="bg-image object-cover -z-20"
         priority
       />
-      <div className="bg-overlay bg-black/30 absolute inset-0"></div>
+      <div className="bg-overlay bg-black/30 absolute inset-0 z-10"></div>
 
       <div
-        className="z-50 flex flex-col h-[calc(100vh-270px)] justify-center items-center px-4 mt-[136px]"
+        className="relative z-50 flex flex-col h-[calc(100vh-270px)] justify-center items-center px-4 mt-[136px]"
         data-aos="fade-up"
         data-aos-once="true"
         data-aos-duration="300"
