@@ -3,6 +3,7 @@ import ProjectHeader from "./projectHeader";
 import ProjectDetailsSection, {
   ProjectData,
 } from "./components/ProjectDetailsSection";
+import MoreProjects from "./components/MoreProjects";
 
 const page = () => {
   // This data should eventually come from your API/database
@@ -20,9 +21,9 @@ const page = () => {
     ],
     location: "New Cairo, Egypt",
     images: [
-      "https://admin.dma-mea.com/storage/01J9RHPNX281E7DVKNFS45TR34.jpg",
-      "https://admin.dma-mea.com/storage/01J9RHRJTWQWCX1P5ESTFM1CKN.jpg",
-      "https://admin.dma-mea.com/storage/01J9RHSK0TGSC0XW5QJJTTHZE6.jpg",
+      "/projectslug/01J9RHPNX281E7DVKNFS45TR34.webp",
+      "/projectslug/01J9RHRJTWQWCX1P5ESTFM1CKN.webp",
+      "/projectslug/01J9RHSK0TGSC0XW5QJJTTHZE6.webp",
     ],
   };
 
@@ -30,6 +31,7 @@ const page = () => {
     <>
       <ProjectHeader />
       <ProjectDetailsSection project={projectData} />
+      <MoreProjects />
     </>
   );
 };

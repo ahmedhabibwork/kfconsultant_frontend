@@ -1,6 +1,6 @@
-import {NextConfig} from 'next';
+import { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
- 
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -8,9 +8,13 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'admin.dma-mea.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'admin.dma-mea.com',
+      },
     ],
   },
 };
- 
+
 const withNextIntl = createNextIntlPlugin();
 export default withNextIntl(nextConfig);
