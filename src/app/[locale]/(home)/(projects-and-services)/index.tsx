@@ -1,5 +1,10 @@
 "use client";
+import React from "react";
 import { motion } from "motion/react";
+import { Link } from "@/i18n/navigation";
+import { ArrowRight } from "lucide-react";
+import ProjectSlider from "./ProjectSlider";
+import { projects } from "./projectsData";
 
 const services = [
   {
@@ -45,7 +50,7 @@ const services = [
         style={{ fill: "#000068" }}
       >
         <g transform="translate(0,512) scale(0.1,-0.1)">
-          <path d="M2208 5112 c-1 -5 -41 -39 -88 -77 -47 -37 -104 -85 -127 -106 -42 -39 -43 -41 -43 -104 0 -36 3 -65 8 -65 4 0 45 34 92 75 47 41 89 75 93 75 5 0 6 -39 3 -87 -8 -114 -8 -173 -1 -255 l7 -67 -124 -3 -123 -3 -3 -72 -3 -72 123 -3 123 -3 3 -177 2 -178 75 0 75 0 0 180 0 180 285 0 285 0 0 -285 0 -285 -91 0 -92 0 7 -37 c3 -21 6 -55 6 -75 l0 -38 85 0 85 0 0 -285 0 -285 -85 0 -85 0 0 -75 0 -75 85 0 85 0 0 -287 0 -288 72 -65 72 -65 286 -5 285 -5 3 -123 3 -123 72 3 72 3 3 123 3 122 282 -2 282 -3 3 -123 3 -123 72 3 72 3 3 123 3 122 57 0 c36 0 66 -6 78 -15 25 -19 78 -19 115 0 20 11 50 15 92 13 l62 -3 0 -103 0 -102 73 0 72 0 0 275 0 275 -70 0 -70 0 0 -95 0 -95 -84 0 c-51 0 -88 4 -92 11 -4 7 -22 8 -48 4 -22 -3 -74 -9 -113 -11 l-73 -6 0 282 0 282 73 -6 c88 -8 135 -8 255 0 62 4 92 2 92 -5 0 -6 -4 -11 -8 -11 -5 0 -41 -40 -80 -90 l-71 -90 72 0 72 1 38 49 c20 26 69 85 107 129 39 45 70 88 70 95 0 8 -34 54 -76 103 -41 48 -90 107 -107 130 l-32 42 -73 1 -73 0 81 -100 81 -100 -79 0 c-53 0 -84 5 -98 15 -24 18 -72 18 -104 0 -14 -8 -51 -14 -82 -15 l-58 0 0 286 0 286 73 -7 c70 -6 103 -6 257 -2 l75 2 0 -98 0 -97 73 0 72 0 0 275 0 275 -70 0 -70 0 0 -101 0 -101 -82 6 c-107 8 -177 8 -260 1 l-68 -7 0 287 0 287 73 -6 c94 -8 142 -8 255 0 92 6 109 0 77 -26 -9 -7 -45 -48 -81 -92 l-65 -78 73 0 c72 1 73 1 103 39 17 21 65 80 108 130 42 51 77 99 77 107 0 8 -21 38 -47 67 -27 29 -76 88 -111 130 l-62 77 -70 0 c-83 0 -84 6 20 -115 l69 -80 -67 -3 c-37 -2 -83 2 -103 9 -21 6 -54 9 -80 5 -24 -4 -72 -9 -106 -12 l-63 -6 0 59 c0 33 5 64 11 70 15 15 15 82 1 110 -7 12 -12 53 -12 92 l0 71 100 0 100 0 0 75 0 75 -275 0 -275 0 0 -75 0 -75 101 0 101 0 -6 -87 c-8 -107 -8 -158 0 -245 l6 -68 -286 0 -286 0 0 58 c0 31 7 65 14 74 10 13 11 29 3 65 -5 27 -11 86 -14 132 l-5 83 96 -76 c53 -42 98 -76 101 -76 3 0 5 30 5 68 -1 67 -1 67 -43 99 -23 18 -84 68 -136 112 -93 80 -106 89 -113 73 -1 -4 -39 -38 -84 -74 -44 -36 -98 -82 -120 -102 -21 -20 -42 -36 -46 -36 -5 0 -8 -31 -8 -70 0 -38 3 -70 8 -70 4 0 45 34 92 75 47 41 89 75 93 75 5 0 6 -39 3 -87 -8 -114 -8 -173 -1 -255 l7 -68 -286 0 -286 0 0 58 c0 31 7 65 14 74 10 13 11 29 3 65 -5 27 -11 83 -14 125 l-4 77 98 3 98 3 3 73 3 72 -276 0 -275 0 0 -75 0 -75 101 0 101 0 -6 -82 c-8 -107 -8 -167 -1 -250 l7 -68 -286 0 -286 0 0 58 c0 32 5 63 11 69 7 7 9 30 5 65 -4 29 -9 91 -12 137 l-6 83 96 -76 c53 -42 98 -76 101 -76 3 0 5 30 5 68 -1 67 -1 67 -43 99 -23 18 -84 68 -136 112 -93 81 -106 89 -113 73z" />
+          <path d="M2208 5112 c-1 -5 -41 -39 -88 -77 -47 -37 -104 -85 -127 -106 -42 -39 -43 -41 -43 -104 0 -36 3 -65 8 -65 4 0 45 34 92 75 47 41 89 75 93 75 5 0 6 -39 3 -87 -8 -114 -8 -173 -1 -255 l7 -67 -124 -3 -123 -3 -3 -72 -3 -72 123 -3 123 -3 3 -177 2 -178 75 0 75 0 0 180 0 180 285 0 285 0 0 -285 0 -285 -91 0 -92 0 7 -37 c3 -21 6 -55 6 -75 l0 -38 85 0 85 0 0 -285 0 -285 -85 0 -85 0 0 -75 0 -75 85 0 85 0 0 -287 0 -288 72 -65 72 -65 286 -5 285 -5 3 -123 3 -123 72 3 72 3 3 123 3 122 282 -2 282 -3 3 -123 3 -123 72 3 72 3 3 123 3 122 57 0 c36 0 66 -6 78 -15 25 -19 78 -19 115 0 20 11 50 15 92 13 l62 -3 0 -103 0 -102 73 0 72 0 0 275 0 275 -70 0 -70 0 0 -95 0 -95 -84 0 c-51 0 -88 4 -92 11 -4 7 -22 8 -48 4 -22 -3 -74 -9 -113 -11 l-73 -6 0 282 0 282 73 -6 c88 -8 135 -8 255 0 62 4 92 2 92 -5 0 -6 -4 -11 -8 -11 -5 0 -41 -40 -80 -90 l-71 -90 72 0 72 1 38 49 c20 26 69 85 107 129 39 45 70 88 70 95 0 8 -34 54 -76 103 -41 48 -90 107 -107 130 l-32 42 -73 1 -73 0 81 -100 81 -100 -79 0 c-53 0 -84 5 -98 15 -24 18 -72 18 -104 0 -14 -8 -51 -14 -82 -15 l-58 0 0 286 0 286 73 -7 c70 -6 103 -6 257 -2 l75 2 0 -98 0 -97 73 0 72 0 0 275 0 275 -70 0 -70 0 0 -101 0 -101 -82 6 c-107 8 -177 8 -260 1 l-68 -7 0 287 0 287 73 -6 c94 -8 142 -8 255 0 92 6 109 0 77 -26 -9 -7 -45 -48 -81 -92 l-65 -78 73 0 c72 1 73 1 103 39 17 21 65 80 108 130 42 51 77 99 77 107 0 8 -21 38 -47 67 -27 29 -76 88 -111 130 l-62 77 -70 0 c-83 0 -84 6 20 -115 l69 -80 -67 -3 c-37 -2 -83 2 -103 9 -21 6 -54 9 -80 5 -24 -4 -72 -9 -106 -12 l-63 -6 0 59 c0 33 5 64 11 70 15 15 15 82 1 110 -7 12 -12 53 -12 92 l0 71 100 0 100 0 0 75 0 75 -275 0 -275 0 0 -75 0 -75 101 0 101 0 -6 -87 c-8 -107 -8 -158 0 -245 l6 -68 -286 0 -286 0 0 58 c0 31 7 65 14 74 10 13 11 29 3 65 -5 27 -11 83 -14 125 l-4 77 98 3 98 3 3 73 3 72 -276 0 -275 0 0 -75 0 -75 101 0 101 0 -6 -82 c-8 -107 -8 -167 -1 -250 l7 -68 -286 0 -286 0 0 58 c0 32 5 63 11 69 7 7 9 30 5 65 -4 29 -9 91 -12 137 l-6 83 96 -76 c53 -42 98 -76 101 -76 3 0 5 30 5 68 -1 67 -1 67 -43 99 -23 18 -84 68 -136 112 -93 81 -106 89 -113 73z" />
         </g>
       </svg>
     ),
@@ -144,14 +149,62 @@ const services = [
   },
 ];
 
-const FourthSection = () => {
+const ProjectsAndServices = () => {
   return (
-    <section
-      id="colorlib-services"
-      className="w-full min-h-screen snap-start py-16 lg:py-24 bg-gray-50"
-    >
+    <section className="w-full min-h-screen snap-start py-16 lg:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+        {/* Projects Section */}
+        <div
+          id="colorlib-project"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-24"
+        >
+          {/* Left Column - Text Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-4"
+          >
+            <span className="text-sm tracking-widest text-gray-600 uppercase">
+              Explore
+            </span>
+            <h2 className="mt-4 text-3xl lg:text-4xl mb-6">
+              <span className="font-light">Key </span>
+              <span className="font-bold">PROJECTS</span>
+            </h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Thanks to our experience gained through our mega projects in
+              various locations and countless projects, which are reflected in
+              our present activities and operations provided by AACE through
+              high-quality services. This experience encourages our organization
+              to expand globally through more diverse projects.
+            </p>
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 text-blue-900 hover:text-blue-700 font-medium transition-colors"
+            >
+              View All Projects <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
+          {/* Right Column - Carousel */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-7 lg:col-start-6"
+          >
+            <ProjectSlider projects={projects} />
+          </motion.div>
+        </div>
+
+        {/* Services Section */}
+        <div
+          id="colorlib-services"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12"
+        >
           {/* Left Column - Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -178,7 +231,7 @@ const FourthSection = () => {
 
           {/* Right Column - Services Grid */}
           <div className="lg:col-span-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
               {services.map((service, index) => (
                 <motion.div
                   key={service.id}
@@ -186,10 +239,10 @@ const FourthSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col items-start gap-4"
+                  className="flex items-start gap-4"
                 >
-                  <div className="mb-2">{service.icon}</div>
-                  <h3 className="text-lg font-medium text-gray-900">
+                  <div className="shrink-0 text-blue-900">{service.icon}</div>
+                  <h3 className="text-lg font-medium text-gray-900 pt-2 leading-tight">
                     {service.title}
                   </h3>
                 </motion.div>
@@ -202,4 +255,4 @@ const FourthSection = () => {
   );
 };
 
-export default FourthSection;
+export default ProjectsAndServices;
