@@ -7,7 +7,7 @@ import Footer from "@/components/cors/footer";
 
 const page = () => {
   return (
-    <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar">
+    <div className="h-screen w-full">
       <HeroSlider />
       <SeconedSection />
       <ThirdSection />

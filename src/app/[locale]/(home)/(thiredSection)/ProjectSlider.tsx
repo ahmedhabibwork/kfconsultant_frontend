@@ -1,150 +1,103 @@
 "use client";
-import React, { useRef, useEffect, useState } from "react";
-import { motion, useMotionValue, animate } from "motion/react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Project } from "./projectsData";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { projects, Project } from "./projectsData";
 
 interface ProjectSliderProps {
   projects: Project[];
-  activeId: number;
-  onSelect: (id: number) => void;
 }
 
-const ProjectSlider = ({
-  projects,
-  activeId,
-  onSelect,
-}: ProjectSliderProps) => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const itemsContainerRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
-  const x = useMotionValue(0);
+const ProjectSlider = ({ projects }: ProjectSliderProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const updateWidth = () => {
-      if (scrollContainerRef.current && itemsContainerRef.current) {
-        const scrollWidth = itemsContainerRef.current.scrollWidth;
-        const offsetWidth = scrollContainerRef.current.offsetWidth;
-        setWidth(scrollWidth - offsetWidth);
-      }
-    };
-
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
-
-  useEffect(() => {
-    if (itemsContainerRef.current && width > 0) {
-      const activeIndex = projects.findIndex((p) => p.id === activeId);
-      if (activeIndex !== -1) {
-        const itemNode = itemsContainerRef.current.children[
-          activeIndex
-        ] as HTMLElement;
-
-        if (itemNode) {
-          // Calculate target position to center the item or ensure it's visible
-          // For simplicity, let's try to scroll so the item is at the start, but clamped
-          let targetX = -itemNode.offsetLeft;
-
-          // Clamp between 0 and -width
-          if (targetX > 0) targetX = 0;
-          if (targetX < -width) targetX = -width;
-
-          animate(x, targetX, {
-            type: "spring",
-            stiffness: 300,
-            damping: 30,
-          });
-        }
-      }
-    }
-  }, [activeId, width, projects, x]);
-
-  const handlePrev = () => {
-    const currentIndex = projects.findIndex((p) => p.id === activeId);
-    if (currentIndex > 0) {
-      onSelect(projects[currentIndex - 1].id);
-    }
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
   };
 
-  const handleNext = () => {
-    const currentIndex = projects.findIndex((p) => p.id === activeId);
-    if (currentIndex < projects.length - 1) {
-      onSelect(projects[currentIndex + 1].id);
-    }
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
   };
 
   return (
-    <div className="w-full flex flex-col gap-6">
-      <motion.div
-        ref={scrollContainerRef}
-        className="cursor-grab overflow-hidden"
-      >
-        <motion.div
-          ref={itemsContainerRef}
-          drag="x"
-          dragConstraints={{ right: 0, left: -width }}
-          style={{ x }}
-          className="flex gap-6"
-        >
-          {projects.map((project) => (
-            <motion.div
-              key={project.id}
-              onClick={() => onSelect(project.id)}
-              className={`relative min-w-[170px] h-[170px] md:min-w-[211px] md:h-[211px] rounded-2xl cursor-pointer transition-all duration-300 ${
-                activeId === project.id
-                  ? "scale-110 shadow-[10px_0px_5px_rgba(0,0,0,0.3)] z-10 border-2 border-white"
-                  : "scale-100 opacity-70 hover:opacity-100"
-              }`}
+    <div className="relative w-full h-[500px]">
+      {/* Carousel Container */}
+      <div className="relative w-full h-full overflow-hidden rounded-lg">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.5 }}
+            className="absolute inset-0 w-full h-full"
+          >
+            {/* Project Card */}
+            <div
+              className="w-full h-full bg-cover bg-center relative"
+              style={{
+                backgroundImage: `url(${projects[currentIndex].image})`,
+              }}
             >
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover rounded-2xl"
-              />
-              <div
-                className={`absolute inset-0 rounded-2xl transition-colors duration-300 ${
-                  activeId === project.id ? "bg-transparent" : "bg-black/30"
-                }`}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
 
-      {/* Navigation Controls */}
-      <div className="flex items-center gap-9 mt-4">
-        <div className="flex-1 h-[0.5px] bg-[#696969] relative">
-          <div
-            className="absolute top-0 left-0 h-px bg-[#D9D9D9] transition-all duration-300"
-            style={{
-              width: `${
-                ((projects.findIndex((p) => p.id === activeId) + 1) /
-                  projects.length) *
-                100
-              }%`,
-            }}
-          ></div>
-        </div>
-        <div className="flex items-center justify-end rtl:flex-row-reverse gap-[20px]">
+              {/* Content Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-white/95 backdrop-blur-sm p-8 max-w-md mx-4 text-center shadow-xl">
+                  <h2 className="text-2xl font-bold mb-4 text-gray-900">
+                    {projects[currentIndex].title}
+                  </h2>
+                  <p className="text-sm uppercase tracking-widest text-blue-900 mb-4 font-semibold">
+                    {projects[currentIndex].location}
+                  </p>
+                  <p className="text-gray-700 mb-2">
+                    {projects[currentIndex].architect}
+                  </p>
+                  <p className="text-gray-600 text-sm">
+                    {projects[currentIndex].services}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={goToPrevious}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition-all"
+        aria-label="Previous project"
+      >
+        <ArrowLeft className="w-6 h-6 text-gray-800" />
+      </button>
+      <button
+        onClick={goToNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition-all"
+        aria-label="Next project"
+      >
+        <ArrowRight className="w-6 h-6 text-gray-800" />
+      </button>
+
+      {/* Dots Navigation */}
+      <div className="absolute bottom-6 left-0 right-0 z-10 flex justify-center gap-2">
+        {projects.map((_, index) => (
           <button
-            onClick={handlePrev}
-            disabled={projects[0].id === activeId}
-            className="bg-white/20 backdrop-blur-[5px] w-[40px] h-[40px] rounded-full border border-white cursor-pointer flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/30 transition-colors"
-          >
-            <ChevronLeft className="text-white" />
-          </button>
-          <button
-            onClick={handleNext}
-            disabled={projects[projects.length - 1].id === activeId}
-            className="bg-white/20 backdrop-blur-[5px] w-[40px] h-[40px] rounded-full border border-white cursor-pointer flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/30 transition-colors"
-          >
-            <ChevronRight className="text-white" />
-          </button>
-        </div>
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all ${
+              currentIndex === index
+                ? "bg-white scale-125"
+                : "bg-white/50 hover:bg-white/80"
+            }`}
+            aria-label={`Go to project ${index + 1}`}
+          />
+        ))}
       </div>
     </div>
   );

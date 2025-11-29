@@ -1,47 +1,51 @@
 export interface Project {
   id: number;
   title: string;
-  subTitle: string;
-  description: string;
+  location: string;
+  architect: string;
+  services: string;
   image: string;
-  link: string;
 }
 
 export const projects: Project[] = [
   {
     id: 1,
-    title: "Aliva",
-    subTitle: "Mostakbal City",
-    description:
-      "Aliva is a city inspired by the word 'life' spanning 600 acres, featuring stunning natural beauty and modern urban design that encourages social interaction. Aliva offers a unique living experience where comfort and luxury integrate with the breathtaking natural environment, making it the ideal place to live and enjoy life.",
-    image: "/slideone.webp",
-    link: "/projects/1",
+    title: "We Telecom Headquarters",
+    location: "New Administrative City",
+    architect: "ACUD",
+    services: "Structural Design | Supervision",
+    image: "https://aaceconsultants.com/wp-content/uploads/2022/05/WE-Telecom-3D-Render-scaled.jpg",
   },
   {
     id: 2,
-    title: "Mountain View",
-    subTitle: "iCity New Cairo",
-    description:
-      "Mountain View iCity New Cairo is a revolutionary concept that offers a unique living experience. It is designed to be a place where you can indulge in everything you wish for, without any compromise. The project offers a diverse range of architectural styles and living options to suit every lifestyle.",
-    image: "/slidetow.webp",
-    link: "/projects/2",
+    title: "Dorrat El Karz Mall",
+    location: "Cairo, Egypt",
+    architect: "ZDS Architects",
+    services: "Structural Design",
+    image: "https://aaceconsultants.com/wp-content/uploads/2022/05/zyro-image-2.jpg",
   },
   {
     id: 3,
-    title: "Palm Hills",
-    subTitle: "New Cairo",
-    description:
-      "Palm Hills New Cairo is a new mixed-use community providing balance and diversity of housing types, natural backdrops, commercial services and recreational amenities for its residents and nearby visitors. It is influenced by the local area and is centered on creating a community of pedestrian-scaled, tree-lined streets.",
-    image: "/slidethree.webp",
-    link: "/projects/3",
+    title: "Prk Vie - Upwyde",
+    location: "Cairo, Egypt",
+    architect: "Al Gabaly Architects",
+    services: "Structural Design | Supervision",
+    image: "https://aaceconsultants.com/wp-content/uploads/2025/04/Prk-vie-new-cairo.webp",
   },
   {
     id: 4,
-    title: "Madinaty",
-    subTitle: "New Cairo",
-    description:
-      "Madinaty is a city built on 8,000 acres, designed to provide a modern lifestyle for its residents. It features a wide range of services and facilities, including schools, hospitals, shopping malls, and sports clubs, all set within a lush green environment.",
-    image: "/slidefour.webp",
-    link: "/projects/4",
+    title: "Business District - New Capital",
+    location: "Cairo, Egypt",
+    architect: "Al Gabaly Architects",
+    services: "Structural Design | Supervision",
+    image: "https://aaceconsultants.com/wp-content/uploads/2022/10/Al-Safi-23B3-scaled.jpg",
+  },
+  {
+    id: 5,
+    title: "Golden Gate",
+    location: "Cairo, Egypt",
+    architect: "ZDS Architects",
+    services: "Structural Design",
+    image: "https://aaceconsultants.com/wp-content/uploads/2022/08/WhatsApp-Image-2022-08-03-at-8.20.25-PM-3.jpeg",
   },
 ];
