@@ -3,10 +3,7 @@ import { motion } from "motion/react";
 
 const SecondSection = () => {
   return (
-    <section
-      id="colorlib-intro"
-      className="w-full min-h-screen snap-start py-16 lg:py-24"
-    >
+    <section id="colorlib-intro" className="w-full snap-start py-12 lg:py-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
           {/* Center Column - Heading (appears first on mobile, center on desktop) */}
