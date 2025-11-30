@@ -1,19 +1,18 @@
-import React from "react";
 import AboutHeader from "./AboutHeader";
-import SecondSection from "./seconedSection";
-import ThiredSectionBg from "./ThiredSectionBg";
-import Sectors from "./sectors";
-import AwardsSection from "./AwardsSection";
 import Footer from "@/components/cors/footer";
+import OurPurpose from "./(our_purpose)";
+import Vision from "./(vision)";
+import OurFounder from "./(our_founder)";
+import OurPeople from "./(our_people)";
 
 const page = () => {
   return (
     <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar">
       <AboutHeader />
-      <SecondSection />
-      <ThiredSectionBg />
-      <Sectors />
-      <AwardsSection />
+      <OurPurpose />
+      <Vision />
+      <OurFounder />
+      <OurPeople />
       <Footer />
     </div>
   );
