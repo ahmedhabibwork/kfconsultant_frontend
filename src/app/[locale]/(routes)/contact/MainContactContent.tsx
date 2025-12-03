@@ -2,15 +2,20 @@ import React from "react";
 import ContactDetails from "./components/ContactDetails";
 import ContactForm from "./components/ContactForm";
 import ContactMap from "./components/ContactMap";
+import { ContactInfo } from "@/types/contactTypes";
 
-const MainContactContent = () => {
+interface MainContactContentProps {
+  contactInfo: ContactInfo;
+}
+
+const MainContactContent = ({ contactInfo }: MainContactContentProps) => {
   return (
     <div className="flex items-center justify-center max-w-7xl mx-auto gap-16 max-md:gap-4 shadow-lg max-md:flex-col h-max max-md:p-[30px] my-8 max-md:mt-2">
       <div className="flex flex-col gap-4 flex-1">
-        <ContactDetails />
+        <ContactDetails contactInfo={contactInfo} />
         <ContactForm />
       </div>
-      <ContactMap />
+      <ContactMap mapLink={contactInfo.map_link} />
     </div>
   );
 };

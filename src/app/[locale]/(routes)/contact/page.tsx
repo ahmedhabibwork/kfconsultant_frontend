@@ -1,12 +1,15 @@
 import React from "react";
 import ContactHeader from "./ContactHeader";
 import MainContactContent from "./MainContactContent";
+import { getContactInfo } from "@/actions/contact";
 
-const page = () => {
+const page = async () => {
+  const contactData = await getContactInfo();
+
   return (
     <div>
       <ContactHeader />
-      <MainContactContent />
+      <MainContactContent contactInfo={contactData.msg_data} />
     </div>
   );
 };

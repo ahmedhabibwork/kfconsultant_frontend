@@ -1,7 +1,12 @@
 import React from "react";
 import Marquee from "./Marquee";
+import { Client } from "@/types/homeTypes";
 
-const PartnersSection = () => {
+interface PartnersSectionProps {
+  clients: Client[];
+}
+
+const PartnersSection = ({ clients }: PartnersSectionProps) => {
   return (
     <div
       id="partners"
@@ -20,7 +25,7 @@ const PartnersSection = () => {
         </div>
       </div>
       <div dir="ltr" className="w-full">
-        <Marquee />
+        <Marquee clients={clients} />
       </div>
     </div>
   );

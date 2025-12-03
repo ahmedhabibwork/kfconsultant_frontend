@@ -2,42 +2,25 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { Banner } from "@/types/homeTypes";
 
-const slides = [
-  {
-    image:
-      "https://aaceconsultants.com/wp-content/uploads/2022/05/Islamic-Culture-Construction3-scaled.jpg",
-    title: "Amr Abdelrahman",
-    subtitle: "Consultant Engineers",
-  },
-  {
-    image:
-      "https://aaceconsultants.com/wp-content/uploads/2022/05/ceece474-818f-4399-95b5-67c471f03586-e1681652894970.jpg",
-    title: "Amr Abdelrahman",
-    subtitle: "Consultant Engineers",
-  },
-  {
-    image:
-      "https://aaceconsultants.com/wp-content/uploads/2022/05/WhatsApp-Image-2023-08-29-at-5.20.57-PM.jpeg",
-    title: "Amr Abdelrahman",
-    subtitle: "Consultant Engineers",
-  },
-  {
-    image: "https://aaceconsultants.com/wp-content/uploads/2022/08/Image2.jpeg",
-    title: "Amr Abdelrahman",
-    subtitle: "Consultant Engineers",
-  },
-];
+interface HeroSliderProps {
+  banner: Banner;
+}
 
-const HeroSlider = () => {
+const HeroSlider = ({ banner }: HeroSliderProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // If we only have one banner, we can treat it as a single slide
+  const slides = [banner];
+
   useEffect(() => {
+    if (slides.length <= 1) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   return (
     <aside
@@ -63,29 +46,30 @@ const HeroSlider = () => {
                 transition={{ delay: 0.5, duration: 0.8 }}
                 className="text-4xl md:text-6xl font-bold mb-4"
               >
-                {slides[currentSlide].title} <br />{" "}
-                {slides[currentSlide].subtitle}
+                {slides[currentSlide].title}
               </motion.h2>
             </div>
           </div>
         </motion.div>
       </AnimatePresence>
 
-      {/* Dots Navigation */}
-      <div className="absolute bottom-10 left-0 right-0 z-20 flex justify-center gap-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
-              currentSlide === index
-                ? "bg-white scale-125"
-                : "bg-white/50 hover:bg-white/80"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
+      {/* Dots Navigation - Only show if more than one slide */}
+      {slides.length > 1 && (
+        <div className="absolute bottom-10 left-0 right-0 z-20 flex justify-center gap-3">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                currentSlide === index
+                  ? "bg-white scale-125"
+                  : "bg-white/50 hover:bg-white/80"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </aside>
   );
 };

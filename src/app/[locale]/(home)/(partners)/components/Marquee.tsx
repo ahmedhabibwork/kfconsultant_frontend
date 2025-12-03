@@ -1,18 +1,22 @@
 "use client";
 import React from "react";
 import PartnerLogo from "./PartnerLogo";
-import { partners } from "./data";
+import { Client } from "@/types/homeTypes";
 
-const Marquee = () => {
+interface MarqueeProps {
+  clients: Client[];
+}
+
+const Marquee = ({ clients }: MarqueeProps) => {
   return (
     <div className="relative w-full overflow-hidden py-10">
       <div className="flex w-full">
         <div className="flex gap-10 pr-10 animate-marquee w-max">
-          {[...partners, ...partners].map((partner, index) => (
+          {[...clients, ...clients].map((client, index) => (
             <PartnerLogo
-              key={`${partner.name}-${index}`}
-              src={partner.src}
-              alt={partner.name}
+              key={`${client.title}-${index}`}
+              src={client.image}
+              alt={client.title}
             />
           ))}
         </div>

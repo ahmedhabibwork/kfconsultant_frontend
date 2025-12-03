@@ -9,8 +9,12 @@ const nextConfig: NextConfig = {
         hostname: 'admin.dma-mea.com',
       },
       {
+        protocol: 'http',
+        hostname: '72.62.16.29',
+      },
+      {
         protocol: 'https',
-        hostname: 'admin.dma-mea.com',
+        hostname: '72.62.16.29',
       },
     ],
   },
