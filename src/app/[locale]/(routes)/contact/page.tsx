@@ -7,7 +7,7 @@ const page = async () => {
   const contactData = await getContactInfo();
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <ContactHeader />
       <MainContactContent contactInfo={contactData.msg_data} />
     </div>

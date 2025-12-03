@@ -10,7 +10,7 @@ interface MainContactContentProps {
 
 const MainContactContent = ({ contactInfo }: MainContactContentProps) => {
   return (
-    <div className="flex items-center justify-center max-w-7xl mx-auto gap-16 max-md:gap-4 shadow-lg max-md:flex-col h-max max-md:p-[30px] my-8 max-md:mt-2">
+    <div className="flex items-center justify-center max-w-7xl mx-auto gap-16 max-md:gap-4 shadow-lg max-md:flex-col h-max max-md:p-[30px] my-8 max-md:mt-2 flex-1">
       <div className="flex flex-col gap-4 flex-1">
         <ContactDetails contactInfo={contactInfo} />
         <ContactForm />

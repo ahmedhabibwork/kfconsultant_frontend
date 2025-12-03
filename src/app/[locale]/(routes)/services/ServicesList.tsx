@@ -9,7 +9,7 @@ interface ServicesListProps {
 
 const ServicesList = ({ services }: ServicesListProps) => {
   return (
-    <section className="w-full py-16 md:py-24 bg-white snap-start">
+    <section className="w-full py-16 md:py-24 bg-white snap-start flex-1">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {services.map((service) => (

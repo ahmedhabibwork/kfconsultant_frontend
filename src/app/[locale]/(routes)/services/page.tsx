@@ -8,9 +8,10 @@ const page = async () => {
   const servicesData = await getServices();
 
   return (
-    <div className="">
+    <div className="min-h-screen flex flex-col">
       <ServicesHeader />
       <ServicesList services={servicesData.msg_data} />
+      <Footer />
     </div>
   );
 };
