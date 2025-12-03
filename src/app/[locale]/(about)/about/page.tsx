@@ -16,7 +16,6 @@ const page = async () => {
       <Vision />
       <OurFounder />
       <OurPeople team={aboutData.msg_data.team} />
-      <Footer />
     </div>
   );
 };

@@ -12,7 +12,7 @@ const HeaderComponent = ({
   return (
     <section
       id="first-section"
-      className="panel w-full max-h-[300px] h-full snap-start overflow-y-auto relative text-white"
+      className="panel w-full min-h-[200px] md:min-h-[300px] h-full snap-start overflow-y-auto relative text-white flex flex-col"
     >
       <Image
         alt="Background"
@@ -24,7 +24,7 @@ const HeaderComponent = ({
       <div className="bg-overlay bg-black/30 absolute inset-0 z-10"></div>
 
       <div
-        className="relative z-50 flex flex-col h-full justify-center items-center px-4"
+        className="relative z-20 flex flex-col flex-1 justify-center items-center px-4"
         data-aos="fade-up"
         data-aos-once="true"
         data-aos-duration="300"

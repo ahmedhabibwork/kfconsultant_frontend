@@ -16,7 +16,6 @@ const page = async () => {
       <SeconedSection whyUs={whyUs} />
       <ProjectsAndServices projects={project} services={services} />
       <PartnersSection clients={clients} />
-      <Footer />
     </div>
   );
 };
