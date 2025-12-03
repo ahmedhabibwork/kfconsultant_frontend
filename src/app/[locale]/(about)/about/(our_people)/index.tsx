@@ -3,41 +3,26 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { TeamMember } from "@/types/aboutTypes";
 
-const engineers = [
-  {
-    id: 1,
-    name: "DR. AHMED FOUAD",
-    credentials: "CPRE®, PMP®, PE, LEED (GBES)",
-    role: "PMO Head | Consultant Engineer | Supervision Department",
-    image: "/aboutseconedbg.webp", // Placeholder
-  },
-  {
-    id: 2,
-    name: "ENG. SARAH SMITH",
-    credentials: "M.Sc, PMP®",
-    role: "Senior Structural Engineer",
-    image: "/aboutthiredbg.webp", // Placeholder
-  },
-  {
-    id: 3,
-    name: "ENG. JOHN DOE",
-    credentials: "Ph.D, PE",
-    role: "Lead Architect",
-    image: "/aboutseconedbg.webp", // Placeholder
-  },
-];
+interface OurPeopleProps {
+  team: TeamMember[];
+}
 
-const OurPeople = () => {
+const OurPeople = ({ team }: OurPeopleProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % engineers.length);
+    setCurrentIndex((prev) => (prev + 1) % team.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + engineers.length) % engineers.length);
+    setCurrentIndex((prev) => (prev - 1 + team.length) % team.length);
   };
+
+  if (!team || team.length === 0) {
+    return null;
+  }
 
   return (
     <section className="w-full py-16 md:py-24 bg-white snap-start">
@@ -63,27 +48,29 @@ const OurPeople = () => {
               Key
             </h3>
             <h3 className="text-4xl md:text-5xl font-bold text-black uppercase leading-tight">
-              Engineers
+              Members
             </h3>
           </div>
 
           {/* Right Side - Slider Card */}
           <div className="w-full lg:w-2/3 relative bg-white shadow-sm border border-gray-100 rounded-lg overflow-hidden">
             {/* Navigation Buttons */}
-            <div className="absolute top-0 right-0 z-10 flex">
-              <button
-                onClick={prevSlide}
-                className="w-12 h-12 bg-indigo-400 hover:bg-indigo-500 text-white flex items-center justify-center transition-colors"
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="w-12 h-12 bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center transition-colors"
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
+            {team.length > 1 && (
+              <div className="absolute top-0 right-0 z-10 flex">
+                <button
+                  onClick={prevSlide}
+                  className="w-12 h-12 bg-indigo-400 hover:bg-indigo-500 text-white flex items-center justify-center transition-colors"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="w-12 h-12 bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center transition-colors"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            )}
 
             {/* Slide Content */}
             <div className="relative h-[300px] md:h-[250px] overflow-hidden">
@@ -99,8 +86,8 @@ const OurPeople = () => {
                   {/* Image */}
                   <div className="w-full md:w-1/3 h-48 md:h-full relative">
                     <Image
-                      src={engineers[currentIndex].image}
-                      alt={engineers[currentIndex].name}
+                      src={team[currentIndex].image}
+                      alt={team[currentIndex].name}
                       fill
                       className="object-cover"
                     />
@@ -110,15 +97,12 @@ const OurPeople = () => {
                   <div className="w-full md:w-2/3 p-8 flex flex-col justify-center gap-4 bg-white">
                     <div className="flex flex-col gap-1">
                       <h4 className="text-lg font-bold text-black uppercase">
-                        {engineers[currentIndex].name} |{" "}
-                        <span className="text-gray-600 font-medium text-sm">
-                          {engineers[currentIndex].credentials}
-                        </span>
+                        {team[currentIndex].name}
                       </h4>
                     </div>
                     <div className="w-12 h-0.5 bg-gray-200"></div>
                     <p className="text-gray-500 text-sm leading-relaxed">
-                      {engineers[currentIndex].role}
+                      {team[currentIndex].job_title}
                     </p>
                   </div>
                 </motion.div>

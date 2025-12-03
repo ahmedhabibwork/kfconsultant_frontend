@@ -1,8 +1,13 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { AboutUs } from "@/types/aboutTypes";
 
-const OurPurpose = () => {
+interface OurPurposeProps {
+  aboutUs: AboutUs;
+}
+
+const OurPurpose = ({ aboutUs }: OurPurposeProps) => {
   return (
     <section className="w-full py-16 md:py-24 bg-white snap-start">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
@@ -21,25 +26,30 @@ const OurPurpose = () => {
           {/* Text Content */}
           <div className="flex flex-col gap-6">
             <h3 className="text-3xl md:text-4xl font-normal text-gray-900">
-              Mission
+              {aboutUs.title}
             </h3>
             <p className="text-gray-600 text-base md:text-lg leading-relaxed text-justify">
-              Our focus extends beyond construction; we are committed to
-              delivering efficient solutions that are both economically viable
-              and environmentally responsible, ensuring we meet our clients'
-              needs promptly. We are committed to integrating research and
-              expertise within the civil engineering industry, delivering
-              structural design solutions for a diverse range of structures by
-              thoroughly examining construction challenges both on-site and
-              off-site.
+              {aboutUs.short_description}
             </p>
+            {aboutUs.experience_years > 0 && (
+              <div className="flex items-center gap-4 mt-4">
+                <div className="flex flex-col">
+                  <span className="text-5xl font-bold text-primary">
+                    {aboutUs.experience_years}
+                  </span>
+                  <span className="text-gray-600 text-sm uppercase tracking-wider">
+                    Years of Experience
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Image */}
           <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-lg overflow-hidden shadow-lg">
             <Image
-              src="/aboutseconedbg.webp"
-              alt="Mission - Civil Engineering"
+              src={aboutUs.image || "/aboutseconedbg.webp"}
+              alt={aboutUs.title}
               fill
               className="object-cover"
             />
