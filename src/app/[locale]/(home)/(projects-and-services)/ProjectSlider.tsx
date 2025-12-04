@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { projects, Project } from "./projectsData";
+import { Project } from "@/types/homeTypes";
+import TextEditorReader from "@/components/TextReader";
 
 interface ProjectSliderProps {
   projects: Project[];
@@ -40,7 +41,7 @@ const ProjectSlider = ({ projects }: ProjectSliderProps) => {
             <div
               className="w-full h-full bg-cover bg-center relative"
               style={{
-                backgroundImage: `url(${projects[currentIndex].image})`,
+                backgroundImage: `url(${projects[currentIndex].cover_image})`,
               }}
             >
               {/* Overlay */}
@@ -55,11 +56,13 @@ const ProjectSlider = ({ projects }: ProjectSliderProps) => {
                   <p className="text-sm uppercase tracking-widest text-blue-900 mb-4 font-semibold">
                     {projects[currentIndex].location}
                   </p>
-                  <p className="text-gray-700 mb-2">
-                    {projects[currentIndex].architect}
-                  </p>
+                  <div className="text-gray-700 mb-2">
+                    <TextEditorReader
+                      value={projects[currentIndex].short_description}
+                    />
+                  </div>
                   <p className="text-gray-600 text-sm">
-                    {projects[currentIndex].services}
+                    {projects[currentIndex].category.title}
                   </p>
                 </div>
               </div>

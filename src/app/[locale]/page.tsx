@@ -14,7 +14,8 @@ const page = async () => {
     <div className="h-screen w-full">
       <HeroSlider banner={banner} />
       <SeconedSection whyUs={whyUs} />
-      <ProjectsAndServices projects={project} services={services} />
+      <FourthSection services={services} />
+      <ProjectsAndServices projects={project} />
       <PartnersSection clients={clients} />
     </div>
   );

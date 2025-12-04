@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import TextEditorReader from "@/components/TextReader";
 
 interface ServiceCardProps {
   title: string;
@@ -19,10 +20,7 @@ const ServiceCard = ({ title, description, image }: ServiceCardProps) => {
           <h3 className="text-xl font-medium text-gray-800 group-hover:text-indigo-900 transition-colors">
             {title}
           </h3>
-          <div
-            className="text-gray-500 text-sm leading-relaxed text-justify prose prose-sm max-w-none"
-            dangerouslySetInnerHTML={{ __html: description }}
-          />
+          <TextEditorReader value={description} />
         </div>
       </div>
     </div>

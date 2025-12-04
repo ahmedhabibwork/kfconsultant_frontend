@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/button";
+import TextEditorReader from "@/components/TextReader";
 
 interface InfoCardProps {
   title: string;
@@ -31,9 +32,9 @@ const InfoCard = ({
           {title}
         </h1>
       </div>
-      <p className="text-gray-100 font-medium line-clamp-6 text-justify text-[13px] leading-relaxed max-md:text-sm">
-        {description}
-      </p>
+      <div className="text-gray-100 font-medium line-clamp-6 text-justify text-[13px] leading-relaxed max-md:text-sm">
+        <TextEditorReader value={description} />
+      </div>
       <div className="max-sm:scale-75 max-xs:scale-[.69] max-sm:-translate-x-11 max-xs:-translate-x-6 flex justify-end pe-4">
         <Link href={linkHref}>
           <Button text={buttonText} />

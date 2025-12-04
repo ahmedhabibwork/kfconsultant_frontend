@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { AboutUs } from "@/types/aboutTypes";
+import TextEditorReader from "@/components/TextReader";
 
 interface OurPurposeProps {
   aboutUs: AboutUs;
@@ -28,9 +29,9 @@ const OurPurpose = ({ aboutUs }: OurPurposeProps) => {
             <h3 className="text-3xl md:text-4xl font-normal text-gray-900">
               {aboutUs.title}
             </h3>
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed text-justify">
-              {aboutUs.short_description}
-            </p>
+            <div className="text-gray-600 text-base md:text-lg leading-relaxed text-justify">
+              <TextEditorReader value={aboutUs.short_description} />
+            </div>
             {aboutUs.experience_years > 0 && (
               <div className="flex items-center gap-4 mt-4">
                 <div className="flex flex-col">

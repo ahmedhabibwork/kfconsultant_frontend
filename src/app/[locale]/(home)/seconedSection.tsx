@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import { WhyUs } from "@/types/homeTypes";
+import TextEditorReader from "@/components/TextReader";
 
 interface SecondSectionProps {
   whyUs: WhyUs;
@@ -52,9 +53,11 @@ const SecondSection = ({ whyUs }: SecondSectionProps) => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="md:col-span-4 md:col-start-9 md:row-start-1"
           >
-            <p className="text-gray-700 leading-relaxed">
-              {whyUs.description || whyUs.short_description}
-            </p>
+            <div className="text-gray-700 leading-relaxed">
+              <TextEditorReader
+                value={whyUs.description || whyUs.short_description}
+              />
+            </div>
           </motion.div>
         </div>
       </div>
