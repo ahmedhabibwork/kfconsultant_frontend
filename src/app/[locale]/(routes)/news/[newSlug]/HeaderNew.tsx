@@ -1,10 +1,15 @@
 import HeaderComponent from "@/components/HeaderComponent";
+import { BlogPost } from "@/types/blogDetailesType";
 
-const HeaderNew = () => {
+interface HeaderNewProps {
+  blog: BlogPost;
+}
+
+const HeaderNew = ({ blog }: HeaderNewProps) => {
   return (
-    <HeaderComponent background="/contactBg.webp">
+    <HeaderComponent background={blog.images[0] || "/contactBg.webp"}>
       <h1 className="text-center text-[60px] max-md:text-[35px] font-medium max-w-2xl">
-        DMA Contributes to Riyadh's Skyline with Mountain View I
+        {blog.title}
       </h1>
     </HeaderComponent>
   );
