@@ -4,6 +4,8 @@ import ProjectDetailsSection from "./components/ProjectDetailsSection";
 import MoreProjects from "./components/MoreProjects";
 import { getProjectDetails } from "@/actions/project-details";
 import { Project } from "@/types/projectDetailesTypes";
+import { Metadata } from "next";
+import { createMetadata, createProjectSchema } from "@/lib/metadata";
 
 interface PageProps {
   params: Promise<{
@@ -28,6 +30,23 @@ function mapProjectToComponentData(project: Project) {
   };
 }
 
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { project_slug } = await params;
+  const projectData = await getProjectDetails(project_slug);
+  const { project } = projectData.msg_data;
+
+  return createMetadata({
+    title: project.meta_title || project.title,
+    description: project.meta_description || project.short_description,
+    image: project.cover_image,
+    url: `/projects/${project.slug}`,
+    type: "article",
+    publishedTime: project.created_at,
+  });
+}
+
 const page = async ({ params }: PageProps) => {
   const { project_slug } = await params;
   const projectData = await getProjectDetails(project_slug);
@@ -35,8 +54,19 @@ const page = async ({ params }: PageProps) => {
 
   const componentData = mapProjectToComponentData(project);
 
+  const jsonLd = createProjectSchema({
+    title: project.title,
+    description: project.meta_description || project.short_description,
+    image: project.cover_image,
+    url: `https://dma-mea.com/projects/${project.slug}`,
+  });
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <ProjectHeader project={project} />
       <ProjectDetailsSection project={componentData} />
       <MoreProjects />

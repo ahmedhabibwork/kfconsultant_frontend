@@ -1,9 +1,28 @@
+import { Metadata } from "next";
 import HeroSlider from "@/components/HeroSlider";
 import FourthSection from "./(home)/(fourthSection)";
 import SeconedSection from "./(home)/seconedSection";
 import ProjectsAndServices from "./(home)/(projects-and-services)";
 import PartnersSection from "./(home)/(partners)";
 import { getHome } from "@/actions/get_home";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Home",
+  description:
+    "Leading design and engineering consultancy firm with over 30 years of experience in architectural design, master planning, and infrastructure development across Egypt and the Middle East.",
+  keywords: [
+    "architecture",
+    "engineering",
+    "design consultancy",
+    "master planning",
+    "infrastructure",
+    "Egypt",
+    "Middle East",
+    "DMA",
+  ],
+  url: "/",
+});
 
 const page = async () => {
   const data = await getHome();
