@@ -14,7 +14,7 @@ const ProjectsList = ({ projects }: ProjectsListProps) => {
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
-            id={String(project.id)}
+            slug={project.slug || ""}
             title={project.title}
             client={project.owner}
             location={project.location}

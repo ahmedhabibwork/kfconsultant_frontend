@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { motion } from "motion/react";
 
 interface ProjectCardProps {
-  id: string;
+  slug: string;
   title: string;
   client: string;
   location: string;
@@ -14,7 +13,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({
-  id,
+  slug,
   title,
   client,
   location,
@@ -25,7 +24,7 @@ const ProjectCard = ({
   return (
     <Link
       className="text-white flex-1 h-fit w-[300px] max-md:w-full group z-1"
-      href={`/projects/${id}`}
+      href={`/projects/${slug}`}
     >
       <Image
         alt={title}
