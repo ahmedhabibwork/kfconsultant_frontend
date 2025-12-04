@@ -3,7 +3,6 @@ import FourthSection from "./(home)/(fourthSection)";
 import SeconedSection from "./(home)/seconedSection";
 import ProjectsAndServices from "./(home)/(projects-and-services)";
 import PartnersSection from "./(home)/(partners)";
-import Footer from "@/components/cors/footer";
 import { getHome } from "@/actions/get_home";
 
 const page = async () => {
@@ -11,7 +10,7 @@ const page = async () => {
   const { banner, whyUs, project, services, clients } = data.msg_data;
 
   return (
-    <div className="h-screen w-full">
+    <div className="w-full">
       <HeroSlider banner={banner} />
       <SeconedSection whyUs={whyUs} />
       <FourthSection services={services} />
