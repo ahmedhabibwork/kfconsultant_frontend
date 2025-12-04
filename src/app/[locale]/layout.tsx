@@ -9,6 +9,7 @@ import NextProgress from "@/components/next-progress";
 import Footer from "@/components/cors/footer";
 import { Toaster } from "sonner";
 import { getCategories } from "@/actions/categories";
+import { getContactInfo } from "@/actions/contact";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,8 @@ export default async function RootLayout({
   const locale = await getLocale();
   const categoriesData = await getCategories();
   const categories = categoriesData.msg_data;
+  const contactData = await getContactInfo();
+  const contactInfo = contactData.msg_data;
 
   return (
     <html
@@ -48,7 +51,7 @@ export default async function RootLayout({
               <NextProgress />
               <Header categories={categories} />
               {children}
-              <Footer />
+              <Footer contactInfo={contactInfo} />
             </div>
           </ModalProvider>
         </NextIntlClientProvider>
