@@ -1,12 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { ArrowRight } from "lucide-react";
-import Input from "@/components/cors/Input";
 import PhoneInput from "@/components/cors/PhoneInput";
-import SelectInput from "@/components/cors/SelectInput";
 import Button from "@/components/button";
 import { submitContactForm } from "@/actions/contact";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 const ContactForm = () => {
   const t = useTranslations("forms.contact");
@@ -19,10 +17,6 @@ const ContactForm = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState<{
-    type: "success" | "error" | null;
-    message: string;
-  }>({ type: null, message: "" });
 
   const enquiryOptions = [
     { value: "general", label: t("options.general") },
@@ -34,12 +28,11 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setStatus({ type: null, message: "" });
 
     try {
       const result = await submitContactForm(formData);
       if (result.success) {
-        setStatus({ type: "success", message: t("success") });
+        toast.success(t("success"));
         setFormData({
           firstName: "",
           lastName: "",
@@ -49,14 +42,11 @@ const ContactForm = () => {
           message: "",
         });
       } else {
-        setStatus({
-          type: "error",
-          message: t("error"),
-        });
+        toast.error(t("error"));
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setStatus({ type: "error", message: t("error") });
+      toast.error(t("error"));
     } finally {
       setIsSubmitting(false);
     }
@@ -75,103 +65,155 @@ const ContactForm = () => {
     setFormData((prev) => ({ ...prev, phone }));
   };
 
-  const handleSelectChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, enquiryType: value }));
-  };
-
   return (
-    <div className="p-[30px] flex-1 max-sm:py-[10px] w-full max-w-3xl mx-auto bg-[#EAEAEA]">
-      <div className="flex flex-col gap-3 mt-2 mb-[40px] mx-auto">
-        <h2 className="text-2xl text-primary max-sm:text-lg font-bold uppercase">
+    <div
+      className="w-full bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12"
+      data-aos="fade-up"
+      data-aos-once="true"
+      data-aos-duration="1000"
+    >
+      <div className="text-center mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3 uppercase tracking-tight">
           {t("title")}
         </h2>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="relative flex flex-col gap-4 max-sm:gap-3 items-center"
-      >
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         {/* Name Fields */}
-        <div className="flex w-full items-center gap-6 flex-wrap max-md:flex-col max-sm:gap-3">
-          <div className="flex-1 w-full">
-            <Input
-              placeholder={t("firstName")}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="w-full space-y-2">
+            <label
+              htmlFor="firstName"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
+            >
+              {t("firstName")}
+            </label>
+            <input
+              id="firstName"
               type="text"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
+              placeholder={t("firstName")}
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
-          <div className="flex-1 w-full">
-            <Input
-              placeholder={t("lastName")}
+          <div className="w-full space-y-2">
+            <label
+              htmlFor="lastName"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
+            >
+              {t("lastName")}
+            </label>
+            <input
+              id="lastName"
               type="text"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
+              placeholder={t("lastName")}
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
         </div>
 
         {/* Email & Phone Fields */}
-        <div className="flex w-full items-center gap-6 flex-wrap max-md:flex-col max-sm:gap-3">
-          <div className="w-full flex-1">
-            <Input
-              placeholder={t("email")}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="w-full space-y-2">
+            <label
+              htmlFor="email"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
+            >
+              {t("email")}
+            </label>
+            <input
+              id="email"
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              placeholder={t("email")}
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
-          <div className="w-full flex-1">
-            <PhoneInput value={formData.phone} onChange={handlePhoneChange} />
+          <div className="w-full space-y-2">
+            <label
+              htmlFor="phone"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
+            >
+              {t("phone")}
+            </label>
+            <div className="[&_.react-international-phone-input]:!h-10 [&_.react-international-phone-input]:!w-full [&_.react-international-phone-input]:!rounded-r-md [&_.react-international-phone-input]:!border-input [&_.react-international-phone-input]:!bg-background [&_.react-international-phone-country-selector-button]:!h-10 [&_.react-international-phone-country-selector-button]:!border-input [&_.react-international-phone-country-selector-button]:!bg-background">
+              <PhoneInput
+                value={formData.phone}
+                onChange={handlePhoneChange}
+                className="!w-full"
+              />
+            </div>
           </div>
         </div>
 
         {/* Enquiry Type */}
-        <div className="w-full">
-          <SelectInput
-            options={enquiryOptions}
+        <div className="w-full space-y-2">
+          <label
+            htmlFor="enquiryType"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
+          >
+            {t("enquiryType")}
+          </label>
+          <select
+            id="enquiryType"
+            name="enquiryType"
             value={formData.enquiryType}
-            onChange={handleSelectChange}
-            placeholder={t("enquiryType")}
-          />
+            onChange={handleChange}
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <option value="" disabled>
+              {t("enquiryType")}
+            </option>
+            {enquiryOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Message */}
-        <div className="w-full">
+        <div className="w-full space-y-2">
+          <label
+            htmlFor="message"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
+          >
+            {t("message")}
+          </label>
           <textarea
-            placeholder={t("message")}
-            rows={3}
-            className="flex-1 w-full px-4 py-[20px] border border-[#EAEAEA] focus:outline-none resize-none rounded bg-white"
+            id="message"
             name="message"
             value={formData.message}
             onChange={handleChange}
+            placeholder={t("message")}
+            rows={4}
+            className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-y"
           />
         </div>
 
-        {/* Status Message */}
-        {status.message && (
-          <div
-            className={`w-full text-center p-2 rounded ${
-              status.type === "success"
-                ? "bg-green-100 text-green-700"
-                : "bg-red-100 text-red-700"
-            }`}
-          >
-            {status.message}
-          </div>
-        )}
-
         {/* Submit Button */}
-        <Button
-          text={isSubmitting ? t("submitting") : t("submit")}
-          className=" text-primary!"
-          svgClassName="!fill-primary"
-          disabled={isSubmitting}
-          onClick={(e) => handleSubmit(e)}
-        />
+        <div className="flex justify-center mt-4">
+          <Button
+            text={isSubmitting ? t("submitting") : t("submit")}
+            textColor="text-primary-foreground"
+            hoverColor="hover:opacity-90"
+            width="w-full md:w-[240px]"
+            height="h-[56px]"
+            textSize="text-[15px] font-medium"
+            svgClassName="!fill-primary-foreground group-hover/parent:!fill-primary-foreground"
+            arrowSize="w-5 h-5"
+            disabled={isSubmitting}
+            className="bg-primary hover:bg-primary/90"
+            onClick={(e) => handleSubmit(e)}
+          />
+        </div>
       </form>
     </div>
   );
