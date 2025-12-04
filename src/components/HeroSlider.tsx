@@ -5,14 +5,14 @@ import { motion, AnimatePresence } from "motion/react";
 import { Banner } from "@/types/homeTypes";
 
 interface HeroSliderProps {
-  banner: Banner;
+  banner: Banner[];
 }
 
 const HeroSlider = ({ banner }: HeroSliderProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // If we only have one banner, we can treat it as a single slide
-  const slides = [banner];
+  const slides = banner;
 
   useEffect(() => {
     if (slides.length <= 1) return;
