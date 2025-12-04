@@ -10,7 +10,7 @@ const page = async () => {
   const aboutData = await getAboutUs();
 
   return (
-    <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar">
+    <div className="">
       <AboutHeader />
       <OurPurpose aboutUs={aboutData.msg_data.about_us} />
       <Vision />

@@ -8,6 +8,7 @@ import { getLocale } from "next-intl/server";
 import NextProgress from "@/components/next-progress";
 import Footer from "@/components/cors/footer";
 import { Toaster } from "sonner";
+import { getCategories } from "@/actions/categories";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
+  const categoriesData = await getCategories();
+  const categories = categoriesData.msg_data;
+
   return (
     <html
       lang={locale === "ar" ? "ar" : "en"}
@@ -42,7 +46,7 @@ export default async function RootLayout({
             <Toaster position="top-right" richColors />
             <div className="w-full overflow-x-hidden">
               <NextProgress />
-              <Header />
+              <Header categories={categories} />
               {children}
               <Footer />
             </div>
