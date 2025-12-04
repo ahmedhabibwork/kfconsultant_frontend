@@ -1,10 +1,15 @@
 import HeaderComponent from "@/components/HeaderComponent";
+import { Project } from "@/types/projectDetailesTypes";
 
-const ProjectHeader = () => {
+interface ProjectHeaderProps {
+  project: Project;
+}
+
+const ProjectHeader = ({ project }: ProjectHeaderProps) => {
   return (
-    <HeaderComponent background="/newsBg.webp">
+    <HeaderComponent background={project.cover_image || "/newsBg.webp"}>
       <h1 className="uppercase font-medium text-[60px] max-md:text-[35px]">
-        Privado
+        {project.title}
       </h1>
     </HeaderComponent>
   );
