@@ -1,42 +1,51 @@
 "use client";
-import React from "react";
 import { motion } from "motion/react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface TabsProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  categories: Record<string, string>;
 }
 
-const tabs = [
-  "all",
-  "Residential",
-  "Hospitality",
-  "Offices",
-  "Commercial",
-  "Healthcare",
-  "Educational",
-];
+const Tabs = ({ categories }: TabsProps) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const activeCategory = searchParams.get("category") || "all";
 
-const Tabs = ({ activeTab, setActiveTab }: TabsProps) => {
+  const handleCategoryChange = (categoryKey: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (categoryKey === "all") {
+      params.delete("category");
+    } else {
+      params.set("category", categoryKey);
+    }
+    router.push(`?${params.toString()}`);
+  };
+
+  // Convert categories record to array and add "all" option
+  const categoryEntries = [
+    { key: "all", label: "All" },
+    ...Object.entries(categories).map(([key, label]) => ({ key, label })),
+  ];
+
   return (
     <div className="flex flex-1 max-w-full overflow-x-auto" id="projects">
       <div className="flex uppercase py-3 px-[18px] text-sm w-full gap-8 items-center">
-        {tabs.map((tab) => (
+        {categoryEntries.map((category) => (
           <div
-            key={tab}
-            onClick={() => setActiveTab(tab)}
+            key={category.key}
+            onClick={() => handleCategoryChange(category.key)}
             className="relative cursor-pointer whitespace-nowrap pb-1"
           >
             <span
               className={`transition-colors duration-300 ${
-                activeTab === tab
+                activeCategory === category.key
                   ? "text-black font-medium"
                   : "text-gray-500 hover:text-black"
               }`}
             >
-              {tab}
+              {category.label}
             </span>
-            {activeTab === tab && (
+            {activeCategory === category.key && (
               <motion.div
                 layoutId="activeTab"
                 className="absolute bottom-0 left-0 right-0 h-[2px] bg-black"
