@@ -105,7 +105,7 @@ const JobApplicationModal = ({ job }: JobApplicationModalProps) => {
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   openModal({
-                    view: <JobApplicationForm />,
+                    view: <JobApplicationForm jobTitle={job.title} />,
                     customSize: "620px",
                     origin: {
                       x: rect.left + rect.width / 2,

@@ -7,6 +7,7 @@ import Header from "@/components/cors/header";
 import { getLocale } from "next-intl/server";
 import NextProgress from "@/components/next-progress";
 import Footer from "@/components/cors/footer";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider locale={locale}>
           <ModalProvider>
+            <Toaster position="top-right" richColors />
             <div className="w-full overflow-x-hidden">
               <NextProgress />
               <Header />

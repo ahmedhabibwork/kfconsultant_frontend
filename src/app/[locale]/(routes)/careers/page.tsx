@@ -7,9 +7,7 @@ const page = () => {
   return (
     <div>
       <CareersHeader />
-      <div className="px-[30px] py-16">
-        <SearchBar />
-      </div>
+      <div className="px-[30px] py-16">{/* <SearchBar /> */}</div>
       <CareersContent />
     </div>
   );
