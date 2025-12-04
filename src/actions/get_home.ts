@@ -1,10 +1,10 @@
 'use server';
 
 import { apiFetch } from '@/lib/apiFetch';
-import { homeApiResponse } from '@/types/homeTypes';
+import { HomePageResponse } from '@/types/homeTypes';
 
 export async function getHome() {
-    const result = await apiFetch<homeApiResponse>('/home');
+    const result = await apiFetch<HomePageResponse>('/home');
 
     if (result.isErr()) {
         throw new Error(result.error.message);

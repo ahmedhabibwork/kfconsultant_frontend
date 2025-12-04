@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import PhoneInput from "@/components/cors/PhoneInput";
-import Button from "@/components/button";
 import { submitContactForm } from "@/actions/contact";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -200,19 +199,13 @@ const ContactForm = () => {
 
         {/* Submit Button */}
         <div className="flex justify-center mt-4">
-          <Button
-            text={isSubmitting ? t("submitting") : t("submit")}
-            textColor="text-primary-foreground"
-            hoverColor="hover:opacity-90"
-            width="w-full md:w-[240px]"
-            height="h-[56px]"
-            textSize="text-[15px] font-medium"
-            svgClassName="!fill-primary-foreground group-hover/parent:!fill-primary-foreground"
-            arrowSize="w-5 h-5"
+          <button
+            type="submit"
             disabled={isSubmitting}
-            className="bg-primary hover:bg-primary/90"
-            onClick={(e) => handleSubmit(e)}
-          />
+            className="w-full md:w-[280px] h-[56px] bg-primary hover:bg-primary/90 text-white font-medium text-[15px] rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? t("submitting") : t("submit")}
+          </button>
         </div>
       </form>
     </div>

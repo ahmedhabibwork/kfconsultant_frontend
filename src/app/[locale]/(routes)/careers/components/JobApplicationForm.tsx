@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PhoneInput from "@/components/cors/PhoneInput";
-import Button from "@/components/button";
 import { submitJobApplication } from "@/actions/job-application";
 import { toast } from "sonner";
 import { Upload, X } from "lucide-react";
@@ -239,18 +238,13 @@ const JobApplicationForm = ({ jobTitle }: JobApplicationFormProps) => {
         </div>
 
         <div className="flex justify-center mt-8">
-          <Button
-            text={isLoading ? "Submitting..." : "Submit Application"}
-            textColor="text-primary-foreground"
-            hoverColor="hover:opacity-90"
-            width="w-full md:w-[240px]"
-            height="h-[56px]"
-            textSize="text-[15px] font-medium"
-            svgClassName="!fill-primary-foreground group-hover/parent:!fill-primary-foreground"
-            arrowSize="w-5 h-5"
+          <button
+            type="submit"
             disabled={isLoading}
-            className="bg-primary hover:bg-primary/90"
-          />
+            className="w-full md:w-[280px] h-[56px] bg-primary hover:bg-primary/90 text-white font-medium text-[15px] rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? "Submitting..." : "Submit Application"}
+          </button>
         </div>
       </form>
     </div>

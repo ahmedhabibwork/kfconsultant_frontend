@@ -7,6 +7,7 @@ import ProjectCard from "../../(SeconedSection)/ProjectCard";
 const projects = [
   {
     id: "2",
+    slug: "privado",
     title: "Privado",
     client: "Talaat Moustafa Group",
     location: "New Cairo, Egypt",
@@ -16,6 +17,7 @@ const projects = [
   },
   {
     id: "7",
+    slug: "il-bosco-city",
     title: "Il Bosco City",
     client: "Misr Italia",
     location: "New Cairo, Egypt",
@@ -25,6 +27,7 @@ const projects = [
   },
   {
     id: "4",
+    slug: "icity-new-cairo",
     title: "ICity New Cairo",
     client: "Mountain View",
     location: "New Cairo, Egypt",

@@ -4,6 +4,7 @@
     "firstName": "FIRST NAME",
     "lastName": "LAST NAME",
     "email": "EMAIL",
+    "phone": "PHONE NUMBER",
     "enquiryType": "ENQUIRY TYPE",
     "message": "YOUR MESSAGE",
     "submit": "Send Message",
