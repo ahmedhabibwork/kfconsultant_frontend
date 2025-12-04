@@ -3,16 +3,17 @@ import React from "react";
 import Filters from "./Filters";
 import Tabs from "./Tabs";
 import ProjectsList from "./ProjectsList";
+import Pagination from "./Pagination";
 import {
   Project,
   Filters as FiltersType,
-  Pagination,
+  Pagination as PaginationType,
 } from "@/types/projectsTypes";
 
 interface SeconedSectionProps {
   projects: Project[];
   filters: FiltersType;
-  pagination: Pagination;
+  pagination: PaginationType;
 }
 
 const SeconedSection = ({
@@ -27,6 +28,7 @@ const SeconedSection = ({
         <Tabs categories={filters.category} />
       </div>
       <ProjectsList projects={projects} />
+      <Pagination pagination={pagination} />
     </div>
   );
 };
