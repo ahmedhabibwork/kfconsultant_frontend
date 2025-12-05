@@ -23,12 +23,17 @@ const FourthSection = ({ services }: FourthSectionProps) => {
             transition={{ duration: 0.6 }}
             className="lg:col-span-4"
           >
-            <span className="text-sm tracking-widest text-gray-600 uppercase">
-              WHAT WE DO?
+            <span
+              className="text-sm tracking-widest text-[#00006c] uppercase"
+              style={{ letterSpacing: "1em" }}
+            >
+              WHAT WE DO ?
             </span>
-            <h2 className="mt-4 text-3xl lg:text-4xl mb-6">
-              <span className="font-light">Services </span>
-              <span className="font-bold">Offered</span>
+            <h2 className="mt-4 text-3xl lg:text-4xl mb-6 flex flex-col">
+              <span className="font-light text-[50px] uppercase">
+                Services{" "}
+              </span>
+              <span className="font-bold text-[50px] uppercase">Offered</span>
             </h2>
             <p className="text-gray-700 leading-relaxed">
               We have a vast professional team and hands-on experience in

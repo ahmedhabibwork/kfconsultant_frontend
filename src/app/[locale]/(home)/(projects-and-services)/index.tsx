@@ -27,12 +27,15 @@ const ProjectsAndServices = ({ projects }: ProjectsAndServicesProps) => {
             transition={{ duration: 0.6 }}
             className="lg:col-span-4"
           >
-            <span className="text-sm tracking-widest text-gray-600 uppercase">
+            <span
+              style={{ letterSpacing: "1em" }}
+              className="text-sm tracking-widest text-[#00006c] uppercase"
+            >
               Explore
             </span>
-            <h2 className="mt-4 text-3xl lg:text-4xl mb-6">
-              <span className="font-light">Key </span>
-              <span className="font-bold">PROJECTS</span>
+            <h2 className="mt-4 text-3xl lg:text-4xl mb-6 flex flex-col">
+              <span className="font-light text-[50px] uppercase">Key </span>
+              <span className="font-bold text-[50px] uppercase">PROJECTS</span>
             </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               Thanks to our experience gained through our mega projects in

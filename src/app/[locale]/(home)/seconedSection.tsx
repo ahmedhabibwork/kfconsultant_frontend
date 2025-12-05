@@ -20,9 +20,9 @@ const SecondSection = ({ aboutUs }: SecondSectionProps) => {
             transition={{ duration: 0.6 }}
             className="md:col-span-4 md:col-start-5 text-center"
           >
-            <span className="text-sm tracking-widest text-gray-600 uppercase">
+            {/* <span className="text-sm tracking-widest text-gray-600 uppercase">
               WELCOME!
-            </span>
+            </span> */}
             <h2 className="mt-4 text-3xl lg:text-4xl font-bold">
               {aboutUs.title}
             </h2>

@@ -41,7 +41,10 @@ const OurPeople = ({ team }: OurPeopleProps) => {
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-20">
           {/* Left Side - Section Title */}
           <div className="flex flex-col gap-2 lg:w-1/3 pt-8">
-            <span className="text-indigo-500 text-sm font-semibold tracking-[0.3em] uppercase mb-2">
+            <span
+              style={{ letterSpacing: "1em" }}
+              className="text-[#00006c] text-sm font-semibold uppercase mb-2"
+            >
               Team
             </span>
             <h3 className="text-4xl md:text-5xl font-light text-black uppercase leading-tight">
