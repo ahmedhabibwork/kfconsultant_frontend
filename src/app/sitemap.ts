@@ -1,7 +1,9 @@
 import { MetadataRoute } from 'next';
 import { SITE_CONFIG } from '@/lib/constants';
-import { getProjects } from '@/actions/projects';
-import { getBlogs } from '@/actions/blogs';
+import { getSitemapProjects } from '@/actions/getSitemapProjects';
+import { getSitemapBlogs } from '@/actions/getSitemapBlogs';
+
+export const revalidate = 86400; // 24 hours
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = SITE_CONFIG.url;
@@ -24,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
     // Dynamic Project routes
-    const projectsData = await getProjects();
+    const projectsData = await getSitemapProjects();
     const projects = projectsData.msg_data.data.map((project) => ({
         url: `${baseUrl}/projects/${project.slug}`,
         lastModified: project.created_at,
@@ -33,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
     // Dynamic Blog routes
-    const blogsData = await getBlogs();
+    const blogsData = await getSitemapBlogs();
     const blogs = blogsData.msg_data.flat().map((blog) => ({
         url: `${baseUrl}/news/${blog.slug}`,
         lastModified: blog.created_at,
