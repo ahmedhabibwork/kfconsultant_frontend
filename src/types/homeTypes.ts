@@ -1,63 +1,59 @@
-export type Category = {
-    id: number;
-    slug: string;
-    title: string;
-    created_at: string;
-};
+export interface ApiResponse {
+    status: string;
+    text: string;
+    msg_data: HomeData;
+}
 
-export type Project = {
+export interface HomeData {
+    banner: Banner[];
+    project: Project[];
+    clients: Client[];
+    about_us: AboutUs;
+    services: Service[];
+}
+
+export interface Banner {
     id: number;
     title: string;
-    slug: string | null;
+    image: string;
+}
+
+export interface Project {
+    id: number;
+    title: string;
+    slug: string;
     short_description: string;
     location: string;
     category: Category;
     cover_image: string;
-};
+}
 
-export type Banner = {
-    id: number;
-    title: string;
-    image: string;
-};
-
-export type Client = {
-    id: number;
-    title: string;
-    image: string;
-    created_at: string;
-};
-
-export type WhyUs = {
-    id: number;
-    title: string;
-    short_description: string;
-    description: string | null;
-    phone: string | null;
-    experience_years: number;
-    image: string | null;
-    created_at: string;
-};
-
-export type Service = {
+export interface Category {
     id: number;
     slug: string;
     title: string;
-    description: string;
+    created_at: string; // ISO 8601 date string
+}
+
+export interface Client {
+    id: number;
+    title: string;
     image: string;
-    created_at: string;
-};
+    created_at: string; // ISO 8601 date string
+}
 
-export type MsgData = {
-    banner: Banner[];
-    project: Project[];
-    clients: Client[];
-    whyUs: WhyUs;
-    services: Service[];
-};
+export interface AboutUs {
+    id: number;
+    title: string;
+    short_description: string;
+    experience_years: number;
+}
 
-export type HomePageResponse = {
-    status: string;
-    text: string;
-    msg_data: MsgData;
-};
+export interface Service {
+    id: number;
+    slug: string;
+    title: string;
+    description: string; // HTML string
+    image: string;
+    created_at: string; // ISO 8601 date string
+}

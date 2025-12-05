@@ -1,13 +1,13 @@
 "use client";
 import { motion } from "motion/react";
-import { WhyUs } from "@/types/homeTypes";
+import { AboutUs } from "@/types/homeTypes";
 import TextEditorReader from "@/components/TextReader";
 
 interface SecondSectionProps {
-  whyUs: WhyUs;
+  aboutUs: AboutUs;
 }
 
-const SecondSection = ({ whyUs }: SecondSectionProps) => {
+const SecondSection = ({ aboutUs }: SecondSectionProps) => {
   return (
     <section id="colorlib-intro" className="w-full snap-start py-12 lg:py-16">
       <div className="container mx-auto px-4">
@@ -24,7 +24,7 @@ const SecondSection = ({ whyUs }: SecondSectionProps) => {
               WELCOME!
             </span>
             <h2 className="mt-4 text-3xl lg:text-4xl font-bold">
-              {whyUs.title}
+              {aboutUs.title}
             </h2>
           </motion.div>
 
@@ -38,7 +38,7 @@ const SecondSection = ({ whyUs }: SecondSectionProps) => {
           >
             <div className="border-4 border-blue-900 bg-blue-900 text-white p-12 text-center min-w-[250px]">
               <div className="text-7xl font-bold mb-2">
-                {whyUs.experience_years}
+                {aboutUs.experience_years}
               </div>
               <div className="text-xl uppercase tracking-wider mb-1">Years</div>
               <div className="text-base font-light">Experience</div>
@@ -54,9 +54,7 @@ const SecondSection = ({ whyUs }: SecondSectionProps) => {
             className="md:col-span-4 md:col-start-9 md:row-start-1"
           >
             <div className="text-gray-700 leading-relaxed">
-              <TextEditorReader
-                value={whyUs.description || whyUs.short_description}
-              />
+              <TextEditorReader value={aboutUs.short_description} />
             </div>
           </motion.div>
         </div>

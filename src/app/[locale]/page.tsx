@@ -26,12 +26,12 @@ export const metadata: Metadata = createMetadata({
 
 const page = async () => {
   const data = await getHome();
-  const { banner, whyUs, project, services, clients } = data.msg_data;
+  const { banner, about_us, project, services, clients } = data.msg_data;
 
   return (
     <div className="w-full">
       <HeroSlider banner={banner} />
-      <SeconedSection whyUs={whyUs} />
+      <SeconedSection aboutUs={about_us} />
       <FourthSection services={services} />
       <ProjectsAndServices projects={project} />
       <PartnersSection clients={clients} />
