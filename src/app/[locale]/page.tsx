@@ -19,7 +19,7 @@ export const metadata: Metadata = createMetadata({
     "infrastructure",
     "Egypt",
     "Middle East",
-    "DMA",
+    "KFconsultant",
   ],
   url: "/",
 });

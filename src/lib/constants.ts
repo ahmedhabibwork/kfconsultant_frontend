@@ -1,7 +1,7 @@
 // Site-wide constants and configuration
 export const SITE_CONFIG = {
-    name: 'DMA',
-    title: 'DMA - Design and Engineering Consultants',
+    name: 'KFconsultant',
+    title: 'KFconsultant - Design and Engineering Consultants',
     description: 'Leading design and engineering consultancy firm with over 30 years of experience in architectural design, master planning, and infrastructure development.',
     url: 'https://dma-mea.com',
     ogImage: 'https://admin.dma-mea.com/storage/01JBVT9DBJJE7S4APP40W7YR0S.jpg',

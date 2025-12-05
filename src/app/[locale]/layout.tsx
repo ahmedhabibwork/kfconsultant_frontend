@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DMA",
+  title: "KFconsultant",
 };
 
 export default async function RootLayout({

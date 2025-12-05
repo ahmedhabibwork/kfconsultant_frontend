@@ -8,7 +8,7 @@ const FirstSection = () => {
     <HeaderComponent background="/home-first-section.webp">
       <Image
         src="/logohome.webp"
-        alt="DMA Logo"
+        alt="KFconsultant Logo"
         width={622}
         height={156}
         className="max-w-[466.5px] max-sm:max-w-[200px] z-10"

@@ -28,7 +28,10 @@ const Footer = ({ contactInfo }: FooterProps) => {
             {t("quickLinks.title")}
           </p>
           <div className="flex flex-col gap-2">
-            <a className="text-white text-xs" href="/DMA Privacy Policy.docx">
+            <a
+              className="text-white text-xs"
+              href="/KFconsultant Privacy Policy.docx"
+            >
               {t("quickLinks.privacyPolicy")}
             </a>
             <Link className="text-white text-xs" href="/about">
@@ -176,7 +179,7 @@ const Footer = ({ contactInfo }: FooterProps) => {
             )}
           </div>
           <p className="mt-3 text-white">
-            © {new Date().getFullYear()} DMA. All rights reserved.
+            © {new Date().getFullYear()} KFconsultant. All rights reserved.
           </p>
         </div>
       </div>

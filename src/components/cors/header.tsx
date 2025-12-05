@@ -35,7 +35,7 @@ const Header = ({ categories }: HeaderProps) => {
               id="colorlib-logo"
               className="text-2xl font-bold tracking-widest"
             >
-              <Link href="/">AACE</Link>
+              <Link href="/">KFconsultant</Link>
             </div>
           </div>
 
