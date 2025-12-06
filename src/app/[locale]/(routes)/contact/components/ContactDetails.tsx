@@ -1,7 +1,9 @@
 import React from "react";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail } from "lucide-react";
 import SocialLinks from "./SocialLinks";
 import { ContactInfo } from "@/types/contactTypes";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import PhoneNumber from "@/components/PhoneNumber";
 
 interface ContactDetailsProps {
   contactInfo: ContactInfo;
@@ -15,50 +17,59 @@ const ContactDetails = ({ contactInfo }: ContactDetailsProps) => {
           Contact Details
         </h3>
 
-        <div className="flex flex-col gap-2 my-3">
+        <div className="flex flex-col gap-4 my-6">
           {/* Address */}
-          <div className="flex items-center gap-6">
-            <MapPin className="size-6 text-primary" />
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center flex-shrink-0">
+              <MapPin className="w-5 h-5 text-primary" />
+            </div>
             <div className="flex flex-col">
-              <p className="text-primary text-xs cursor-pointer">
+              <span className="text-xs text-gray-500 mb-1">Address</span>
+              <p className="text-primary text-sm leading-relaxed">
                 {contactInfo.address}
               </p>
             </div>
           </div>
 
           {/* Email */}
-          <div className="flex items-center gap-6">
-            <Mail className="size-6 text-primary" />
-            <a
-              className="text-primary text-xs hover:underline"
-              href={`mailto:${contactInfo.email}`}
-            >
-              {contactInfo.email}
-            </a>
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center flex-shrink-0">
+              <Mail className="w-5 h-5 text-primary" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs text-gray-500 mb-1">Email</span>
+              <a
+                className="text-primary text-sm hover:text-blue-600 transition-colors"
+                href={`mailto:${contactInfo.email}`}
+              >
+                {contactInfo.email}
+              </a>
+            </div>
           </div>
 
           {/* Phone Numbers */}
-          {contactInfo.phone1 && (
-            <div className="flex items-center gap-6">
-              <Phone className="size-6 text-primary" />
-              <a
-                className="text-primary text-xs hover:underline"
-                href={`tel:${contactInfo.phone1}`}
-              >
-                {contactInfo.phone1}
-              </a>
-            </div>
-          )}
-          {contactInfo.phone2 && contactInfo.phone2 !== contactInfo.phone1 && (
-            <div className="flex items-center gap-6">
-              <Phone className="size-6 text-primary" />
-              <a
-                className="text-primary text-xs hover:underline"
-                href={`tel:${contactInfo.phone2}`}
-              >
-                {contactInfo.phone2}
-              </a>
-            </div>
+          <div className="flex flex-col gap-3">
+            {contactInfo.phone1 && (
+              <PhoneNumber
+                phoneNumber={contactInfo.phone1}
+                className="items-start"
+              />
+            )}
+            {contactInfo.phone2 &&
+              contactInfo.phone2 !== contactInfo.phone1 && (
+                <PhoneNumber
+                  phoneNumber={contactInfo.phone2}
+                  className="items-start"
+                />
+              )}
+          </div>
+
+          {/* WhatsApp */}
+          {contactInfo.whatsapp_number && (
+            <WhatsAppButton
+              phoneNumber={contactInfo.whatsapp_number}
+              className="items-start"
+            />
           )}
         </div>
 

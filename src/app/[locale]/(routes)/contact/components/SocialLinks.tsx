@@ -1,5 +1,6 @@
 import React from "react";
 import { ContactInfo } from "@/types/contactTypes";
+import SocialIcon from "@/components/SocialIcon";
 
 interface SocialLinksProps {
   contactInfo: ContactInfo;
@@ -14,74 +15,17 @@ const SocialLinks = ({ contactInfo }: SocialLinksProps) => {
   if (!hasAnySocialLink) return null;
 
   return (
-    <div className="flex flex-col gap-2 my-3">
+    <div className="flex flex-col gap-3 my-6">
       <p className="font-bold text-primary">Follow us</p>
-      <div className="flex gap-[28px]">
+      <div className="flex gap-4">
         {contactInfo.facebook_link && (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-primary p-1.5 rounded-full flex items-center justify-center hover:bg-primary/80 transition-colors"
-            href={contactInfo.facebook_link}
-            aria-label="Facebook"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 25 24"
-              fill="none"
-            >
-              <path
-                d="M14.5086 2.87939C13.282 2.87939 12.1056 3.36667 11.2382 4.23403C10.3709 5.10138 9.88359 6.27777 9.88359 7.50439V10.0794H7.40859C7.28459 10.0794 7.18359 10.1794 7.18359 10.3044V13.7044C7.18359 13.8284 7.28359 13.9294 7.40859 13.9294H9.88359V20.9044C9.88359 21.0284 9.98359 21.1294 10.1086 21.1294H13.5086C13.6326 21.1294 13.7336 21.0294 13.7336 20.9044V13.9294H16.2306C16.3336 13.9294 16.4236 13.8594 16.4486 13.7594L17.2986 10.3594C17.307 10.3262 17.3076 10.2916 17.3006 10.2581C17.2936 10.2246 17.279 10.1932 17.258 10.1662C17.2369 10.1392 17.21 10.1173 17.1793 10.1023C17.1486 10.0873 17.1148 10.0794 17.0806 10.0794H13.7336V7.50439C13.7336 7.40262 13.7536 7.30184 13.7926 7.20781C13.8315 7.11379 13.8886 7.02835 13.9606 6.95639C14.0326 6.88442 14.118 6.82734 14.212 6.78839C14.306 6.74944 14.4068 6.72939 14.5086 6.72939H17.1086C17.2326 6.72939 17.3336 6.62939 17.3336 6.50439V3.10439C17.3336 2.98039 17.2336 2.87939 17.1086 2.87939H14.5086Z"
-                className="fill-white"
-              />
-            </svg>
-          </a>
+          <SocialIcon href={contactInfo.facebook_link} platform="facebook" />
         )}
         {contactInfo.linkedin_link && (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-primary p-1.5 rounded-full flex items-center justify-center hover:bg-primary/80 transition-colors"
-            href={contactInfo.linkedin_link}
-            aria-label="LinkedIn"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 21 20"
-              fill="none"
-            >
-              <path
-                d="M4.50587 2.65974C4.50559 3.21634 4.28422 3.75002 3.89045 4.1434C3.49668 4.53677 2.96277 4.75761 2.40618 4.75733C1.84959 4.75705 1.3159 4.53568 0.922528 4.14191C0.529154 3.74815 0.308316 3.21424 0.308594 2.65765C0.308872 2.10105 0.530245 1.56737 0.924012 1.17399C1.31778 0.780619 1.85169 0.559781 2.40828 0.560059C2.96487 0.560337 3.49856 0.78171 3.89193 1.17548C4.28531 1.56924 4.50614 2.10315 4.50587 2.65974ZM4.56883 6.31137H0.371553V19.4488H4.56883V6.31137ZM11.2005 6.31137H7.02423V19.4488H11.1585V12.5548C11.1585 8.71431 16.1638 8.35754 16.1638 12.5548V19.4488H20.3086V11.1277C20.3086 4.65345 12.9004 4.89479 11.1585 8.07422L11.2005 6.31137Z"
-                className="fill-white"
-              />
-            </svg>
-          </a>
+          <SocialIcon href={contactInfo.linkedin_link} platform="linkedin" />
         )}
         {contactInfo.instagram_link && (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-primary p-1.5 rounded-full flex items-center justify-center hover:bg-primary/80 transition-colors"
-            href={contactInfo.instagram_link}
-            aria-label="Instagram"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 25 24"
-              fill="none"
-            >
-              <path
-                d="M12.3087 8.88019C10.5884 8.88019 9.18449 10.2841 9.18449 12.0044C9.18449 13.7247 10.5884 15.1286 12.3087 15.1286C14.029 15.1286 15.4329 13.7247 15.4329 12.0044C15.4329 10.2841 14.029 8.88019 12.3087 8.88019ZM21.679 12.0044C21.679 10.7107 21.6907 9.42863 21.6181 8.13722C21.5454 6.63722 21.2032 5.30597 20.1064 4.2091C19.0071 3.10988 17.6782 2.77003 16.1782 2.69738C14.8845 2.62472 13.6025 2.63644 12.311 2.63644C11.0173 2.63644 9.73527 2.62472 8.44386 2.69738C6.94386 2.77003 5.61261 3.11222 4.51574 4.2091C3.41652 5.30831 3.07667 6.63722 3.00402 8.13722C2.93136 9.43097 2.94308 10.713 2.94308 12.0044C2.94308 13.2958 2.93136 14.5802 3.00402 15.8716C3.07667 17.3716 3.41886 18.7028 4.51574 19.7997C5.61495 20.8989 6.94386 21.2388 8.44386 21.3114C9.73761 21.3841 11.0196 21.3724 12.311 21.3724C13.6048 21.3724 14.8868 21.3841 16.1782 21.3114C17.6782 21.2388 19.0095 20.8966 20.1064 19.7997C21.2056 18.7005 21.5454 17.3716 21.6181 15.8716C21.6931 14.5802 21.679 13.2982 21.679 12.0044ZM12.3087 16.8114C9.64855 16.8114 7.50167 14.6646 7.50167 12.0044C7.50167 9.34425 9.64855 7.19738 12.3087 7.19738C14.9689 7.19738 17.1157 9.34425 17.1157 12.0044C17.1157 14.6646 14.9689 16.8114 12.3087 16.8114ZM17.3126 8.12316C16.6915 8.12316 16.19 7.6216 16.19 7.0005C16.19 6.37941 16.6915 5.87785 17.3126 5.87785C17.9337 5.87785 18.4353 6.37941 18.4353 7.0005C18.4355 7.14798 18.4065 7.29405 18.3502 7.43034C18.2938 7.56663 18.2111 7.69047 18.1069 7.79475C18.0026 7.89904 17.8787 7.98172 17.7425 8.03808C17.6062 8.09443 17.4601 8.12334 17.3126 8.12316Z"
-                className="fill-white"
-              />
-            </svg>
-          </a>
+          <SocialIcon href={contactInfo.instagram_link} platform="instagram" />
         )}
       </div>
     </div>
