@@ -10,6 +10,7 @@ import Footer from "@/components/cors/footer";
 import { Toaster } from "sonner";
 import { getCategories } from "@/actions/categories";
 import { getContactInfo } from "@/actions/contact";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,10 +54,11 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale}>
           <ModalProvider>
             <Toaster position="top-right" richColors />
-            <div className="flex min-h-screen w-full flex-col overflow-x-hidden">
+            <div className="flex min-h-screen w-full flex-col overflow-x-hidden relative">
               <NextProgress />
               <Header categories={categories} />
               <main className="flex-1 w-full">{children}</main>
+              <WhatsAppButton />
               <Footer contactInfo={contactInfo} />
             </div>
           </ModalProvider>
