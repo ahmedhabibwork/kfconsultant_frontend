@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Project } from "@/types/homeTypes";
@@ -11,6 +11,15 @@ interface ProjectSliderProps {
 
 const ProjectSlider = ({ projects }: ProjectSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (projects.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex, projects.length]);
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
