@@ -9,6 +9,21 @@ interface ProjectGalleryProps {
 
 const ProjectGallery: React.FC<ProjectGalleryProps> = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  React.useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (isAutoPlaying) {
+      interval = setInterval(() => {
+        setCurrentImageIndex((prev) =>
+          prev === images.length - 1 ? 0 : prev + 1
+        );
+      }, 3000); // Change image every 3 seconds
+    }
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, images.length]);
 
   const handlePrevious = () => {
     setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -23,7 +38,11 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ images }) => {
   };
 
   return (
-    <div className="w-full mx-auto flex gap-8 max-lg:flex-col max-lg:gap-4">
+    <div
+      className="w-full mx-auto flex gap-8 max-lg:flex-col max-lg:gap-4"
+      onMouseEnter={() => setIsAutoPlaying(false)}
+      onMouseLeave={() => setIsAutoPlaying(true)}
+    >
       {/* Main Image */}
       <motion.div
         className="w-3/4 max-lg:w-full relative"

@@ -51,7 +51,6 @@ export async function generateMetadata({
 const page = async ({ params }: PageProps) => {
   const { project_slug } = await params;
   const projectData = await getProjectDetails(project_slug);
-  const contactData = await getContactInfo();
   const { project } = projectData.msg_data;
 
   const componentData = mapProjectToComponentData(project);

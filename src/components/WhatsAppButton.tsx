@@ -43,7 +43,7 @@ const WhatsAppButton = () => {
   }
 
   return (
-    <div className="fixed bottom-10 left-10 z-[9999]">
+    <div className="fixed bottom-10 left-10 z-9999">
       <span className="absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75 animate-ping"></span>
       <Link
         href={messageUrl}
