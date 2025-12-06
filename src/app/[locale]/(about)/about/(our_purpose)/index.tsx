@@ -30,7 +30,7 @@ const OurPurpose = ({ aboutUs }: OurPurposeProps) => {
               {aboutUs.title}
             </h3>
             <div className="text-gray-600 text-base md:text-lg leading-relaxed text-justify">
-              <TextEditorReader value={aboutUs.short_description} />
+              <TextEditorReader value={aboutUs.mission} />
             </div>
             {aboutUs.experience_years > 0 && (
               <div className="flex items-center gap-4 mt-4">
@@ -49,7 +49,7 @@ const OurPurpose = ({ aboutUs }: OurPurposeProps) => {
           {/* Image */}
           <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-lg overflow-hidden shadow-lg">
             <Image
-              src={aboutUs.image || "/aboutseconedbg.webp"}
+              src={aboutUs.mission_image || "/aboutseconedbg.webp"}
               alt={aboutUs.title}
               fill
               className="object-cover"

@@ -1,9 +1,9 @@
 "use server";
 import { apiFetch } from "@/lib/apiFetch";
-import { AboutUsApiResponse } from "@/types/aboutTypes";
+import { ApiResponse } from "@/types/aboutTypes";
 
 export async function getAboutUs() {
-    const result = await apiFetch<AboutUsApiResponse>("/about-us", {
+    const result = await apiFetch<ApiResponse>("/about-us", {
         method: "GET",
         cache: "no-store",
     });

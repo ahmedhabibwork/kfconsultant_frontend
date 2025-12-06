@@ -13,8 +13,8 @@ const page = async () => {
     <div className="">
       <AboutHeader />
       <OurPurpose aboutUs={aboutData.msg_data.about_us} />
-      <Vision />
-      <OurFounder />
+      <Vision aboutUs={aboutData.msg_data.about_us} />
+      <OurFounder aboutUs={aboutData.msg_data.about_us} />
       <OurPeople team={aboutData.msg_data.team} />
     </div>
   );

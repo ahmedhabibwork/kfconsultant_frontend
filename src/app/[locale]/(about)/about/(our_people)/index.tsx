@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -19,6 +19,14 @@ const OurPeople = ({ team }: OurPeopleProps) => {
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + team.length) % team.length);
   };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [team.length]);
 
   if (!team || team.length === 0) {
     return null;
