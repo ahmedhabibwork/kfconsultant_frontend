@@ -54,21 +54,21 @@ const FourthSection = ({ services }: FourthSectionProps) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col items-start gap-4"
+                  className="flex items-start gap-4"
                 >
                   <div className="mb-2">
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="w-16 h-16 object-contain"
+                      className="w-[66px] h-[66px] object-contain"
                     />
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900">
+                  <h3 className="text-lg text-[rgb(0,0,108)] text-[24px] font-normal">
                     {service.title}
                   </h3>
-                  <div className="text-sm text-gray-600 line-clamp-3">
+                  {/* <div className="text-sm text-gray-600 line-clamp-3">
                     <TextEditorReader value={service.description} />
-                  </div>
+                  </div> */}
                 </motion.div>
               ))}
             </div>

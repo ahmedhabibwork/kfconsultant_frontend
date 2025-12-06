@@ -5,7 +5,7 @@ const SecondSection = () => {
   return (
     <section id="colorlib-intro" className="w-full snap-start py-12 lg:py-16">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row gap-5 items-center">
+        <div className="flex flex-col md:flex-row gap-10 items-center">
           {/* Left Column - Years Experience Box */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -33,7 +33,7 @@ const SecondSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="md:col-span-4 text-center md:text-left"
           >
-            <span className="text-[#00006c] text-sm tracking-[0.6em] uppercase font-bold block mb-4">
+            <span className="text-[#00006c] text-sm tracking-[1.5em] uppercase font-normal block mb-4">
               Welcome!
             </span>
             <h2 className="text-4xl lg:text-5xl leading-tight text-gray-900">

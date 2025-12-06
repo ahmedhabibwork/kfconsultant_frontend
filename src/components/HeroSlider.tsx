@@ -14,13 +14,13 @@ const HeroSlider = ({ banner }: HeroSliderProps) => {
   // If we only have one banner, we can treat it as a single slide
   const slides = banner;
 
-  useEffect(() => {
-    if (slides.length <= 1) return;
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
+  // useEffect(() => {
+  //   if (slides.length <= 1) return;
+  //   const timer = setInterval(() => {
+  //     setCurrentSlide((prev) => (prev + 1) % slides.length);
+  //   }, 6000);
+  //   return () => clearInterval(timer);
+  // }, [slides.length]);
 
   return (
     <aside
@@ -34,17 +34,21 @@ const HeroSlider = ({ banner }: HeroSliderProps) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${slides[currentSlide].image})` }}
+          className="absolute inset-0 w-full h-full bg-no-repeat bg-cover bg-bottom"
+          style={{
+            backgroundImage: `url(${slides[currentSlide].image})`,
+            backgroundPosition: "bottom center",
+          }}
         >
-          <div className="absolute inset-0 bg-black/40" /> {/* Overlay */}
+          <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]" />{" "}
+          {/* Overlay */}
           <div className="container mx-auto h-full flex items-center justify-center relative z-10">
             <div className="text-center text-white">
               <motion.h2
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-4xl md:text-6xl font-bold mb-4"
+                className="text-[20px] font-normal mb-4 text-[#ffffffb3] leading-1.5"
               >
                 {slides[currentSlide].title}
               </motion.h2>
