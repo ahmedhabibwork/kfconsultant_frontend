@@ -8,8 +8,19 @@ interface ProjectsListProps {
 }
 
 const ProjectsList = ({ projects }: ProjectsListProps) => {
+  if (!projects || projects.length === 0) {
+    return (
+      <div className="py-[60px] min-h-[60vh] flex items-center justify-center text-gray-500">
+        <p className="text-xl">No projects found.</p>
+      </div>
+    );
+  }
+
   return (
-    <div id="projects-list" className="py-[60px] text-white max-md:pt-0">
+    <div
+      id="projects-list"
+      className="py-[60px] text-white max-md:pt-0 min-h-[60vh]"
+    >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-fit mx-auto place-items-center gap-[16px] px-5">
         {projects.map((project) => (
           <ProjectCard

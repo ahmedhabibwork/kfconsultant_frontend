@@ -53,10 +53,10 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale}>
           <ModalProvider>
             <Toaster position="top-right" richColors />
-            <div className="w-full overflow-x-hidden">
+            <div className="flex min-h-screen w-full flex-col overflow-x-hidden">
               <NextProgress />
               <Header categories={categories} />
-              {children}
+              <main className="flex-1 w-full">{children}</main>
               <Footer contactInfo={contactInfo} />
             </div>
           </ModalProvider>
