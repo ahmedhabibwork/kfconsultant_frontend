@@ -28,7 +28,6 @@ function mapProjectToComponentData(project: Project) {
     ].filter(Boolean),
     location: project.location,
     images: project.images,
-    scale: project.scale.title,
     status: project.status.title,
   };
 }

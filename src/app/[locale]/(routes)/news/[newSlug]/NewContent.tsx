@@ -39,10 +39,10 @@ const NewContent = ({
         <p className="text-[#616161] leading-[36.80px] text-sm">
           {formattedDate}
         </p>
-        <h5 className="text-primary text-lg font-bold mb-4 max-md:text-lg">
+        <h5 className="text-primary text-[26px] font-bold mb-4 max-md:text-lg">
           {blog.title}
         </h5>
-        <p className="text-primary text-[13px] mb-[32px] max-md:text-sm">
+        <p className="text-primary text-[24px] mb-[32px] max-md:text-sm">
           {blog.short_description}
         </p>
         <ShareButtons

@@ -9,6 +9,7 @@ interface PageProps {
     scope?: string;
     status?: string;
     year?: string;
+    search?: string;
     page?: string;
   }>;
 }
@@ -21,6 +22,7 @@ const page = async ({ searchParams }: PageProps) => {
     scope: params.scope,
     status: params.status,
     year: params.year,
+    search: params.search,
     page: params.page ? parseInt(params.page) : undefined,
   });
   const { data: projects, filters } = data.msg_data;

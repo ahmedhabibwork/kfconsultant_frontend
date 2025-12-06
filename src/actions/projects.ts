@@ -11,6 +11,7 @@ export async function getProjects(filters?: ProjectFilters) {
     if (filters?.scope) params.append('scope', filters.scope);
     if (filters?.status) params.append('status', filters.status);
     if (filters?.year) params.append('year', filters.year);
+    if (filters?.search) params.append('search', filters.search);
     if (filters?.page) params.append('page', String(filters.page));
     if (filters?.per_page) params.append('per_page', String(filters.per_page));
 

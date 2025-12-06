@@ -113,6 +113,7 @@ export interface ProjectFilters {
     scope?: string;
     year?: string;
     status?: string;
+    search?: string;
     page?: number;
     per_page?: number;
 }
