@@ -1,18 +1,11 @@
 import React from "react";
-import ServicesHeader from "./ServicesHeader";
-import ServicesList from "./ServicesList";
-import Footer from "@/components/cors/footer";
 import { getServices } from "@/actions/services";
+import ServicesPageClient from "./ServicesPageClient";
 
 const page = async () => {
   const servicesData = await getServices();
 
-  return (
-    <div className="min-h-screen flex flex-col">
-      <ServicesHeader />
-      <ServicesList services={servicesData.msg_data} />
-    </div>
-  );
+  return <ServicesPageClient services={servicesData.msg_data} />;
 };
 
 export default page;
