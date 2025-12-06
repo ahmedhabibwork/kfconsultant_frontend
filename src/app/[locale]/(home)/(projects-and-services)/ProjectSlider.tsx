@@ -8,10 +8,17 @@ import Link from "next/link";
 
 interface ProjectSliderProps {
   projects: Project[];
+  onSlideChange?: (index: number) => void;
 }
 
-const ProjectSlider = ({ projects }: ProjectSliderProps) => {
+const ProjectSlider = ({ projects, onSlideChange }: ProjectSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (onSlideChange) {
+      onSlideChange(currentIndex);
+    }
+  }, [currentIndex, onSlideChange]);
 
   useEffect(() => {
     if (projects.length <= 1) return;

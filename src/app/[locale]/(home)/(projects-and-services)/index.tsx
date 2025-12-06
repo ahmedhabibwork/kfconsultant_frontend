@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
 import ProjectSlider from "./ProjectSlider";
+import TextEditorReader from "@/components/TextReader";
 import { Project } from "@/types/homeTypes";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PhoneNumber from "@/components/PhoneNumber";
@@ -19,6 +20,14 @@ const ProjectsAndServices = ({
   whatsappNumber,
   phoneNumber,
 }: ProjectsAndServicesProps) => {
+  const [activeProjectIndex, setActiveProjectIndex] = React.useState(0);
+
+  const handleSlideChange = (index: number) => {
+    setActiveProjectIndex(index);
+  };
+
+  const activeProject = projects[activeProjectIndex];
+
   return (
     <section className="w-full py-12 lg:py-16 bg-gray-50">
       <div className="container">
@@ -45,13 +54,36 @@ const ProjectsAndServices = ({
               <span className="font-light text-[50px] uppercase">Key </span>
               <span className="font-bold text-[50px] uppercase">PROJECTS</span>
             </h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              Thanks to our experience gained through our mega projects in
-              various locations and countless projects, which are reflected in
-              our present activities and operations provided by AACE through
-              high-quality services. This experience encourages our organization
-              to expand globally through more diverse projects.
-            </p>
+            <div className="text-gray-700 leading-relaxed mb-4 min-h-[120px]">
+              <AnimatePresence mode="wait">
+                {activeProject ? (
+                  <motion.div
+                    key={activeProject.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <TextEditorReader value={activeProject.short_description} />
+                  </motion.div>
+                ) : (
+                  <motion.p
+                    key="default-desc"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    Thanks to our experience gained through our mega projects in
+                    various locations and countless projects, which are
+                    reflected in our present activities and operations provided
+                    by AACE through high-quality services. This experience
+                    encourages our organization to expand globally through more
+                    diverse projects.
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
             <div className="flex flex-col items-start gap-6 mt-4">
               <Link
                 href="/projects"
@@ -72,7 +104,10 @@ const ProjectsAndServices = ({
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-7 lg:col-start-6"
           >
-            <ProjectSlider projects={projects} />
+            <ProjectSlider
+              projects={projects}
+              onSlideChange={handleSlideChange}
+            />
           </motion.div>
         </div>
       </div>
