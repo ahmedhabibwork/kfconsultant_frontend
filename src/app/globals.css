@@ -173,4 +173,12 @@ button {
   padding-inline: 1rem;
   max-width: 1134px;
   width: 100%;
+
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-inline: 4rem;
+  }
 }

@@ -12,7 +12,7 @@ interface ProjectsAndServicesProps {
 
 const ProjectsAndServices = ({ projects }: ProjectsAndServicesProps) => {
   return (
-    <section className="w-full min-h-screen snap-start py-12 lg:py-16 bg-gray-50">
+    <section className="w-full py-12 lg:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Projects Section */}
         <div

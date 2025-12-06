@@ -6,6 +6,7 @@ import ProjectsAndServices from "./(home)/(projects-and-services)";
 import PartnersSection from "./(home)/(partners)";
 import { getHome } from "@/actions/get_home";
 import { createMetadata } from "@/lib/metadata";
+import Analytics from "./(home)/(analytics)";
 
 export const metadata: Metadata = createMetadata({
   title: "Home",
@@ -33,6 +34,7 @@ const page = async () => {
       <HeroSlider banner={banner} />
       <SeconedSection />
       <FourthSection services={services} />
+      <Analytics />
       <ProjectsAndServices projects={project} />
       <PartnersSection clients={clients} />
     </div>

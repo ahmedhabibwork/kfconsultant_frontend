@@ -11,7 +11,7 @@ const FourthSection = ({ services }: FourthSectionProps) => {
   return (
     <section
       id="colorlib-services"
-      className="w-full min-h-screen snap-start py-16 lg:py-24 bg-gray-50"
+      className="w-full py-16 lg:py-24 bg-gray-50"
     >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">

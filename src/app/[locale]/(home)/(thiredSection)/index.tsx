@@ -8,10 +8,7 @@ import { projects } from "./projectsData";
 
 const ThirdSection = () => {
   return (
-    <section
-      id="colorlib-project"
-      className="w-full min-h-screen snap-start py-16 lg:py-24 bg-gray-50"
-    >
+    <section id="colorlib-project" className="w-full py-16 lg:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column - Text Content */}
