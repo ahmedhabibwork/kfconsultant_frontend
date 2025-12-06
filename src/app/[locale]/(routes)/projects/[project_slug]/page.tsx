@@ -3,6 +3,7 @@ import ProjectHeader from "./projectHeader";
 import ProjectDetailsSection from "./components/ProjectDetailsSection";
 import MoreProjects from "./components/MoreProjects";
 import { getProjectDetails } from "@/actions/project-details";
+import { getContactInfo } from "@/actions/contact";
 import { Project } from "@/types/projectDetailesTypes";
 import { Metadata } from "next";
 import { createMetadata, createProjectSchema } from "@/lib/metadata";
@@ -50,6 +51,7 @@ export async function generateMetadata({
 const page = async ({ params }: PageProps) => {
   const { project_slug } = await params;
   const projectData = await getProjectDetails(project_slug);
+  const contactData = await getContactInfo();
   const { project } = projectData.msg_data;
 
   const componentData = mapProjectToComponentData(project);
@@ -68,7 +70,11 @@ const page = async ({ params }: PageProps) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ProjectHeader project={project} />
-      <ProjectDetailsSection project={componentData} />
+      <ProjectDetailsSection
+        project={componentData}
+        whatsappNumber={contactData.msg_data.whatsapp_number}
+        phoneNumber={contactData.msg_data.phone1}
+      />
       <MoreProjects />
     </>
   );

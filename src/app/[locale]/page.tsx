@@ -40,6 +40,7 @@ const page = async () => {
       <Analytics />
       <ProjectsAndServices
         projects={project}
+        phoneNumber={contactData.msg_data.phone1}
         whatsappNumber={whatsapp_number}
       />
       <PartnersSection clients={clients} />
