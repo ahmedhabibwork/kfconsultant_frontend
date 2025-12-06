@@ -20,7 +20,7 @@ export function createMetadata({
     title,
     description = SITE_CONFIG.description,
     keywords = SITE_CONFIG.keywords,
-    image = SITE_CONFIG.ogImage,
+    image = "",
     url,
     type = 'website',
     publishedTime,
@@ -131,7 +131,7 @@ export function createArticleSchema({
             name: SITE_CONFIG.name,
             logo: {
                 '@type': 'ImageObject',
-                url: SITE_CONFIG.ogImage,
+                url: "",
             },
         },
         mainEntityOfPage: {
