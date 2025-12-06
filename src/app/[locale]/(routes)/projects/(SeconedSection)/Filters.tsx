@@ -1,9 +1,12 @@
 "use client";
-import React from "react";
+
+import React, { useCallback, useEffect, useState } from "react";
 import Select from "react-select";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Filters as FiltersType } from "@/types/projectsTypes";
 import { useDebounce } from "@/hooks/use-debounce";
+import Input from "@/components/cors/Input";
+import { useRouter } from "nextjs-toploader/app";
 
 const customStyles = {
   control: (provided: any) => ({
@@ -43,14 +46,14 @@ const toOptions = (record: Record<string, string>) => {
 };
 
 const Filters = ({ filters }: FiltersProps) => {
-  const router = useRouter();
+  const router = useRouter(); // Using useTopLoader as router
   const searchParams = useSearchParams();
-  const [searchTerm, setSearchTerm] = React.useState(
+  const [searchTerm, setSearchTerm] = useState(
     searchParams.get("search") || ""
   );
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  const handleFilterChange = React.useCallback(
+  const handleFilterChange = useCallback(
     (key: string, value: string | null) => {
       const params = new URLSearchParams(searchParams.toString());
       if (value) {
@@ -67,7 +70,7 @@ const Filters = ({ filters }: FiltersProps) => {
     [searchParams, router]
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Only update if the value is different from the URL param
     // and allow empty string to clear the search
     if (debouncedSearchTerm !== (searchParams.get("search") || "")) {
@@ -76,7 +79,7 @@ const Filters = ({ filters }: FiltersProps) => {
   }, [debouncedSearchTerm, handleFilterChange, searchParams]);
 
   // Sync state with URL if URL changes (e.g. back button)
-  React.useEffect(() => {
+  useEffect(() => {
     const paramSearch = searchParams.get("search");
     if (paramSearch !== null && paramSearch !== searchTerm) {
       setSearchTerm(paramSearch);
@@ -97,11 +100,10 @@ const Filters = ({ filters }: FiltersProps) => {
           Search
         </label>
         <div className="relative">
-          <input
-            type="text"
+          <Input
             id="search"
             placeholder="Search projects..."
-            className="w-full h-[42px] px-3 border border-gray-200 focus:outline-none focus:border-gray-300 transition-colors placeholder:text-gray-400"
+            className="w-full h-[42px] px-3 border border-gray-200 focus:outline-none focus:border-gray-300 transition-colors placeholder:text-gray-400 !py-0"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />

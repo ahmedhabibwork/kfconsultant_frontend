@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "motion/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 interface TabsProps {
   categories: Record<string, string>;
