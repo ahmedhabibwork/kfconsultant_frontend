@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import "../globals.css";
 import { ModalProvider } from "@/components/modal/Modal";
@@ -19,6 +19,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -42,7 +48,7 @@ export default async function RootLayout({
       dir={locale === "ar" ? "rtl" : "ltr"}
     >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative bg-white`}
+        className={`${montserrat.variable} font-sans antialiased relative bg-white`}
       >
         <NextIntlClientProvider locale={locale}>
           <ModalProvider>

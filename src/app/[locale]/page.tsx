@@ -31,7 +31,7 @@ const page = async () => {
   return (
     <div className="w-full">
       <HeroSlider banner={banner} />
-      <SeconedSection aboutUs={about_us} />
+      <SeconedSection />
       <FourthSection services={services} />
       <ProjectsAndServices projects={project} />
       <PartnersSection clients={clients} />
