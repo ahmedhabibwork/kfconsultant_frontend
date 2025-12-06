@@ -147,7 +147,7 @@ const Footer = ({ contactInfo }: FooterProps) => {
             </div>
 
             {/* Social Links */}
-            <div>
+            <div className="md:flex md:flex-col md:items-end">
               <h3 className="text-sm font-semibold uppercase mb-4 text-white">
                 {t("followUs.title")}
               </h3>

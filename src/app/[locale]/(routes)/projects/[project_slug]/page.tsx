@@ -57,7 +57,7 @@ const page = async ({ params }: PageProps) => {
   const componentData = mapProjectToComponentData(project);
 
   const jsonLd = createProjectSchema({
-    title: project.title,
+    title: project.meta_title || project.title,
     description: project.meta_description || project.short_description,
     image: project.cover_image,
     url: `${process.env.API_SITE_URL}/projects/${project.slug}`,
