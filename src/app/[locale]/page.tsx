@@ -34,7 +34,7 @@ const page = async () => {
 
   return (
     <div className="w-full">
-      <HeroSlider banner={banner} />
+      <HeroSlider banner={banner} whatsappNumber={whatsapp_number} />
       <SeconedSection />
       <FourthSection services={services} />
       <Analytics />

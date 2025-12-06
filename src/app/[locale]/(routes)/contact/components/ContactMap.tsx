@@ -13,6 +13,7 @@ const ContactMap = ({ mapLink }: ContactMapProps) => {
         height="100%"
         allowFullScreen
         loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
         title="Google Maps location"
         className="border-0"
       />
