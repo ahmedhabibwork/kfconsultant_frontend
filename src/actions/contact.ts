@@ -26,7 +26,11 @@ export async function submitContactForm(data: {
     return { success: true, message: "Form submitted successfully!" };
   } else {
     console.error("Contact form submission error:", result.error);
-    return { success: false, message: result.error.message || "Failed to submit form" };
+    return {
+      success: false,
+      message: result.error.message || "Failed to submit form",
+      errors: (result.error as any).errors
+    };
   }
 }
 

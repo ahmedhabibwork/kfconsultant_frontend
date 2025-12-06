@@ -1,67 +1,90 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import PhoneInput from "@/components/cors/PhoneInput";
 import { submitContactForm } from "@/actions/contact";
-import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 const ContactForm = () => {
-  const t = useTranslations("forms.contact");
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "+20",
-    enquiryType: "",
-    message: "",
+  const contactSchema = z.object({
+    firstName: z.string().min(1, { message: "First name is required" }),
+    lastName: z.string().min(1, { message: "Last name is required" }),
+    email: z
+      .string()
+      .min(1, { message: "Email is required" })
+      .email({ message: "Invalid email address" }),
+    phone: z.string().min(1, { message: "Phone number is required" }),
+    enquiryType: z.string().min(1, { message: "Enquiry type is required" }),
+    message: z.string().min(1, { message: "Message is required" }),
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  type ContactFormData = z.infer<typeof contactSchema>;
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    setError,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "+20",
+      enquiryType: "",
+      message: "",
+    },
+  });
 
   const enquiryOptions = [
-    { value: "general", label: t("options.general") },
-    { value: "project", label: t("options.project") },
-    { value: "career", label: t("options.career") },
-    { value: "partnership", label: t("options.partnership") },
+    { value: "general", label: "General Inquiry" },
+    { value: "project", label: "Project Inquiry" },
+    { value: "career", label: "Careers" },
+    { value: "partnership", label: "Partnership" },
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
+  const onSubmit = async (data: ContactFormData) => {
     try {
-      const result = await submitContactForm(formData);
+      const result: any = await submitContactForm(data);
+
       if (result.success) {
-        toast.success(t("success"));
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "+20",
-          enquiryType: "",
-          message: "",
-        });
+        toast.success("Message sent successfully!");
+        reset();
       } else {
-        toast.error(t("error"));
+        if (result.errors) {
+          // Map backend errors to form fields
+          const fieldMap: Record<string, keyof ContactFormData> = {
+            name: "firstName", // Map general name error to firstName
+            email: "email",
+            phone: "phone",
+            subject: "enquiryType",
+            notes: "message",
+          };
+
+          Object.entries(result.errors).forEach(([backendKey, messages]) => {
+            const fieldName = fieldMap[backendKey];
+            if (fieldName) {
+              setError(fieldName, {
+                type: "server",
+                message: (messages as string[])[0],
+              });
+            } else {
+              toast.error((messages as string[])[0]);
+            }
+          });
+        } else {
+          toast.error(result.message || "Something went wrong.");
+        }
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.error(t("error"));
-    } finally {
-      setIsSubmitting(false);
+      toast.error("Something went wrong.");
     }
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handlePhoneChange = (phone: string) => {
-    setFormData((prev) => ({ ...prev, phone }));
   };
 
   return (
@@ -73,11 +96,11 @@ const ContactForm = () => {
     >
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3 uppercase tracking-tight">
-          {t("title")}
+          Get In Touch
         </h2>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
         {/* Name Fields */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="w-full space-y-2">
@@ -85,34 +108,44 @@ const ContactForm = () => {
               htmlFor="firstName"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
             >
-              {t("firstName")}
+              First Name
             </label>
             <input
               id="firstName"
               type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              placeholder={t("firstName")}
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="First Name"
+              {...register("firstName")}
+              className={`flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+                errors.firstName ? "border-red-500" : "border-input"
+              }`}
             />
+            {errors.firstName && (
+              <span className="text-red-500 text-xs">
+                {errors.firstName.message}
+              </span>
+            )}
           </div>
           <div className="w-full space-y-2">
             <label
               htmlFor="lastName"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
             >
-              {t("lastName")}
+              Last Name
             </label>
             <input
               id="lastName"
               type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              placeholder={t("lastName")}
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="Last Name"
+              {...register("lastName")}
+              className={`flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+                errors.lastName ? "border-red-500" : "border-input"
+              }`}
             />
+            {errors.lastName && (
+              <span className="text-red-500 text-xs">
+                {errors.lastName.message}
+              </span>
+            )}
           </div>
         </div>
 
@@ -123,32 +156,54 @@ const ContactForm = () => {
               htmlFor="email"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
             >
-              {t("email")}
+              Email Address
             </label>
             <input
               id="email"
               type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder={t("email")}
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="Email Address"
+              {...register("email")}
+              className={`flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+                errors.email ? "border-red-500" : "border-input"
+              }`}
             />
+            {errors.email && (
+              <span className="text-red-500 text-xs">
+                {errors.email.message}
+              </span>
+            )}
           </div>
           <div className="w-full space-y-2">
             <label
               htmlFor="phone"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
             >
-              {t("phone")}
+              Phone Number
             </label>
-            <div className="[&_.react-international-phone-input]:!h-10 [&_.react-international-phone-input]:!w-full [&_.react-international-phone-input]:!rounded-r-md [&_.react-international-phone-input]:!border-input [&_.react-international-phone-input]:!bg-background [&_.react-international-phone-country-selector-button]:!h-10 [&_.react-international-phone-country-selector-button]:!border-input [&_.react-international-phone-country-selector-button]:!bg-background">
-              <PhoneInput
-                value={formData.phone}
-                onChange={handlePhoneChange}
-                className="!w-full"
-              />
-            </div>
+            <Controller
+              name="phone"
+              control={control}
+              render={({ field }) => (
+                <div
+                  className={`[&_.react-international-phone-input]:!h-10 [&_.react-international-phone-input]:!w-full [&_.react-international-phone-input]:!rounded-r-md [&_.react-international-phone-input]:!bg-background [&_.react-international-phone-country-selector-button]:!h-10 [&_.react-international-phone-country-selector-button]:!bg-background ${
+                    errors.phone
+                      ? "[&_.react-international-phone-input]:!border-red-500 [&_.react-international-phone-country-selector-button]:!border-red-500"
+                      : "[&_.react-international-phone-input]:!border-input [&_.react-international-phone-country-selector-button]:!border-input"
+                  }`}
+                >
+                  <PhoneInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    className="!w-full"
+                  />
+                </div>
+              )}
+            />
+            {errors.phone && (
+              <span className="text-red-500 text-xs">
+                {errors.phone.message}
+              </span>
+            )}
           </div>
         </div>
 
@@ -158,24 +213,27 @@ const ContactForm = () => {
             htmlFor="enquiryType"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
           >
-            {t("enquiryType")}
+            Enquiry Type
           </label>
           <select
             id="enquiryType"
-            name="enquiryType"
-            value={formData.enquiryType}
-            onChange={handleChange}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            {...register("enquiryType")}
+            className={`flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+              errors.enquiryType ? "border-red-500" : "border-input"
+            }`}
           >
-            <option value="" disabled>
-              {t("enquiryType")}
-            </option>
+            <option value="">Select Enquiry Type</option>
             {enquiryOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
           </select>
+          {errors.enquiryType && (
+            <span className="text-red-500 text-xs">
+              {errors.enquiryType.message}
+            </span>
+          )}
         </div>
 
         {/* Message */}
@@ -184,17 +242,22 @@ const ContactForm = () => {
             htmlFor="message"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
           >
-            {t("message")}
+            Message
           </label>
           <textarea
             id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            placeholder={t("message")}
+            placeholder="Tell us about your project or inquiry..."
             rows={4}
-            className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-y"
+            {...register("message")}
+            className={`flex min-h-[120px] w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-y ${
+              errors.message ? "border-red-500" : "border-input"
+            }`}
           />
+          {errors.message && (
+            <span className="text-red-500 text-xs">
+              {errors.message.message}
+            </span>
+          )}
         </div>
 
         {/* Submit Button */}
@@ -204,7 +267,7 @@ const ContactForm = () => {
             disabled={isSubmitting}
             className="w-full md:w-[280px] h-[56px] bg-primary hover:bg-primary/90 text-white font-medium text-[15px] rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? t("submitting") : t("submit")}
+            {isSubmitting ? "Submitting..." : "Send Message"}
           </button>
         </div>
       </form>
