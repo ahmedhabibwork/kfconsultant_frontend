@@ -60,7 +60,7 @@ const page = async ({ params }: PageProps) => {
     title: project.title,
     description: project.meta_description || project.short_description,
     image: project.cover_image,
-    url: `https://dma-mea.com/projects/${project.slug}`,
+    url: `${process.env.API_SITE_URL}/projects/${project.slug}`,
   });
 
   return (

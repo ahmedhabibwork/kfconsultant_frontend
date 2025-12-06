@@ -46,31 +46,6 @@ const ContactDetails = ({ contactInfo }: ContactDetailsProps) => {
               </a>
             </div>
           </div>
-
-          {/* Phone Numbers */}
-          <div className="flex flex-col gap-3">
-            {contactInfo.phone1 && (
-              <PhoneNumber
-                phoneNumber={contactInfo.phone1}
-                className="items-start"
-              />
-            )}
-            {contactInfo.phone2 &&
-              contactInfo.phone2 !== contactInfo.phone1 && (
-                <PhoneNumber
-                  phoneNumber={contactInfo.phone2}
-                  className="items-start"
-                />
-              )}
-          </div>
-
-          {/* WhatsApp */}
-          {contactInfo.whatsapp_number && (
-            <WhatsAppButton
-              phoneNumber={contactInfo.whatsapp_number}
-              className="items-start"
-            />
-          )}
         </div>
 
         {/* Social Links */}

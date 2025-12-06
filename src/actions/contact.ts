@@ -7,15 +7,17 @@ export async function submitContactForm(data: {
   lastName: string;
   email: string;
   phone: string;
-  enquiryType: string;
+  subject: string;
   message: string;
 }) {
   const formData = new FormData();
   formData.append("name", `${data.firstName} ${data.lastName}`);
   formData.append("phone", data.phone);
   formData.append("email", data.email);
-  formData.append("subject", data.enquiryType);
+  formData.append("subject", data.subject);
   formData.append("notes", data.message);
+
+  console.log("formData", formData)
 
   const result = await apiFetch("/submit/contact-us", {
     method: "POST",

@@ -16,7 +16,7 @@ const ContactForm = () => {
       .min(1, { message: "Email is required" })
       .email({ message: "Invalid email address" }),
     phone: z.string().min(1, { message: "Phone number is required" }),
-    enquiryType: z.string().min(1, { message: "Enquiry type is required" }),
+    subject: z.string().min(1, { message: "Subject is required" }),
     message: z.string().min(1, { message: "Message is required" }),
   });
 
@@ -36,17 +36,10 @@ const ContactForm = () => {
       lastName: "",
       email: "",
       phone: "+20",
-      enquiryType: "",
+      subject: "",
       message: "",
     },
   });
-
-  const enquiryOptions = [
-    { value: "general", label: "General Inquiry" },
-    { value: "project", label: "Project Inquiry" },
-    { value: "career", label: "Careers" },
-    { value: "partnership", label: "Partnership" },
-  ];
 
   const onSubmit = async (data: ContactFormData) => {
     try {
@@ -62,7 +55,7 @@ const ContactForm = () => {
             name: "firstName", // Map general name error to firstName
             email: "email",
             phone: "phone",
-            subject: "enquiryType",
+            subject: "subject",
             notes: "message",
           };
 
@@ -207,31 +200,26 @@ const ContactForm = () => {
           </div>
         </div>
 
-        {/* Enquiry Type */}
+        {/* Subject Field */}
         <div className="w-full space-y-2">
           <label
-            htmlFor="enquiryType"
+            htmlFor="subject"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-primary"
           >
-            Enquiry Type
+            Subject
           </label>
-          <select
-            id="enquiryType"
-            {...register("enquiryType")}
-            className={`flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
-              errors.enquiryType ? "border-red-500" : "border-input"
+          <input
+            id="subject"
+            type="text"
+            placeholder="Subject"
+            {...register("subject")}
+            className={`flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+              errors.subject ? "border-red-500" : "border-input"
             }`}
-          >
-            <option value="">Select Enquiry Type</option>
-            {enquiryOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          {errors.enquiryType && (
+          />
+          {errors.subject && (
             <span className="text-red-500 text-xs">
-              {errors.enquiryType.message}
+              {errors.subject.message}
             </span>
           )}
         </div>

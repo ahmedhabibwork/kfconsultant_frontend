@@ -39,6 +39,29 @@ function shouldLog(urlStr: string) {
   }
 }
 
+// Generate cURL command for debugging
+function generateCurlCommand(url: string, method: string, headers: Headers, body?: any): string {
+  let curl = `curl -X ${method} '${url}'`;
+
+  // Add headers
+  headers.forEach((value, key) => {
+    curl += ` \\\n  -H '${key}: ${value}'`;
+  });
+
+  // Add body if present
+  if (body) {
+    if (body instanceof FormData) {
+      curl += ` \\\n  --form (FormData - see browser network tab for details)`;
+    } else if (typeof body === 'string') {
+      curl += ` \\\n  -d '${body.replace(/'/g, "\\'")}'`;
+    } else if (typeof body === 'object') {
+      curl += ` \\\n  -d '${JSON.stringify(body).replace(/'/g, "\\'")}'`;
+    }
+  }
+
+  return curl;
+}
+
 /**
  * Generic wrapper that returns a `Result<Ok, Err>` from **neverthrow**
  * instead of throwing.
@@ -75,7 +98,7 @@ export async function apiFetch<T, E = { message: string; status: number }>(
 
   // Increase timeout for production environment
   const timeoutMs = process.env.NODE_ENV === 'production' ? 30_000 : 15_000;
-  
+
   const req: RequestInit & { next?: NextExtras } = {
     ...init,
     headers: merged,
@@ -86,7 +109,7 @@ export async function apiFetch<T, E = { message: string; status: number }>(
 
   let statusForLog = 0;
   let lastError: any = null;
-  
+
   // Retry logic for failed requests
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
@@ -94,7 +117,11 @@ export async function apiFetch<T, E = { message: string; status: number }>(
       if (attempt > 0) {
         await new Promise(resolve => setTimeout(resolve, retryDelay * attempt));
       }
-      
+
+      // Debug: Log cURL command in development
+      const curlCommand = generateCurlCommand(fullUrl, method, merged, (init as any)?.body);
+      console.debug('\n🔍 API Request (cURL):\n' + curlCommand + '\n');
+
       const res = await fetch(fullUrl, req);
       statusForLog = res.status;
 
@@ -127,7 +154,7 @@ export async function apiFetch<T, E = { message: string; status: number }>(
 
           return err(errorResult);
         }
-        
+
         // For server errors, throw to trigger retry
         throw new Error(`Server error: ${res.status} ${res.statusText}`);
       }
@@ -142,12 +169,12 @@ export async function apiFetch<T, E = { message: string; status: number }>(
       }
     }
   }
-  
+
   // If we got here, all retries failed
   // Provide more detailed error messages
   let errorMessage = 'fetch failed';
   let errorStatus = 0;
-  
+
   if (lastError) {
     if (lastError.name === 'AbortError' || lastError.name === 'TimeoutError') {
       errorMessage = 'Request timeout - please check your connection and try again';
@@ -156,7 +183,7 @@ export async function apiFetch<T, E = { message: string; status: number }>(
       errorMessage = lastError.message;
     }
   }
-  
-  
+
+
   return err({ message: errorMessage, status: errorStatus } as E);
 }

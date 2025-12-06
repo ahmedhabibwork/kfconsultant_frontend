@@ -59,8 +59,8 @@ const ProjectsAndServices = ({
               >
                 View All Projects <ArrowRight className="w-4 h-4" />
               </Link>
-              <WhatsAppButton phoneNumber={whatsappNumber} />
-              <PhoneNumber phoneNumber={phoneNumber} />
+              {/* <WhatsAppButton phoneNumber={whatsappNumber} /> */}
+              {/* <PhoneNumber phoneNumber={phoneNumber} /> */}
             </div>
           </motion.div>
 
