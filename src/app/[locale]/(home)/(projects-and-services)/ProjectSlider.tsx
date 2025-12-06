@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Project } from "@/types/homeTypes";
 import TextEditorReader from "@/components/TextReader";
+import Link from "next/link";
 
 interface ProjectSliderProps {
   projects: Project[];
@@ -53,28 +54,33 @@ const ProjectSlider = ({ projects }: ProjectSliderProps) => {
                 backgroundImage: `url(${projects[currentIndex].cover_image})`,
               }}
             >
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/40 to-transparent" />
+              <Link
+                href={`/projects/${projects[currentIndex].slug}`}
+                className="block w-full h-full"
+              >
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/40 to-transparent" />
 
-              {/* Content Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-white/95 backdrop-blur-sm p-8 max-w-md mx-4 text-center shadow-xl">
-                  <h2 className="text-2xl font-bold mb-4 text-gray-900">
-                    {projects[currentIndex].title}
-                  </h2>
-                  <p className="text-sm uppercase tracking-widest text-blue-900 mb-4 font-semibold">
-                    {projects[currentIndex].location}
-                  </p>
-                  <div className="text-gray-700 mb-2">
-                    <TextEditorReader
-                      value={projects[currentIndex].short_description}
-                    />
+                {/* Content Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-white/95 backdrop-blur-sm p-8 max-w-md mx-4 text-center shadow-xl">
+                    <h2 className="text-2xl font-bold mb-4 text-gray-900">
+                      {projects[currentIndex].title}
+                    </h2>
+                    <p className="text-sm uppercase tracking-widest text-blue-900 mb-4 font-semibold">
+                      {projects[currentIndex].location}
+                    </p>
+                    <div className="text-gray-700 mb-2">
+                      <TextEditorReader
+                        value={projects[currentIndex].short_description}
+                      />
+                    </div>
+                    <p className="text-gray-600 text-sm">
+                      {projects[currentIndex].category.title}
+                    </p>
                   </div>
-                  <p className="text-gray-600 text-sm">
-                    {projects[currentIndex].category.title}
-                  </p>
                 </div>
-              </div>
+              </Link>
             </div>
           </motion.div>
         </AnimatePresence>

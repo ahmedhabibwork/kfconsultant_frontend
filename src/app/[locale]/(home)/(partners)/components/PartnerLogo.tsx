@@ -14,7 +14,7 @@ const PartnerLogo = ({ src, alt }: PartnerLogoProps) => {
         alt={alt}
         width={130}
         height={130}
-        className="object-contain w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+        className="object-contain w-full h-full  transition-all duration-300"
       />
     </div>
   );

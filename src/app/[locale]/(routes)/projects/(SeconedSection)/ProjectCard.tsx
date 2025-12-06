@@ -23,7 +23,7 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   return (
     <Link
-      className="text-white flex-1 h-fit w-[300px] max-md:w-full group z-1"
+      className="text-white flex flex-col flex-1 h-full w-[300px] max-md:w-full group z-1"
       href={`/projects/${slug}`}
     >
       <Image
@@ -35,8 +35,8 @@ const ProjectCard = ({
         className="w-full h-[280px] object-cover duration-300 grayscale-30 contrast-80 group-hover:grayscale-0 group-hover:contrast-100"
         src={image}
       />
-      <div className="relative">
-        <div className="bg-primary h-full backdrop-blur-[20px] w-full px-6 py-5 flex flex-col gap-2">
+      <div className="relative flex-grow flex flex-col">
+        <div className="bg-primary h-full backdrop-blur-[20px] w-full px-6 py-5 flex flex-col gap-2 flex-grow">
           <h3 className="text-xl font-bold">{title}</h3>
           <div className="flex flex-col gap-2">
             <motion.div
