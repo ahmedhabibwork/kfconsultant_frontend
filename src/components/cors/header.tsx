@@ -1,24 +1,15 @@
 "use client";
 import { Link } from "@/i18n/navigation";
-import { Menu } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetTitle,
-  SheetDescription,
-} from "@/components/ui/sheet";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Category } from "@/types/CategoriesTypes";
+import MobileMenu from "./MobileMenu";
 
 interface HeaderProps {
   categories: Category[];
@@ -26,11 +17,11 @@ interface HeaderProps {
 
 const Header = ({ categories }: HeaderProps) => {
   return (
-    <nav className="w-full absolute top-0 left-0 z-[9999] py-4 lg:py-8 text-white">
+    <nav className="w-full absolute top-0 left-0 z-50 py-4 lg:py-8 text-white">
       <div className="container">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between relative">
           {/* Logo */}
-          <div className="w-auto z-50">
+          <div className="w-auto relative z-[60]">
             <div
               id="colorlib-logo"
               className="text-2xl font-bold tracking-widest"
@@ -40,7 +31,7 @@ const Header = ({ categories }: HeaderProps) => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex flex-1 text-right justify-end">
+          <div className="hidden lg:flex flex-1 text-right justify-end relative z-[51]">
             <NavigationMenu>
               <NavigationMenuList className="gap-2">
                 <NavigationMenuItem>
@@ -117,82 +108,7 @@ const Header = ({ categories }: HeaderProps) => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden z-50">
-            <Sheet>
-              <SheetTrigger asChild>
-                <button className="text-white focus:outline-none">
-                  <Menu size={28} />
-                </button>
-              </SheetTrigger>
-              <SheetContent
-                side="right"
-                className="w-[300px] sm:w-[400px] bg-black/95 border-none text-white"
-              >
-                <VisuallyHidden>
-                  <SheetTitle>Mobile Menu</SheetTitle>
-                  <SheetDescription>
-                    Navigation links for mobile devices
-                  </SheetDescription>
-                </VisuallyHidden>
-                <nav className="flex flex-col gap-4 mt-8">
-                  <Link
-                    href="/"
-                    className="text-lg font-medium hover:text-gray-300 transition-colors"
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href="/about"
-                    className="text-lg font-medium hover:text-gray-300 transition-colors"
-                  >
-                    About us
-                  </Link>
-                  <Link
-                    href="/services"
-                    className="text-lg font-medium hover:text-gray-300 transition-colors"
-                  >
-                    Services
-                  </Link>
-                  <div className="flex flex-col gap-2">
-                    <Link
-                      href="/projects"
-                      className="text-lg font-medium hover:text-gray-300 transition-colors"
-                    >
-                      Projects
-                    </Link>
-                    <div className="pl-4 flex flex-col gap-2 text-base text-gray-400">
-                      {categories.map((category) => (
-                        <Link
-                          key={category.id}
-                          href={`/projects?category=${category.slug}`}
-                        >
-                          {category.title}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                  <Link
-                    href="/news"
-                    className="text-lg font-medium hover:text-gray-300 transition-colors"
-                  >
-                    News
-                  </Link>
-                  <Link
-                    href="/careers"
-                    className="text-lg font-medium hover:text-gray-300 transition-colors"
-                  >
-                    Careers
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="text-lg font-medium hover:text-gray-300 transition-colors"
-                  >
-                    Contact us
-                  </Link>
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
+          <MobileMenu categories={categories} />
         </div>
       </div>
     </nav>
