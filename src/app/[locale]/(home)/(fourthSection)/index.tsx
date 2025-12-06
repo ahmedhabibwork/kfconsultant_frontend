@@ -35,7 +35,7 @@ const FourthSection = ({ services }: FourthSectionProps) => {
               </span>
               <span className="font-bold text-[50px] uppercase">Offered</span>
             </h2>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-[#808080] leading-relaxed">
               We have a vast professional team and hands-on experience in
               structural design consultation and site supervision along with
               project development and management. AACE is also involved in the
