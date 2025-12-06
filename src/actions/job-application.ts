@@ -30,3 +30,23 @@ export async function submitJobApplication(formData: FormData) {
         };
     }
 }
+
+export async function getJobTitles() {
+    try {
+        const result = await apiFetch<any>("/form/job-application", {
+            method: "GET",
+            cache: "no-store"
+        });
+
+        if (result.isOk()) {
+            console.log(result.value.msg_data);
+            return result.value.msg_data;
+        } else {
+            console.error("Failed to fetch job titles:", result.error);
+            return {};
+        }
+    } catch (error) {
+        console.error("Error fetching job titles:", error);
+        return {};
+    }
+}
