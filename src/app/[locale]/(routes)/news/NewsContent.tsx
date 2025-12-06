@@ -8,7 +8,7 @@ interface NewsContentProps {
 
 const NewsContent = ({ blogs }: NewsContentProps) => {
   return (
-    <div className="text-white pb-5 grid justify-stretch max-w-fit mx-auto justify-items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-[30px] gap-[18px]">
+    <div className="container text-white pb-5 grid justify-stretch max-w-fit justify-items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-[18px]">
       {blogs.map((blog) => (
         <NewsCard
           key={blog.id}

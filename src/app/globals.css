@@ -171,7 +171,7 @@ button {
 @utility container {
   margin-inline: auto;
   padding-inline: 1rem;
-  max-width: 1134px;
+  max-width: 1234px;
   width: 100%;
 
   @media (min-width: 768px) {

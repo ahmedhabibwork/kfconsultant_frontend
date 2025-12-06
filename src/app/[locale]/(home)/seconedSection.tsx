@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 const SecondSection = () => {
   return (
     <section id="colorlib-intro" className="w-full snap-start py-12 lg:py-16">
-      <div className="container mx-auto px-4">
+      <div className="container">
         <div className="flex flex-col md:flex-row gap-10 items-center">
           {/* Left Column - Years Experience Box */}
           <motion.div

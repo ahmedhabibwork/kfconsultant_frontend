@@ -26,8 +26,8 @@ interface HeaderProps {
 
 const Header = ({ categories }: HeaderProps) => {
   return (
-    <nav className="w-full absolute top-0 left-0 z-50 py-4 lg:py-8 text-white">
-      <div className="container mx-auto px-4">
+    <nav className="w-full absolute top-0 left-0 z-[9999] py-4 lg:py-8 text-white">
+      <div className="container">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="w-auto z-50">

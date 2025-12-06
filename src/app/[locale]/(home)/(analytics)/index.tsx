@@ -39,7 +39,7 @@ const Analytics = () => {
 
   return (
     <div className="bg-[#000035] py-25 text-white" ref={ref}>
-      <div className="container mx-auto">
+      <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat) => (
             <div

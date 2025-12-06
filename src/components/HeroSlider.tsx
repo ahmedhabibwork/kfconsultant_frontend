@@ -42,7 +42,7 @@ const HeroSlider = ({ banner }: HeroSliderProps) => {
         >
           <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]" />{" "}
           {/* Overlay */}
-          <div className="container mx-auto h-full flex items-center justify-center relative z-10">
+          <div className="container  h-full flex items-center justify-center relative z-10">
             <div className="text-center text-white">
               <motion.h2
                 initial={{ y: 30, opacity: 0 }}

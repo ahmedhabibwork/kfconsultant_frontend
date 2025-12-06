@@ -11,7 +11,7 @@ const page = async () => {
   return (
     <div>
       <NewsHeader />
-      <p className="py-3 mt-8 mb-[30px] max-md:py-5 border-y-[1px] border-text-gray-200 text-xl font-thin tracking-wide leading-10 uppercase text-primary mx-[30px] h-[64px] flex items-center">
+      <p className="mt-8 mb-[30px] border-y-[1px] border-text-gray-200 text-xl font-thin tracking-wide leading-10 uppercase text-primary h-[64px] flex items-center container">
         Latest News
       </p>
       <NewsContent blogs={blogs} />
