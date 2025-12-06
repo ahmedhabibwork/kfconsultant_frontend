@@ -70,11 +70,7 @@ const page = async ({ params }: PageProps) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ProjectHeader project={project} />
-      <ProjectDetailsSection
-        project={componentData}
-        whatsappNumber={contactData.msg_data.whatsapp_number}
-        phoneNumber={contactData.msg_data.phone1}
-      />
+      <ProjectDetailsSection project={componentData} />
       <MoreProjects />
     </>
   );

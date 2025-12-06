@@ -3,19 +3,13 @@ import React from "react";
 import { motion } from "motion/react";
 
 import TextEditorReader from "@/components/TextReader";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import PhoneNumber from "@/components/PhoneNumber";
 
 interface ProjectDescriptionProps {
   description: string;
-  whatsappNumber: string;
-  phoneNumber: string;
 }
 
 const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
   description,
-  whatsappNumber,
-  phoneNumber,
 }) => {
   return (
     <div className="flex-1">
@@ -27,10 +21,6 @@ const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
         transition={{ duration: 1 }}
       >
         <TextEditorReader value={description} />
-        <div className="mt-6 flex flex-col gap-3">
-          <WhatsAppButton phoneNumber={whatsappNumber} />
-          <PhoneNumber phoneNumber={phoneNumber} />
-        </div>
       </motion.div>
     </div>
   );

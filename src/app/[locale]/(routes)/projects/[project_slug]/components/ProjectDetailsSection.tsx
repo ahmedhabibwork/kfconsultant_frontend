@@ -16,24 +16,16 @@ export interface ProjectData {
 
 interface ProjectDetailsSectionProps {
   project: ProjectData;
-  whatsappNumber: string;
-  phoneNumber: string;
 }
 
 const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
   project,
-  whatsappNumber,
-  phoneNumber,
 }) => {
   return (
     <div className="max-w-[1114px] px-6 mx-auto mt-[64px]">
       {/* Description and Metadata */}
       <div className="flex gap-10 max-md:gap-4 mb-4 max-md:mb-10 max-md:flex-col">
-        <ProjectDescription
-          description={project.description}
-          whatsappNumber={whatsappNumber}
-          phoneNumber={phoneNumber}
-        />
+        <ProjectDescription description={project.description} />
         <ProjectMetadata
           client={project.client}
           type={project.type}
