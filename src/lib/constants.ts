@@ -3,8 +3,8 @@ export const SITE_CONFIG = {
     name: 'KFconsultant',
     title: 'KFconsultant - Design and Engineering Consultants',
     description: 'Leading design and engineering consultancy firm with over 30 years of experience in architectural design, master planning, and infrastructure development.',
-    url: 'https://dma-mea.com',
-    ogImage: 'https://admin.dma-mea.com/storage/01JBVT9DBJJE7S4APP40W7YR0S.jpg',
+    url: process.env.API_SITE_URL,
+    // ogImage: '',
     keywords: [
         'architecture',
         'engineering',
@@ -43,7 +43,7 @@ export const SOCIAL_LINKS = {
 
 // Default Images
 export const DEFAULT_IMAGES = {
-    og: 'https://admin.dma-mea.com/storage/01JBVT9DBJJE7S4APP40W7YR0S.jpg',
+    og: '',
     placeholder: '/newsCard.webp',
     headerBg: '/contactBg.webp',
 } as const;

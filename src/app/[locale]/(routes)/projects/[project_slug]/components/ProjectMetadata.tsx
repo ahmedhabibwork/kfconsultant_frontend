@@ -50,6 +50,7 @@ interface ProjectMetadataProps {
   type: string;
   services: string[];
   location: string;
+  status: string;
 }
 
 const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
@@ -57,13 +58,15 @@ const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
   type,
   services,
   location,
+  status,
 }) => {
   return (
     <div className="flex-1 flex justify-between items-start gap-10 max-sm:flex-col max-lg:flex-wrap md:px-6 text-primary">
       <MetadataItem label="Client" value={client} delay={0} />
-      <MetadataItem label="Type" value={type} delay={300} />
-      <MetadataItem label="Services" value={services} delay={600} />
+      <MetadataItem label="Sector" value={type} delay={300} />
+      <MetadataItem label="Scope" value={services} delay={600} />
       <MetadataItem label="Location" value={location} delay={900} />
+      <MetadataItem label="Status" value={status} delay={1200} />
     </div>
   );
 };

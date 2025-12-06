@@ -36,7 +36,9 @@ export async function submitContactForm(data: {
   }
 }
 
+
 import { cache } from "react";
+import { SOCIAL_LINKS } from "@/lib/constants";
 
 export const getContactInfo = cache(async () => {
   const result = await apiFetch<ContactInfoApiResponse>("/contactinfo", {
@@ -45,7 +47,15 @@ export const getContactInfo = cache(async () => {
   });
 
   if (result.isOk()) {
-    return result.value;
+    return {
+      ...result.value,
+      msg_data: {
+        ...result.value.msg_data,
+        facebook_link: SOCIAL_LINKS.facebook,
+        instagram_link: SOCIAL_LINKS.instagram,
+        linkedin_link: SOCIAL_LINKS.linkedin,
+      },
+    };
   } else {
     console.error("Failed to fetch contact info:", result.error);
     throw new Error(result.error.message || "Failed to fetch contact info");

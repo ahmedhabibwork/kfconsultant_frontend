@@ -23,11 +23,13 @@ function mapProjectToComponentData(project: Project) {
     type: project.category.title,
     services: [
       project.scope.title,
-      project.scale.title,
-      project.status.title,
+      // project.scale.title,
+      // project.status.title,
     ].filter(Boolean),
     location: project.location,
     images: project.images,
+    scale: project.scale.title,
+    status: project.status.title,
   };
 }
 

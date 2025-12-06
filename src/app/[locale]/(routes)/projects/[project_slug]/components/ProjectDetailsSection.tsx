@@ -11,6 +11,7 @@ export interface ProjectData {
   type: string;
   services: string[];
   location: string;
+  status: string;
   images: string[];
 }
 
@@ -31,6 +32,7 @@ const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
           type={project.type}
           services={project.services}
           location={project.location}
+          status={project.status}
         />
       </div>
 

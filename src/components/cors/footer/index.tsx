@@ -17,14 +17,6 @@ const Footer = ({ contactInfo }: FooterProps) => {
 
   return (
     <footer className="relative pt-8 pb-6 px-4 bg-primary/95 text-white overflow-hidden">
-      {/* Background Image */}
-      <Image
-        alt="Footer Background"
-        src="https://admin.dma-mea.com/storage/01JBVT9DBJJE7S4APP40W7YR0S.jpg"
-        fill
-        className="object-cover -z-10"
-        priority
-      />
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/70 -z-10" />
 
