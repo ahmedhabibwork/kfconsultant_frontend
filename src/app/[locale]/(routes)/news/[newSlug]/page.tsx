@@ -1,6 +1,7 @@
 import HeaderNew from "./HeaderNew";
 import NewContent from "./NewContent";
 import { getBlogDetails } from "@/actions/blog-details";
+import { getContactInfo } from "@/actions/contact";
 import { Metadata } from "next";
 import { createMetadata, createArticleSchema } from "@/lib/metadata";
 
@@ -30,6 +31,7 @@ export async function generateMetadata({
 const page = async ({ params }: PageProps) => {
   const { newSlug } = await params;
   const blogData = await getBlogDetails(newSlug);
+  const contactData = await getContactInfo();
   const { blog, latest_blogs } = blogData.msg_data;
 
   const jsonLd = createArticleSchema({
@@ -37,7 +39,7 @@ const page = async ({ params }: PageProps) => {
     description: blog.meta_description || blog.short_description,
     image: blog.images[0],
     publishedTime: blog.created_at,
-    url: `https://dma-mea.com/news/${blog.slug}`,
+    url: `${process.env.API_SITE_URL}/news/${blog.slug}`,
   });
 
   return (
@@ -47,7 +49,12 @@ const page = async ({ params }: PageProps) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <HeaderNew blog={blog} />
-      <NewContent blog={blog} latestBlogs={latest_blogs} />
+      <NewContent
+        blog={blog}
+        latestBlogs={latest_blogs}
+        whatsappNumber={contactData.msg_data.whatsapp_number}
+        phoneNumber={contactData.msg_data.phone1}
+      />
     </div>
   );
 };
