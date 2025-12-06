@@ -18,7 +18,7 @@ const HeroSlider = ({ banner }: HeroSliderProps) => {
     if (slides.length <= 1) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(timer);
   }, [slides.length]);
 
@@ -33,7 +33,7 @@ const HeroSlider = ({ banner }: HeroSliderProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.4 }}
           className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${slides[currentSlide].image})` }}
         >
@@ -43,7 +43,7 @@ const HeroSlider = ({ banner }: HeroSliderProps) => {
               <motion.h2
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
                 className="text-4xl md:text-6xl font-bold mb-4"
               >
                 {slides[currentSlide].title}
