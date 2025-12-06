@@ -5,6 +5,7 @@ import SeconedSection from "./(home)/seconedSection";
 import ProjectsAndServices from "./(home)/(projects-and-services)";
 import PartnersSection from "./(home)/(partners)";
 import { getHome } from "@/actions/get_home";
+import { getContactInfo } from "@/actions/contact";
 import { createMetadata } from "@/lib/metadata";
 import Analytics from "./(home)/(analytics)";
 
@@ -27,7 +28,9 @@ export const metadata: Metadata = createMetadata({
 
 const page = async () => {
   const data = await getHome();
+  const contactData = await getContactInfo();
   const { banner, about_us, project, services, clients } = data.msg_data;
+  const { whatsapp_number } = contactData.msg_data;
 
   return (
     <div className="w-full">
@@ -35,7 +38,10 @@ const page = async () => {
       <SeconedSection />
       <FourthSection services={services} />
       <Analytics />
-      <ProjectsAndServices projects={project} />
+      <ProjectsAndServices
+        projects={project}
+        whatsappNumber={whatsapp_number}
+      />
       <PartnersSection clients={clients} />
     </div>
   );

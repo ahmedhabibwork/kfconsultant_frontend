@@ -34,7 +34,9 @@ export async function submitContactForm(data: {
   }
 }
 
-export async function getContactInfo() {
+import { cache } from "react";
+
+export const getContactInfo = cache(async () => {
   const result = await apiFetch<ContactInfoApiResponse>("/contactinfo", {
     method: "GET",
     cache: "no-store",
@@ -46,4 +48,4 @@ export async function getContactInfo() {
     console.error("Failed to fetch contact info:", result.error);
     throw new Error(result.error.message || "Failed to fetch contact info");
   }
-}
+});
