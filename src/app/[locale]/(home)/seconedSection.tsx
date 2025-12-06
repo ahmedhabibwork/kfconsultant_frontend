@@ -52,7 +52,7 @@ const SecondSection = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="md:col-span-4"
           >
-            <p className="text-gray-500 leading-relaxed text-sm lg:text-base text-justify w-full max-w-[563px] pl-[100px]">
+            <p className="text-gray-500 leading-relaxed text-sm lg:text-base text-justify w-full max-w-[563px] pl-0 lg:pl-[100px]">
               Since 1999, we have been building on this pioneering role in
               design and construction under the name of KFconsultant in
               Structural Design, Engineering Supervision, and Project
