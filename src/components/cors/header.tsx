@@ -63,20 +63,36 @@ const Header = ({ categories }: HeaderProps) => {
                     <Link href="/projects">Projects</Link>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white text-black">
-                      {categories.map((category) => (
-                        <li key={category.id}>
-                          <Link
-                            href={`/projects?category=${category.slug}`}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium leading-none">
-                              {category.title}
-                            </div>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="w-[200px] md:w-[450px] bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden">
+                      <div className="bg-gradient-to-r from-primary to-primary/80 px-4 py-3">
+                        <h3 className="text-white font-semibold text-sm uppercase tracking-wide text-start">
+                          Project Categories
+                        </h3>
+                      </div>
+                      <ul className="grid md:grid-cols-2 gap-1 p-3">
+                        {categories.map((category) => (
+                          <li key={category.id}>
+                            <Link
+                              href={`/projects?category=${category.slug}`}
+                              className="flex items-center gap-3 px-3 py-2.5 rounded-md text-gray-700 hover:bg-primary/5 hover:text-primary transition-all duration-200 group"
+                            >
+                              <span className="w-2 h-2 rounded-full bg-primary/30 group-hover:bg-primary transition-colors" />
+                              <span className="text-sm font-medium">
+                                {category.title}
+                              </span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="bg-gray-50 px-4 py-2.5 border-t border-gray-100 text-start">
+                        <Link
+                          href="/projects"
+                          className="text-sm text-primary font-medium hover:underline"
+                        >
+                          View all projects →
+                        </Link>
+                      </div>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>

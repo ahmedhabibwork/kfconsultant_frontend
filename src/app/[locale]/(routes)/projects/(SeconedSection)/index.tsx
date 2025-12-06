@@ -23,7 +23,7 @@ const SeconedSection = ({
 }: SeconedSectionProps) => {
   return (
     <div className="p-[30px] pt-16">
-      <div className="flex gap-5 justify-between xl:border-y border-t border-gray-200 items-center max-xl:flex-col max-xl:gap-4">
+      <div className="flex gap-5 justify-between xl:border-y border-t border-gray-200 items-center max-xl:flex-col max-xl:gap-4 relative z-10">
         <Filters filters={filters} />
         <Tabs categories={filters.category} />
       </div>
