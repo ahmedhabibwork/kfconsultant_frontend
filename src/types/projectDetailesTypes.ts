@@ -1,4 +1,4 @@
-// Core entity interfaces
+// Base types
 export interface Category {
     id: number;
     slug: string;
@@ -13,14 +13,7 @@ export interface Scope {
     created_at: string | null;
 }
 
-export interface Scale {
-    id: number;
-    slug: string;
-    title: string;
-    created_at: string | null;
-}
-
-export interface ProjectStatus {
+export interface Status {
     id: number;
     slug: string;
     title: string;
@@ -42,25 +35,45 @@ export interface Project {
     description: string;
     category: Category;
     scope: Scope;
-    scale: Scale;
-    status: ProjectStatus;
+    status: Status;
     year: Year;
     owner: string;
     location: string;
-    map_link: string;
+    map_link: string | null;
     cover_image: string;
     images: string[];
-    meta_title: string;
-    meta_description: string;
+    meta_title: string | null;
+    meta_description: string | null;
     created_at: string;
 }
 
-export interface ProjectDetailsData {
+export interface SimilarProject {
+    id: number;
+    title: string;
+    slug: string;
+    short_description: string;
+    description: string;
+    category: Category;
+    scope: Scope;
+    status: Status;
+    year: Year;
+    owner: string;
+    location: string;
+    map_link: string | null;
+    cover_image: string;
+    images: string[];
+    meta_title: string | null;
+    meta_description: string | null;
+    created_at: string;
+}
+
+export interface MsgData {
     project: Project;
+    similar_projects: SimilarProject[];
 }
 
 export interface ProjectDetailsResponse {
     status: string;
     text: string;
-    msg_data: ProjectDetailsData;
+    msg_data: MsgData;
 }

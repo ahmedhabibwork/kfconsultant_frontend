@@ -23,7 +23,7 @@ const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
   project,
 }) => {
   return (
-    <div className="max-w-[1114px] px-6 mx-auto mt-[64px]">
+    <div className="max-w-[1114px] px-6 mx-auto mt-[64px] mb-[64px]">
       {/* Description and Metadata */}
       <div className="flex gap-10 max-md:gap-4 mb-4 max-md:mb-10 max-md:flex-col">
         <ProjectDescription description={project.description} />

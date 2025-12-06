@@ -52,7 +52,7 @@ export async function generateMetadata({
 const page = async ({ params }: PageProps) => {
   const { project_slug } = await params;
   const projectData = await getProjectDetails(project_slug);
-  const { project } = projectData.msg_data;
+  const { project, similar_projects } = projectData.msg_data;
 
   const componentData = mapProjectToComponentData(project);
 
@@ -71,7 +71,7 @@ const page = async ({ params }: PageProps) => {
       />
       <ProjectHeader project={project} />
       <ProjectDetailsSection project={componentData} />
-      <MoreProjects />
+      <MoreProjects projects={similar_projects} />
     </>
   );
 };

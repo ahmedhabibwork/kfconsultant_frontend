@@ -3,41 +3,15 @@ import React from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import ProjectCard from "../../(SeconedSection)/ProjectCard";
+import { SimilarProject } from "@/types/projectDetailesTypes";
 
-const projects = [
-  {
-    id: "2",
-    slug: "privado",
-    title: "Privado",
-    client: "Talaat Moustafa Group",
-    location: "New Cairo, Egypt",
-    area: "275 Acres",
-    sectors: "Residential",
-    image: "/projectslug/01J9RHPNX281E7DVKNFS45TR34.webp",
-  },
-  {
-    id: "7",
-    slug: "il-bosco-city",
-    title: "Il Bosco City",
-    client: "Misr Italia",
-    location: "New Cairo, Egypt",
-    area: "270 Acres",
-    sectors: "Residential",
-    image: "https://admin.dma-mea.com/storage/01J9NV18G3CX0C5G8SVS48MGA9.jpg",
-  },
-  {
-    id: "4",
-    slug: "icity-new-cairo",
-    title: "ICity New Cairo",
-    client: "Mountain View",
-    location: "New Cairo, Egypt",
-    area: "500 Acres",
-    sectors: "Residential",
-    image: "https://admin.dma-mea.com/storage/01J9S4K8308RTWHV16MKRNQND2.jpg",
-  },
-];
+interface MoreProjectsProps {
+  projects: SimilarProject[];
+}
 
-const MoreProjects = () => {
+const MoreProjects = ({ projects }: MoreProjectsProps) => {
+  if (!projects || projects.length === 0) return null;
+
   return (
     <div className="text-center">
       {/* Header Section */}
@@ -69,7 +43,16 @@ const MoreProjects = () => {
       {/* Projects Grid */}
       <div className="grid grid-cols-1 max-w-fit mx-auto place-content-center items-center justify-items-center md:grid-cols-2 lg:grid-cols-3 gap-[18px] justify-center flex-wrap px-[30px]">
         {projects.map((project) => (
-          <ProjectCard key={project.id} {...project} />
+          <ProjectCard
+            key={project.id}
+            slug={project.slug}
+            title={project.title}
+            client={project.owner}
+            location={project.location}
+            area="" // API does not provide area for similar projects yet
+            sectors={project.category.title}
+            image={project.cover_image}
+          />
         ))}
       </div>
 
