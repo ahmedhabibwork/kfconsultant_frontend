@@ -5,6 +5,7 @@ import CountUp from "react-countup";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const stats = [
   { value: 25, label: "YEARS OF REGIONAL EXPERIENCE", suffix: "+" },
@@ -49,19 +50,21 @@ const SecondSection = () => {
               <span className="text-sm font-medium tracking-widest text-[#666666] uppercase">
                 IT&apos;S UPWYDE
               </span>
-              <h2 className="mt-4 text-4xl lg:text-6xl font-bold leading-[1.1] text-black tracking-tight">
-                A Guiding Light In The Dynamic Real Estate Environment
+              <h2 className="mt-4 text-[52px] font-bold leading-[1.1] text-black tracking-tight">
+                A Guiding Light In The Dynamic Real Estate Environment{" "}
               </h2>
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <Button
-                variant="outline"
-                className="group rounded-none border-2 border-black bg-transparent px-8 py-6 text-sm font-bold uppercase tracking-wider text-black hover:bg-black hover:text-white transition-all duration-300"
-              >
-                More About Upwyde
-                <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+              <Link href="/about">
+                <Button
+                  variant="outline"
+                  className="group rounded-none border-2 border-black bg-transparent px-8 py-6 text-sm font-bold uppercase tracking-wider text-black hover:bg-black hover:text-white transition-all duration-300"
+                >
+                  More About KFConsultant
+                  <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
             </motion.div>
           </div>
 
@@ -90,14 +93,14 @@ const SecondSection = () => {
 
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-4"
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4"
             >
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center md:items-start text-center md:text-left"
+                  className="flex flex-col items-center justify-center"
                 >
-                  <span className="text-4xl lg:text-5xl font-bold text-[#E57B70] mb-2 font-mono">
+                  <span className="text-[28px] font-bold text-[#E57B70] mb-2 font-mono text-center">
                     <CountUp
                       end={stat.value}
                       duration={2.5}
@@ -106,7 +109,7 @@ const SecondSection = () => {
                     />
                     {stat.suffix}
                   </span>
-                  <span className="text-[10px] lg:text-xs font-bold tracking-wider text-gray-500 uppercase max-w-[120px] leading-snug">
+                  <span className="text-[10px] lg:text-xs font-bold tracking-wider text-gray-500 uppercase leading-snug text-center">
                     {stat.label}
                   </span>
                 </div>

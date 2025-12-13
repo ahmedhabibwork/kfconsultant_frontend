@@ -19,7 +19,7 @@ const PartnersSection = ({ clients }: PartnersSectionProps) => {
               Success Partners
             </div>
           </div>
-          <h1 className="text-[38px] max-md:text-4xl w-full leading-[25px] ltr:tracking-[2px] text-primary rtl:mb-2 font-bold">
+          <h1 className="text-[38px] max-md:text-4xl w-full leading-[25px] ltr:tracking-[2px] text-black rtl:mb-2 font-bold">
             Trusted By
           </h1>
         </div>

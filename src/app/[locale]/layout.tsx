@@ -11,6 +11,7 @@ import { Toaster } from "sonner";
 import { getCategories } from "@/actions/categories";
 import { getContactInfo } from "@/actions/contact";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import GlobalSearch from "@/components/GlobalSearch";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,6 +59,7 @@ export default async function RootLayout({
               <NextProgress />
               <Header categories={categories} />
               <main className="flex-1 w-full">{children}</main>
+              <GlobalSearch />
               <WhatsAppButton />
               <Footer contactInfo={contactInfo} />
             </div>

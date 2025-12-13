@@ -95,7 +95,7 @@ const Filters = ({ filters }: FiltersProps) => {
 
   return (
     <div className="flex flex-1 gap-[18px] w-full max-xl:border-b border-gray-200 py-3 flex-wrap">
-      <div className="w-full relative">
+      {/* <div className="w-full relative">
         <label htmlFor="search" className="sr-only">
           Search
         </label>
@@ -108,7 +108,7 @@ const Filters = ({ filters }: FiltersProps) => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-      </div>
+      </div> */}
       <div className="w-full flex justify-center max-xl:gap-4 items-center gap-[18px]">
         {/* Scope */}
         <div className="relative w-full flex-1">
