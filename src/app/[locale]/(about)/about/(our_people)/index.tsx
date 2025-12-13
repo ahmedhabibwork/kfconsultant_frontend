@@ -47,24 +47,7 @@ const OurPeople = ({ team }: OurPeopleProps) => {
 
         {/* Content Area */}
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-20">
-          {/* Left Side - Section Title */}
-          <div className="flex flex-col gap-2 lg:w-1/3 pt-8">
-            <span
-              style={{ letterSpacing: "1em" }}
-              className="text-[#00006c] text-sm font-semibold uppercase mb-2"
-            >
-              Team
-            </span>
-            <h3 className="text-4xl md:text-5xl font-light text-black uppercase leading-tight">
-              Key
-            </h3>
-            <h3 className="text-4xl md:text-5xl font-bold text-black uppercase leading-tight">
-              Members
-            </h3>
-          </div>
-
-          {/* Right Side - Slider Card */}
-          <div className="w-full lg:w-2/3 relative bg-white shadow-sm border border-gray-100 rounded-lg overflow-hidden">
+          <div className="w-full relative bg-white shadow-sm border border-gray-100 rounded-lg overflow-hidden">
             {/* Navigation Buttons */}
             {team.length > 1 && (
               <div className="absolute top-0 right-0 z-10 flex">
@@ -100,7 +83,7 @@ const OurPeople = ({ team }: OurPeopleProps) => {
                       src={team[currentIndex].image}
                       alt={team[currentIndex].name}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                     />
                   </div>
 

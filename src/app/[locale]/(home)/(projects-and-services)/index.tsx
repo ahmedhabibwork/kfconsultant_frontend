@@ -1,13 +1,10 @@
 "use client";
+
 import React from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
-import ProjectSlider from "./ProjectSlider";
-import TextEditorReader from "@/components/TextReader";
 import { Project } from "@/types/homeTypes";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import PhoneNumber from "@/components/PhoneNumber";
+import { motion } from "motion/react";
 
 interface ProjectsAndServicesProps {
   projects: Project[];
@@ -15,101 +12,102 @@ interface ProjectsAndServicesProps {
   phoneNumber: string;
 }
 
-const ProjectsAndServices = ({
-  projects,
-  whatsappNumber,
-  phoneNumber,
-}: ProjectsAndServicesProps) => {
-  const [activeProjectIndex, setActiveProjectIndex] = React.useState(0);
+const ProjectsAndServices = ({ projects }: ProjectsAndServicesProps) => {
+  const featuredProjects = projects.slice(0, 3);
 
-  const handleSlideChange = (index: number) => {
-    setActiveProjectIndex(index);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
   };
 
-  const activeProject = projects[activeProjectIndex];
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
 
   return (
-    <section className="w-full py-12 lg:py-16 bg-gray-50">
-      <div className="container">
-        {/* Projects Section */}
-        <div
-          id="colorlib-project"
-          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-16"
+    <section id="projects" className="w-full py-16 lg:py-24 bg-white">
+      <div className="container mx-auto px-4 md:px-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={containerVariants}
         >
-          {/* Left Column - Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-4"
-          >
-            <span
-              style={{ letterSpacing: "1em" }}
-              className="text-sm tracking-widest text-[#00006c] uppercase"
-            >
-              Explore
-            </span>
-            <h2 className="mt-4 text-3xl lg:text-4xl mb-6 flex flex-col">
-              <span className="font-light text-[50px] uppercase">Key </span>
-              <span className="font-bold text-[50px] uppercase">PROJECTS</span>
-            </h2>
-            <div className="text-gray-700 leading-relaxed mb-4 min-h-[120px]">
-              <AnimatePresence mode="wait">
-                {activeProject ? (
-                  <motion.div
-                    key={activeProject.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <TextEditorReader value={activeProject.short_description} />
-                  </motion.div>
-                ) : (
-                  <motion.p
-                    key="default-desc"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    Thanks to our experience gained through our mega projects in
-                    various locations and countless projects, which are
-                    reflected in our present activities and operations provided
-                    by AACE through high-quality services. This experience
-                    encourages our organization to expand globally through more
-                    diverse projects.
-                  </motion.p>
-                )}
-              </AnimatePresence>
+          {/* Header */}
+          <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+            <div>
+              <motion.span
+                variants={itemVariants}
+                className="text-xs font-semibold tracking-widest text-[#666666] uppercase mb-2 block"
+              >
+                SHOWCASE
+              </motion.span>
+              <motion.h2
+                variants={itemVariants}
+                className="text-3xl lg:text-4xl font-bold text-black tracking-tight"
+              >
+                Featured Projects
+              </motion.h2>
             </div>
-            <div className="flex flex-col items-start gap-6 mt-4">
+
+            <motion.div variants={itemVariants}>
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 text-blue-900 hover:text-blue-700 font-medium transition-colors"
+                className="group inline-flex items-center text-sm font-bold text-black hover:text-[#666666] transition-colors"
               >
-                View All Projects <ArrowRight className="w-4 h-4" />
+                Show All Projects
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
-              {/* <WhatsAppButton phoneNumber={whatsappNumber} /> */}
-              {/* <PhoneNumber phoneNumber={phoneNumber} /> */}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          {/* Right Column - Carousel */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-7 lg:col-start-6"
-          >
-            <ProjectSlider
-              projects={projects}
-              onSlideChange={handleSlideChange}
-            />
-          </motion.div>
-        </div>
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                variants={itemVariants}
+                className="group relative aspect-square overflow-hidden rounded-lg cursor-pointer"
+              >
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="block w-full h-full"
+                >
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
+                    style={{ backgroundImage: `url(${project.cover_image})` }}
+                  />
+
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+
+                  {/* Content */}
+                  <div className="absolute bottom-0 left-0 w-full p-6 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-2xl font-bold mb-1 leading-tight">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-300 text-sm font-medium line-clamp-1">
+                      {[project.category.title, project.location]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

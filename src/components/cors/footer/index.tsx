@@ -16,11 +16,11 @@ const Footer = ({ contactInfo }: FooterProps) => {
   const t = useTranslations("footer");
 
   return (
-    <footer className="relative pt-8 pb-6 px-4 bg-primary/95 text-white overflow-hidden">
+    <footer className="relative pt-8 px-4 bg-primary/95 text-white overflow-hidden">
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/70 -z-10" />
 
-      <Card className="bg-transparent border-0 relative z-10 max-w-7xl mx-auto">
+      <Card className="bg-transparent border-0 relative z-10 max-w-7xl mx-auto pb-0">
         <CardContent className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Quick Links */}
