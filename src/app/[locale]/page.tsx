@@ -37,7 +37,7 @@ const page = async () => {
       <HeroSlider banner={banner} />
       <SeconedSection />
       <FourthSection services={services} />
-      <Analytics />
+      {/* <Analytics /> */}
       <ProjectsAndServices
         projects={project}
         phoneNumber={contactData.msg_data.phone1}

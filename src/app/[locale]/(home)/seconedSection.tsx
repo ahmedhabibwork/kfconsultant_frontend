@@ -100,7 +100,7 @@ const SecondSection = () => {
                   key={index}
                   className="flex flex-col items-center justify-center"
                 >
-                  <span className="text-[28px] font-bold text-[#E57B70] mb-2 font-mono text-center">
+                  <span className="text-[28px] font-bold text-primary mb-2 font-mono text-center">
                     <CountUp
                       end={stat.value}
                       duration={2.5}

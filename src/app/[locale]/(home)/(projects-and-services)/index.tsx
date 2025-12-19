@@ -35,7 +35,7 @@ const ProjectsAndServices = ({ projects }: ProjectsAndServicesProps) => {
   };
 
   return (
-    <section id="projects" className="w-full py-16 lg:py-24 bg-white">
+    <section className="w-full py-16 lg:py-24 !bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial="hidden"

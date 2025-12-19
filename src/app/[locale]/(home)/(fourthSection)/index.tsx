@@ -1,54 +1,51 @@
-"use client";
-import { motion } from "motion/react";
-import { Service } from "@/types/homeTypes";
-import TextEditorReader from "@/components/TextReader";
+import ServiceSlider from "./ServiceSlider";
+import { Service as ApiService } from "@/types/homeTypes";
+import { Service as sliderService } from "./servicesData";
+import { Link } from "@/i18n/navigation";
+import { ArrowRight } from "lucide-react";
 
 interface FourthSectionProps {
-  services: Service[];
+  services: ApiService[];
 }
 
-const FourthSection = ({ services }: FourthSectionProps) => {
-  return (
-    <section
-      id="colorlib-services"
-      className="w-full py-16 lg:py-24 bg-gray-50"
-    >
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16"
-        >
-          {services?.slice(0, 3).map((service, index) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group flex flex-col items-center text-center gap-6 p-6 rounded-2xl"
-            >
-              <div className="mb-2 relative">
-                <div className="absolute -inset-4 bg-blue-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-lg" />
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="relative w-20 h-20 object-contain"
-                />
-              </div>
-              <h3 className="text-xl lg:text-2xl font-bold text-[#00006c] group-hover:text-blue-700 transition-colors">
-                {service.title}
-              </h3>
-              <div className="text-sm text-gray-500 leading-relaxed max-w-sm">
-                <TextEditorReader value={service.description} />
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-};
+export default function FourthSection({ services }: FourthSectionProps) {
+  // Transform API services to Slider services format
+  const sliderServices: sliderService[] = services.map((service) => ({
+    id: service.id,
+    title: service.title,
+    image: service.image,
+    link: `/projects?serviceId=${service.id}`,
+  }));
 
-export default FourthSection;
+  return (
+    <main className="bg-gradient-to-b from-slate-50 to-white">
+      {/* Services Section */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div>
+              <span className="block text-sm font-semibold text-gray-500 uppercase tracking-widest mb-2">
+                What We Do
+              </span>
+              <h2 className="text-3xl lg:text-4xl font-bold text-black tracking-tight">
+                Our Services
+              </h2>
+            </div>
+
+            <Link
+              href="/services"
+              className="group inline-flex items-center text-sm font-bold text-black hover:text-[#666666] transition-colors"
+            >
+              View All Services
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+
+          {/* Services Slider */}
+          <ServiceSlider services={sliderServices} />
+        </div>
+      </section>
+    </main>
+  );
+}
