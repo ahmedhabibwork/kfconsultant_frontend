@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import { Link } from "@/i18n/navigation";
 import {
   NavigationMenu,
@@ -16,8 +17,29 @@ interface HeaderProps {
 }
 
 const Header = ({ categories }: HeaderProps) => {
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="w-full absolute top-0 left-0 z-50 py-4 lg:py-8 text-white">
+    <nav
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 text-white ${
+        isSticky
+          ? "bg-black/80 backdrop-blur-md py-4 shadow-sm"
+          : "bg-transparent py-4 lg:py-8"
+      }`}
+    >
       <div className="container">
         <div className="flex items-center justify-between relative">
           {/* Logo */}
