@@ -49,7 +49,7 @@ const HeroSlider = ({ banner }: HeroSliderProps) => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-[20px] font-normal mb-4 text-[#ffffffb3] leading-1.5"
+                className="text-[20px] font-normal mb-4 text-[#ffffffb3]"
               >
                 {slides[currentSlide].title}
               </motion.h2>
