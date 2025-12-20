@@ -57,7 +57,8 @@ function useElementWidth<T extends HTMLElement>() {
 const ProjectsAndServices = ({ projects }: ProjectsAndServicesProps) => {
   const featuredProjects = projects; // use all; show 3 per view
   const cardsPerView = useCardsPerView();
-  const { ref: viewportRef, width: viewportWidth } = useElementWidth<HTMLDivElement>();
+  const { ref: viewportRef, width: viewportWidth } =
+    useElementWidth<HTMLDivElement>();
 
   const [index, setIndex] = React.useState(0);
 
@@ -99,7 +100,7 @@ const ProjectsAndServices = ({ projects }: ProjectsAndServicesProps) => {
           variants={containerVariants}
         >
           {/* Header */}
-          <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+          <div className="flex flex-col md:flex-row justify-between mb-10 gap-4">
             <div>
               <motion.span
                 variants={itemVariants}
@@ -165,7 +166,9 @@ const ProjectsAndServices = ({ projects }: ProjectsAndServicesProps) => {
                         {/* Background Image */}
                         <div
                           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
-                          style={{ backgroundImage: `url(${project.cover_image})` }}
+                          style={{
+                            backgroundImage: `url(${project.cover_image})`,
+                          }}
                         />
 
                         {/* Gradient Overlay */}
@@ -218,9 +221,13 @@ const ProjectsAndServices = ({ projects }: ProjectsAndServicesProps) => {
                         key={p}
                         type="button"
                         aria-label={`Go to page ${p + 1}`}
-                        onClick={() => setIndex(Math.min(maxIndex, p * cardsPerView))}
+                        onClick={() =>
+                          setIndex(Math.min(maxIndex, p * cardsPerView))
+                        }
                         className={`h-2.5 w-2.5 rounded-full transition ${
-                          p === activePage ? "bg-black" : "bg-black/20 hover:bg-black/35"
+                          p === activePage
+                            ? "bg-black"
+                            : "bg-black/20 hover:bg-black/35"
                         }`}
                       />
                     ))}

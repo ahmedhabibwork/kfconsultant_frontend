@@ -21,7 +21,7 @@ export default function FourthSection({ services }: FourthSectionProps) {
     <section className="bg-slate-50 py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between mb-12 gap-6">
           <div>
             <span className="block text-sm font-semibold text-gray-500 uppercase tracking-widest mb-2">
               What We Do
