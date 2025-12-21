@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Banner } from "@/types/homeTypes";
-import Link from "next/link";
 
 interface HeroSliderProps {
   banner: Banner[];
@@ -15,13 +14,22 @@ const HeroSlider = ({ banner }: HeroSliderProps) => {
   // If we only have one banner, we can treat it as a single slide
   const slides = banner;
 
-  // useEffect(() => {
-  //   if (slides.length <= 1) return;
-  //   const timer = setInterval(() => {
-  //     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  //   }, 6000);
-  //   return () => clearInterval(timer);
-  // }, [slides.length]);
+  // Auto-slide effect
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  // Prefetch images
+  useEffect(() => {
+    slides.forEach((slide) => {
+      const img = new Image();
+      img.src = slide.image;
+    });
+  }, [slides]);
 
   return (
     <aside
