@@ -70,15 +70,49 @@ const ProjectsAndServices = ({ projects }: ProjectsAndServicesProps) => {
     setIndex((i) => Math.min(Math.max(0, i), maxIndex));
   }, [maxIndex]);
 
+  // Auto-slide effect
+  React.useEffect(() => {
+    if (!canSlide) return;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [canSlide, maxIndex]);
+
+  // Prefetch images
+  React.useEffect(() => {
+    featuredProjects.forEach((project) => {
+      if (project.cover_image) {
+        const img = new Image();
+        img.src = project.cover_image;
+      }
+    });
+  }, [featuredProjects]);
+
   const prev = () => setIndex((i) => Math.max(0, i - 1));
-  const next = () => setIndex((i) => Math.min(maxIndex, i + 1));
+  const next = () => setIndex((i) => (i >= maxIndex ? 0 : i + 1));
 
   // pixels to move for 1 card
   const cardStep = cardsPerView > 0 ? viewportWidth / cardsPerView : 0;
   const x = -index * cardStep;
 
   const totalPages = Math.ceil(featuredProjects.length / cardsPerView);
-  const activePage = Math.floor(index / cardsPerView);
+
+  // Find the page whose starting index is closest to the current index
+  const activePage = React.useMemo(() => {
+    let closest = 0;
+    let minDiff = Infinity;
+
+    for (let p = 0; p < totalPages; p++) {
+      const target = Math.min(maxIndex, p * cardsPerView);
+      const diff = Math.abs(index - target);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closest = p;
+      }
+    }
+    return closest;
+  }, [index, maxIndex, cardsPerView, totalPages]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
