@@ -1,23 +1,16 @@
 import { CategoriesResponse } from "@/types/CategoriesTypes";
+import { apiFetch } from "@/lib/apiFetch";
 
 export async function getCategories(): Promise<CategoriesResponse> {
-    try {
-        const response = await fetch("http://72.62.16.29/api/v1/categories", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            cache: "no-store",
-        });
+    const result = await apiFetch<CategoriesResponse>("/categories", {
+        method: "GET",
+        cache: "no-store",
+    });
 
-        if (!response.ok) {
-            throw new Error(`Failed to fetch categories: ${response.statusText}`);
-        }
-
-        const data: CategoriesResponse = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Error fetching categories:", error);
-        throw error;
+    if (result.isErr()) {
+        console.error("Error fetching categories:", result.error);
+        throw new Error(result.error.message);
     }
+
+    return result.value;
 }

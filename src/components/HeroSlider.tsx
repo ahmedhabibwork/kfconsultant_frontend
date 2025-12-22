@@ -12,6 +12,7 @@ const HeroSlider = ({ banner }: HeroSliderProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // If we only have one banner, we can treat it as a single slide
+
   const slides = banner;
 
   // Auto-slide effect

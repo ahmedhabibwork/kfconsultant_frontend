@@ -38,7 +38,6 @@ export async function submitContactForm(data: {
 
 
 import { cache } from "react";
-import { SOCIAL_LINKS } from "@/lib/constants";
 
 export const getContactInfo = cache(async () => {
   const result = await apiFetch<ContactInfoApiResponse>("/contactinfo", {
@@ -51,9 +50,6 @@ export const getContactInfo = cache(async () => {
       ...result.value,
       msg_data: {
         ...result.value.msg_data,
-        facebook_link: SOCIAL_LINKS.facebook,
-        instagram_link: SOCIAL_LINKS.instagram,
-        linkedin_link: SOCIAL_LINKS.linkedin,
       },
     };
   } else {

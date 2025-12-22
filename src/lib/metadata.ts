@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { SITE_CONFIG, SOCIAL_LINKS } from './constants';
+import { SITE_CONFIG } from './constants';
 
 interface MetadataParams {
     title?: string;
@@ -88,11 +88,6 @@ export function createOrganizationSchema() {
         url: SITE_CONFIG.url,
         logo: "",
         description: SITE_CONFIG.description,
-        sameAs: [
-            SOCIAL_LINKS.facebook,
-            SOCIAL_LINKS.instagram,
-            SOCIAL_LINKS.linkedin,
-        ],
     };
 }
 

@@ -19,7 +19,7 @@ export const SITE_CONFIG = {
 
 // API Configuration
 export const API_CONFIG = {
-    baseUrl: process.env.NEXT_PUBLIC_API_ENDPOINT || 'http://72.62.16.29/api/v1',
+    baseUrl: process.env.NEXT_PUBLIC_API_ENDPOINT,
     endpoints: {
         home: '/home',
         about: '/about-us',
@@ -34,19 +34,6 @@ export const API_CONFIG = {
     },
 } as const;
 
-// Social Media Links
-export const SOCIAL_LINKS = {
-    facebook: 'https://www.facebook.com/DMADesignConsultancy',
-    instagram: 'https://www.instagram.com/dma.design.consultancy',
-    linkedin: 'https://www.linkedin.com/company/dma-egypt/',
-} as const;
-
-// Default Images
-export const DEFAULT_IMAGES = {
-    og: '',
-    placeholder: '/newsCard.webp',
-    headerBg: '/contactBg.webp',
-} as const;
 
 // Pagination
 export const PAGINATION = {
