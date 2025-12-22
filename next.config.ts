@@ -6,15 +6,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'admin.dma-mea.com',
+        hostname: '**',
       },
       {
         protocol: 'http',
-        hostname: '72.62.16.29',
-      },
-      {
-        protocol: 'https',
-        hostname: '72.62.16.29',
+        hostname: '**',
       },
     ],
   },
