@@ -39,23 +39,27 @@ function shouldLog(urlStr: string) {
   }
 }
 
-// Generate cURL command for debugging
+// Generate cURL command for debugging (Windows CMD format)
 function generateCurlCommand(url: string, method: string, headers: Headers, body?: any): string {
-  let curl = `curl -X ${method} '${url}'`;
+  let curl = `curl ^"${url}^"`;
 
   // Add headers
   headers.forEach((value, key) => {
-    curl += ` \\\n  -H '${key}: ${value}'`;
+    // Escape quotes for Windows CMD
+    const escapedValue = value.replace(/"/g, '^\\"');
+    curl += ` ^\n  -H ^"${key}: ${escapedValue}^"`;
   });
 
   // Add body if present
   if (body) {
     if (body instanceof FormData) {
-      curl += ` \\\n  --form (FormData - see browser network tab for details)`;
+      curl += ` ^\n  --form (FormData - see browser network tab for details)`;
     } else if (typeof body === 'string') {
-      curl += ` \\\n  -d '${body.replace(/'/g, "\\'")}'`;
+      const escapedBody = body.replace(/"/g, '^\\"');
+      curl += ` ^\n  -d ^"${escapedBody}^"`;
     } else if (typeof body === 'object') {
-      curl += ` \\\n  -d '${JSON.stringify(body).replace(/'/g, "\\'")}'`;
+      const escapedBody = JSON.stringify(body).replace(/"/g, '^\\"');
+      curl += ` ^\n  -d ^"${escapedBody}^"`;
     }
   }
 
@@ -118,9 +122,9 @@ export async function apiFetch<T, E = { message: string; status: number }>(
         await new Promise(resolve => setTimeout(resolve, retryDelay * attempt));
       }
 
-      // Debug: Log cURL command in development
+      // Log full cURL command for debugging
       const curlCommand = generateCurlCommand(fullUrl, method, merged, (init as any)?.body);
-      console.debug('\n🔍 API Request (cURL):\n' + curlCommand + '\n');
+      console.log('\n🔍 API Request (cURL):\n' + curlCommand + '\n');
 
       const res = await fetch(fullUrl, req);
       statusForLog = res.status;
@@ -131,6 +135,14 @@ export async function apiFetch<T, E = { message: string; status: number }>(
       } catch {
         body = await res.clone().text();
       }
+
+      // Log response details (especially useful in production)
+      console.log(`📥 API Response [${method} ${path}]:`, {
+        status: res.status,
+        statusText: res.statusText,
+        ok: res.ok,
+        body: body
+      });
 
       if (!res.ok) {
         // Don't retry for client errors (4xx), only server errors (5xx)
